@@ -46,31 +46,7 @@
             @yield('contenu_page')
 
             <!-- Footer -->
-            <footer class="footer pt-0">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6">
-                        <div class="copyright text-center  text-lg-left  text-muted">
-                            &copy; 2020 <a href="#" class="font-weight-bold ml-1">Creative Tim</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link">Creative Tim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="http://blog.creative-tim.com" class="nav-link">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/license" class="nav-link">License</a>
-                        </li>
-                        </ul>
-                    </div>
-                </div>
-            </footer>
+            {{--  @include('layouts.footer')  --}}
         </div>
     </div>
     <!-- Argon Scripts -->
@@ -81,6 +57,34 @@
     <script src="{{ ('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ ('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Optional JS -->
+    {{--  Formulaire  --}}
+    <script src="{{ ('assets/vendor/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ ('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ ('assets/vendor/moment.min.js') }}"></script>
+    <script src="{{ ('assets/vendor/bootstrap-datetimepicker.js') }}"></script>
+    <script src="{{ ('assets/vendor/nouislider/distribute/nouislider.min.js') }}"></script>
+    <script src="{{ ('assets/vendor/quill/dist/quill.min.js') }}"></script>
+    <script src="{{ ('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
+    <script src="{{ ('assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datetimepicker({
+                icons: {
+                time: "fa fa-clock",
+                date: "fa fa-calendar-day",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove'
+                }
+            });
+        });
+    </script>
+
+    {{--    --}}
     <script src="{{ ('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ ('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->

@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('/dashboard', function () {
-    return view('pages.directeur.home');
+    return view('pages.directeur.add_exemple');
 });
 
