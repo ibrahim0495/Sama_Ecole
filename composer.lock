@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "5a993688a4552c644071256b6b56c39a",
+=======
+    "content-hash": "6558f74828bca9ebecac73d90cea4b1a",
+>>>>>>> initial commit
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -921,6 +925,7 @@
             "time": "2020-07-07T15:10:00+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "laravel/ui",
             "version": "v2.1.0",
             "source": {
@@ -976,6 +981,8 @@
             "time": "2020-06-30T20:56:33+00:00"
         },
         {
+=======
+>>>>>>> initial commit
             "name": "league/commonmark",
             "version": "1.5.1",
             "source": {
