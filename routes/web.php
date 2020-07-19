@@ -19,3 +19,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('pages.directeur.home');
 });
+
+// Authentification
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+// Routes directeur
+Route::get('/etabilissement', function () {
+    return view('pages.directeur.ajouterEtablissement');
+});
