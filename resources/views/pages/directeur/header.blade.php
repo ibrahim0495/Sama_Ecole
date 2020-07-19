@@ -17,7 +17,6 @@
                     <a href="#" class="btn btn-sm btn-neutral">Filters</a>
                 </div>
             </div>
-<<<<<<< HEAD
             <!-- Card stats -->
             <div class="row">
                 <div class="col-xl-3 col-md-6">
@@ -109,10 +108,6 @@
                     </div>
                 </div>
             </div>
-=======
-
-            @yield('header')
->>>>>>> create formulaire
         </div>
     </div>
 </div>
