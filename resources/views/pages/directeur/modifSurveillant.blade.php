@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_dir', ['title' => ' |Etablissement'])
+@extends('pages.directeur.master_dir', ['title' => ' |Surveillant'])
 
 @section('contenu_page')
 
@@ -14,29 +14,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                   </div>
-                  <input class="form-control" placeholder="Nom" type="text">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <div class="input-group input-group-merge">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                  </div>
-                  <input class="form-control" placeholder="Addresse Email" type="email">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <div class="input-group input-group-merge">
-                  <input class="form-control" placeholder="Adresse" type="text">
-                  <div class="input-group-append">
-                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
-                  </div>
+                  <input class="form-control" value="" type="text">
                 </div>
               </div>
             </div>
@@ -44,16 +22,50 @@
                 <div class="form-group">
                   <div class="input-group input-group-merge">
                     <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input class="form-control" value="" type="text">
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group input-group-merge">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                    <input class="form-control" value="" type="email">
+                  </div>
+                </div>
+              </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="input-group input-group-merge">
+                  <input class="form-control" value="" type="text">
+                  <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group input-group-merge">
+                    <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Telephone" type="text">
+                    <input class="form-control" value="" type="text">
                     <div class="input-group-append">
                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
                     </div>
                   </div>
                 </div>
               </div>
-          </div>
+        </div>
 
           <!-- Input groups with icon -->
           <div class="row">
