@@ -55,7 +55,7 @@
               </div>
           </div>
 
-          <!-- Input groups with icon -->
+          <!-- Input groups with icon  -->
           <div class="row">
 
             <div class="col-md-3">
