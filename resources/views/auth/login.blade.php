@@ -71,7 +71,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/examples/lock.html" class="nav-link">
+            <a href="#" class="nav-link">
               <span class="nav-link-inner--text">Contact</span>
             </a>
           </li>

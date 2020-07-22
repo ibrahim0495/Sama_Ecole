@@ -29,5 +29,13 @@ Route::resource('classe', '');//->middleware(ConnectionSession::class);
 Route::resource('matiere', '');//->middleware(ConnectionSession::class);
 Route::resource('surveillant', '');//->middleware(ConnectionSession::class);
 
+//Parent
+Route::get('/parent', function(){
+    return view('pages.parent.master_par');
+});
+Route::get('/enfant', function(){
+    return view('pages.parent.show_enfant');
+});
+
 
 
