@@ -47,6 +47,7 @@
 
             <!-- Footer -->
             {{--  @include('layouts.footer')  --}}
+            {{-- fdlfdfkdlfdfld;bvc;fdmfdnfddd --}}
         </div>
     </div>
     <!-- Argon Scripts -->
