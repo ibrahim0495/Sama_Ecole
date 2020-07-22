@@ -23,11 +23,11 @@ Route::get('/dashboard', function () {
 Route::post('/loginme','loginController@index');
 
 //Directeur
-Route::resource('etablissement', 'EregistrerEtablisController');//->middleware(ConnectionSession::class);
-Route::resource('salleClasse', 'SalleClasseController');//->middleware(ConnectionSession::class);
-Route::resource('classe', 'EregistrerClasseController');//->middleware(ConnectionSession::class);
-Route::resource('matiere', 'EregistrerMatiereController');//->middleware(ConnectionSession::class);
-Route::resource('surveillant', 'EregistrerSurveillantController');//->middleware(ConnectionSession::class);
+Route::resource('etablissement', '');//->middleware(ConnectionSession::class);
+Route::resource('salleClasse', '');//->middleware(ConnectionSession::class);
+Route::resource('classe', '');//->middleware(ConnectionSession::class);
+Route::resource('matiere', '');//->middleware(ConnectionSession::class);
+Route::resource('surveillant', '');//->middleware(ConnectionSession::class);
 
 
 
