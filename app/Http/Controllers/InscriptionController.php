@@ -23,7 +23,7 @@ class InscriptionController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.comptable.inscription');
     }
 
     /**

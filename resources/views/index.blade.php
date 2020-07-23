@@ -33,7 +33,7 @@
   <!-- Navabr -->
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         <img src="{{ ('assets/img/brand/white.png') }}">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@
         <div class="navbar-collapse-header">
           <div class="row">
             <div class="col-6 collapse-brand">
-              <a href="#">
+              <a href="/">
                 <img src="{{ ('assets/img/brand/blue.png') }}">
               </a>
             </div>
@@ -58,7 +58,7 @@
         {{--  NavBar  --}}
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/" class="nav-link">
                     <span class="nav-link-inner--text">Dashboard</span>
                     </a>
                 </li>

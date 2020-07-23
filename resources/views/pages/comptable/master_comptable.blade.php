@@ -27,31 +27,33 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ ('assets/css/argon.css?v=1.2.0') }}" type="text/css">
+
+  @yield('extra-css')
 </head>
 
 <body>
     <!-- Sidenav -->
-    @include('pages.directeur.sideBar')
+    @include('pages.comptable.sideBar')
 
     <!-- Main content -->
     <div class="main-content" id="panel">
             <!-- Topnav -->
-            @include('pages.directeur.navBar')
+            @include('layouts._partials.navBar')
+
             <!-- Header -->
-            <!-- Header -->
-            @include('pages.directeur.header')
+            @yield('header')
+
         <!-- Page content -->
         <div class="container-fluid mt--6">
             {{--  Contenu de la page ici  --}}
             @yield('contenu_page')
-
         </div>
     </div>
     <!-- Argon Scripts -->
     <!-- Core -->
-    <script src="{{ ('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ ('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ ('assets/vendor/js-cookie/js.cookie.js') }}"></script>
+    <script src="{{ ('assets/vendor/jquery/dist/jquery.min.js') }}"></script>--
+    <script src="{{ ('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>--
+    <script src="{{ ('assets/vendor/js-cookie/js.cookie.js') }}"></script>--
     <script src="{{ ('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ ('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Optional JS -->
@@ -61,6 +63,10 @@
     <script src="{{ ('assets/js/argon.js?v=1.2.0') }}"></script>
     <!-- Demo JS - remove this in your project -->
     <script src="{{ ('assets/js/demo.min.js') }}"></script>
+    <script src="./assets/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+
+    @yield('extra-js')
+
 </body>
 
 </html>

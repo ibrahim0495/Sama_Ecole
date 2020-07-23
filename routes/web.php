@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth.login');
 });
 Route::get('/dashboard', function () {
@@ -21,6 +21,12 @@ Route::get('/dashboard', function () {
 });
 
 //Liste des Routes
+Route::get('/', function () {
+    return view('index');
+});
+Route::get('/comptables', function () {
+    return view('pages.directeur.Create_Surveillant');
+});
 
 //Absence
 Route::resource('etablissement', 'EtablissementController');

@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_dir', ['title' => ' | Accueil'])
+@extends('pages.comptable.master_comptable', ['title' => ' | Accueil'])
 
 @section('header')
     <div class="header bg-primary pb-6">
@@ -119,7 +119,7 @@
 @section('contenu_page')
     <div class="row">
         <div class="col-xl-8">
-            <h1>Statistique ici</h1>
+            <h1>Statistique Ici</h1>
         </div>
     </div>
 @endsection
