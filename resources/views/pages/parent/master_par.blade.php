@@ -31,15 +31,15 @@
 
 <body>
     <!-- Sidenav -->
-    @include('pages.directeur.sideBar')
+    @include('pages.parent.sideBar')
 
     <!-- Main content -->
     <div class="main-content" id="panel">
             <!-- Topnav -->
-            @include('pages.directeur.navBar')
+            @include('pages.parent.navBar')
             <!-- Header -->
             <!-- Header -->
-            @include('pages.directeur.header')
+
         <!-- Page content -->
         <div class="container-fluid mt--6">
             {{--  Contenu de la page ici  --}}
@@ -47,7 +47,6 @@
 
             <!-- Footer -->
             {{--  @include('layouts.footer')  --}}
-            {{-- fdlfdfkdlfdfld;bvc;fdmfdnfddd --}}
         </div>
     </div>
     <!-- Argon Scripts -->
