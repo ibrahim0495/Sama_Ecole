@@ -20,22 +20,58 @@ Route::get('/dashboard', function () {
     return view('pages.directeur.add_exemple');
 });
 
-Route::post('/loginme','loginController@index');
+//Absence
+Route::resource('etablissement', 'EtablissementController');
+
+//Année Scolaire
+Route::resource('annee-scolaire', 'AnneeScolaireController');
+
+//Bulletin
+Route::resource('bulletin', 'BulletinController');
+
+//Chat
+Route::resource('chat', 'ChatController');
+
+//Classe
+Route::resource('classe', 'ClasseController');
+
+//Comptable
+Route::resource('comptable', 'ComptableController');
+
+//Compte User
+Route::resource('user', 'CompteUserController');
 
 //Directeur
-Route::resource('etablissement', '');//->middleware(ConnectionSession::class);
-Route::resource('salleClasse', '');//->middleware(ConnectionSession::class);
-Route::resource('classe', '');//->middleware(ConnectionSession::class);
-Route::resource('matiere', '');//->middleware(ConnectionSession::class);
-Route::resource('surveillant', '');//->middleware(ConnectionSession::class);
+Route::resource('directeur', 'DirecteurController');
+
+//Eleve
+Route::resource('eleve', 'EleveController');
+
+//Emploi du temps
+Route::resource('edt', 'EmploiDuTempsController');
+
+//Inscription
+Route::resource('inscription', 'InscriptionController');
+
+//Matière
+Route::resource('matiere', 'MatiereController');
+
+//Note
+Route::resource('notes', 'NoteController');
 
 //Parent
-Route::get('/parent', function(){
-    return view('pages.parent.master_par');
-});
-Route::get('/enfant', function(){
-    return view('pages.parent.show_enfant');
-});
+Route::resource('parent', 'ParentController');
+
+//Professeur
+Route::resource('professeur', 'ProfesseurController');
+
+//Statistique
+Route::resource('statistique', 'StatistiqueController');
+
+//Surveillant
+Route::resource('surveillant', 'SurveillantController');
+
+
 
 
 
