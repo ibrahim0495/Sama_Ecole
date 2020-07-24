@@ -14,7 +14,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Sama Ecole gestion d'une école>
+  <meta name="description" content="Sama Ecole gestion d'une école">
   <meta name="author" content="Sama Ecole">
   <title>Sama Ecole</title>
   <!-- Favicon -->
