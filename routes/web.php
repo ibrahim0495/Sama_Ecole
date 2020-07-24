@@ -20,13 +20,11 @@ Route::get('/dashboard', function () {
     return view('pages.directeur.add_exemple');
 });
 
-//Liste des Routes
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/comptables', function () {
-    return view('pages.directeur.Create_Surveillant');
-});
+//Liste des Routes
+
 
 //Absence
 Route::resource('etablissement', 'EtablissementController');
