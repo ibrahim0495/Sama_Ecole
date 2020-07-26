@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ComptableController extends Controller
+class PayementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class ComptableController extends Controller
      */
     public function index()
     {
-        return view('pages.comptable.dashboard');
+        //
     }
 
     /**
@@ -23,7 +23,7 @@ class ComptableController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.comptable.payement');
     }
 
     /**
@@ -34,7 +34,8 @@ class ComptableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nom_page = "calendier_payement";
+        return view('pages.comptable.payer_mensuel', compact('nom_page'));
     }
 
     /**
