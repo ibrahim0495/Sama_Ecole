@@ -13,7 +13,8 @@ class ComptableController extends Controller
      */
     public function index()
     {
-        return view('pages.comptable.dashboard');
+        $nom_page = "comptable_index";
+        return view('pages.comptable.dashboard', compact('nom_page'));
     }
 
     /**

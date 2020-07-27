@@ -33,7 +33,7 @@
 
 <body>
     <!-- Sidenav -->
-    @include('pages.comptable.sideBar')
+    @include('pages.surveillant.sideBar')
 
     <!-- Main content -->
     <div class="main-content" id="panel">
@@ -49,24 +49,11 @@
                                 @yield('breadcrumb')
                             </div>
 
-                            @if ($nom_page == "calendier_payement")
-                                <div class="col-lg-6 mt-3 mt-lg-0 text-lg-right">
-                                    <a href="#" class="fullcalendar-btn-prev btn btn-sm btn-neutral">
-                                        <i class="fas fa-angle-left"></i>
-                                    </a>
-                                    <a href="#" class="fullcalendar-btn-next btn btn-sm btn-neutral">
-                                        <i class="fas fa-angle-right"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="month">Month</a>
-                                    <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicWeek">Week</a>
-                                    <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicDay">Day</a>
-                                </div>
-                            @else
-                                <div class="col-lg-6 col-5 text-right">
+                            <div class="col-lg-6 col-5 text-right">
                                 <a href="#" class="btn btn-sm btn-neutral">New</a>
                                 <a href="#" class="btn btn-sm btn-neutral">2019-2020</a>
                             </div>
-                            @endif
+
                         </div>
                     <!-- Card stats -->
                         @yield('header')

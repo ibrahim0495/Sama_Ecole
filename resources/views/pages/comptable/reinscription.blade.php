@@ -1,16 +1,16 @@
-@extends('pages.comptable.master_comptable', ['title' => ' | Inscription'])
+@extends('pages.comptable.master_comptable', ['title'=>'|Réinscription'])
 
 @section('extra-css')
 
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Inscription</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Réinscription</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Inscription</li>
+            <li class="breadcrumb-item"><a href="{{ route('comptable.index') }}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Réinscription</li>
         </ol>
     </nav>
 @endsection
@@ -19,16 +19,22 @@
     <div class="card mb-4">
         <!-- Card header -->
         <div class="card-header">
-            <h3 class="mb-0">Inscription</h3>
+            <h3 class="mb-0">Réinscription</h3>
         </div>
-        <!-- Card body -->
         <div class="card-body">
-            <form method="POST" action="{{ route('inscription.store') }}">
+            <form method="POST" action="{{ route('reinscription.store') }}">
                 @csrf
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card-header">
-                            <h4 class="mb-0">Scolairité</h4>
+                    {{--  Matricule  --}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="InputMatricule">Matricule</label>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Saisir le matricule">
+                            </div>
                         </div>
                     </div>
 
@@ -36,7 +42,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="exampleFormControlSelect1">Classe</label>
-                            <select class="form-control"  data-toggle="select" id="exampleFormControlSelect1">
+                            <select class="form-control" id="exampleFormControlSelect1">
                                 <option>6ème</option>
                                 <option>5ème</option>
                                 <option>4ème</option>
@@ -44,112 +50,7 @@
                         </div>
                     </div>
 
-                    {{-- Année Scolaire --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="exampleFormControlSelect2">Année-Scolaire</label>
-                            <select class="form-control" id="exampleFormControlSelect2">
-                                <option>2019-2020</option>
-                                <option>2020-2021</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card-header">
-                            <h4 class="mb-0">Informations personnelles de l'élève</h4>
-                        </div>
-                    </div>
-                    {{-- Prénoms --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="InputPrénom">Prénom</label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)">
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Nom --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="InputNom">Nom</label>
-                             <div class="input-group input-group-merge">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Saisir le nom">
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Date de naissance --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="exampleDatepicker">Date de naissance</label>
-                            <input class="form-control datepicker" placeholder="Saisir la date de naissance" type="text" value="06/20/2018">
-                        </div>
-                    </div>
-
-                    {{-- Lieu de naissance --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="example2cols2InputLieuNaiss">Lieu de naissance</label>
-                            <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Lieu de naissance" type="text">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Adresse --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="InputAdresse">Adresse</label>
-                            <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Adresse" type="text">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Sexe --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="exampleFormControlSelectSexe">Sexe</label>
-                            <select class="form-control" id="exampleFormControlSelectSexe">
-                                <option>Garçon</option>
-                                <option>Fille</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    {{-- Téléphone --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="InputTéléphone">Téléphone</label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
-                                </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="text">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Montant inscription --}}
+                    {{--  Montant réincription  --}}
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="InputSomme">Somme versée</label>
@@ -162,15 +63,6 @@
                                     <span class="input-group-text"><small class="font-weight-bold">Franc CFA</small></span>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card-header">
-                            <h4 class="mb-0">Informations du parent</h4>
                         </div>
                     </div>
 
@@ -188,7 +80,6 @@
                 </div>
 
                 <div class="row" id="demo" ></div>
-
                 <script>
                     function getTypeParent() {
                         var nouveau =
@@ -269,14 +160,12 @@
                     }
                 </script>
 
-                <button type="submit" class="btn btn-primary btn-lg btn-block">
-                    Inscrire
-                </button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Réinscrire</button>
             </form>
         </div>
     </div>
 @endsection
 
 @section('extra-js')
-    <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+
 @endsection

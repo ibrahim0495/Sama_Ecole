@@ -13,7 +13,7 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

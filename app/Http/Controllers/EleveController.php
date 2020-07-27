@@ -23,7 +23,12 @@ class EleveController extends Controller
      */
     public function create()
     {
-        //
+        //Puisque la fonction lister classe c'est à direles élèves d'une classe
+        //Il faut qu'on le crée une seule fois
+        $nom_page = "classe_create";
+        $profils = "comptable";
+        return view('layouts.show_classe', compact('nom_page', 'profils'));
+
     }
 
     /**
@@ -34,7 +39,11 @@ class EleveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $profils = "comptable";
+        if ($profils == "comptable") {
+            $nom_page = "eleve_store";
+            return view('pages.comptable.nos_eleves', compact('nom_page'));
+        }
     }
 
     /**

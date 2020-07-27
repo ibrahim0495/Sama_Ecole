@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth.login');
 });
-Route::get('/dashboard', function () {
-    return view('pages.directeur.add_exemple');
-});
 
 Route::get('/', function () {
     return view('index');
 });
 //Liste des Routes
+//Pour tout le monde
 
+//Eleve
+Route::resource('eleve', 'EleveController');
 
+///////////////////////////////////////
 //Absence
 Route::resource('etablissement', 'EtablissementController');
 
@@ -43,14 +44,22 @@ Route::resource('classe', 'ClasseController');
 
 /* Ouzy_dev route's */
 
-//Comptable
+//Comptable fonctionnalites
 Route::resource('comptable', 'ComptableController');
 
 //Inscription
 Route::resource('inscription', 'InscriptionController');
 
+//Réinscription
+Route::resource('reinscription', 'ReinscriptionController');
+
 //Payement
 Route::resource('payement', 'PayementController');
+
+//Surveillant fonctionnalites
+
+//Surveillant
+Route::resource('surveillant', 'SurveillantController');
 
 //////////////////////////////////////////////////
 
@@ -59,9 +68,6 @@ Route::resource('user', 'CompteUserController');
 
 //Directeur
 Route::resource('directeur', 'DirecteurController');
-
-//Eleve
-Route::resource('eleve', 'EleveController');
 
 //Emploi du temps
 Route::resource('edt', 'EmploiDuTempsController');
@@ -81,8 +87,6 @@ Route::resource('professeur', 'ProfesseurController');
 //Statistique
 Route::resource('statistique', 'StatistiqueController');
 
-//Surveillant
-Route::resource('surveillant', 'SurveillantController');
 
 
 
