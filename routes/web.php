@@ -43,8 +43,18 @@ Route::resource('chat', 'ChatController');
 //Classe
 Route::resource('classe', 'ClasseController');
 
+/* Ouzy_dev route's */
+
 //Comptable
 Route::resource('comptable', 'ComptableController');
+
+//Inscription
+Route::resource('inscription', 'InscriptionController');
+
+//Payement
+Route::resource('payement', 'PayementController');
+
+//////////////////////////////////////////////////
 
 //Compte User
 Route::resource('user', 'CompteUserController');
@@ -57,9 +67,6 @@ Route::resource('eleve', 'EleveController');
 
 //Emploi du temps
 Route::resource('edt', 'EmploiDuTempsController');
-
-//Inscription
-Route::resource('inscription', 'InscriptionController');
 
 //Matière
 Route::resource('matiere', 'MatiereController');

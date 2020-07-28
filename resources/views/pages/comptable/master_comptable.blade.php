@@ -11,25 +11,25 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Sama Ecole">
-  <meta name="author" content="Sama Ecole">
-  <title>Sama Ecole</title>
-  <!-- Favicon -->
-  {{--  <link rel="icon" href="../../assets/img/brand/favicon.png" type="image/png">  --}}
-  <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <!-- Icons -->
-  <link rel="stylesheet" href="{{ ('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
-  <link rel="stylesheet" href="{{ ('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
-  <!-- Page plugins -->
-  <!-- Argon CSS -->
-  <link rel="stylesheet" href="{{ ('assets/css/argon.css?v=1.2.0') }}" type="text/css">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sama Ecole">
+    <meta name="author" content="Sama Ecole">
+    <title>Sama Ecole</title>
+    <!-- Favicon -->
+    {{--  <link rel="icon" href="../../assets/img/brand/favicon.png" type="image/png">  --}}
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
+    <!-- Page plugins -->
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
 
-  @yield('extra-css')
-</head>
+    @yield('extra-css')
+    </head>
 
 <body>
     <!-- Sidenav -->
@@ -41,7 +41,39 @@
             @include('layouts._partials.navBar')
 
             <!-- Header -->
-            @yield('header')
+            <div class="header bg-primary pb-6">
+                <div class="container-fluid">
+                    <div class="header-body">
+                        <div class="row align-items-center py-4">
+                            <div class="col-lg-6 col-7">
+                                @yield('breadcrumb')
+                            </div>
+
+                            @if ($nom_page == "calendier_payement")
+                                <div class="col-lg-6 mt-3 mt-lg-0 text-lg-right">
+                                    <a href="#" class="fullcalendar-btn-prev btn btn-sm btn-neutral">
+                                        <i class="fas fa-angle-left"></i>
+                                    </a>
+                                    <a href="#" class="fullcalendar-btn-next btn btn-sm btn-neutral">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="month">Month</a>
+                                    <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicWeek">Week</a>
+                                    <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicDay">Day</a>
+                                </div>
+                            @else
+                                <div class="col-lg-6 col-5 text-right">
+                                <a href="#" class="btn btn-sm btn-neutral">New</a>
+                                <a href="#" class="btn btn-sm btn-neutral">2019-2020</a>
+                            </div>
+                            @endif
+                        </div>
+                    <!-- Card stats -->
+                        @yield('header')
+                    </div>
+                </div>
+            </div>
+
 
         <!-- Page content -->
         <div class="container-fluid mt--6">
@@ -51,19 +83,19 @@
     </div>
     <!-- Argon Scripts -->
     <!-- Core -->
-    <script src="{{ ('assets/vendor/jquery/dist/jquery.min.js') }}"></script>--
-    <script src="{{ ('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>--
-    <script src="{{ ('assets/vendor/js-cookie/js.cookie.js') }}"></script>--
-    <script src="{{ ('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ ('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js-cookie/js.cookie.js') }}"></script>--
+    <script src="{{ asset('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Optional JS -->
-    <script src="{{ ('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ ('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
+    <script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->
-    <script src="{{ ('assets/js/argon.js?v=1.2.0') }}"></script>
+    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
     <!-- Demo JS - remove this in your project -->
-    <script src="{{ ('assets/js/demo.min.js') }}"></script>
-    <script src="./assets/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+    {{-- <script src="{{ asset('assets/js/demo.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>
 
     @yield('extra-js')
 
