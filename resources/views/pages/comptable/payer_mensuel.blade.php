@@ -7,7 +7,6 @@
 
 @section('breadcrumb')
     <h6 class="h2 text-white d-inline-block mb-0">Mensualité</h6>
-    <h6 class="fullcalendar-title h2 text-white d-inline-block mb-0">Full calendar</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
@@ -121,4 +120,5 @@
     <script src="{{ asset('assets/vendor/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/fullcalendar/dist/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

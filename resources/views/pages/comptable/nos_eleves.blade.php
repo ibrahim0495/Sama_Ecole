@@ -60,8 +60,20 @@
                                     <td>NDIAYE</td>
                                     <td>00/00/0000</td>
                                     <td>6ème</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-primary">Options</button>
+                                    <td class="clearfix">
+                                        <a
+                                            class="btn btn-sm btn-success float-left"
+                                            href="#" data-toggle="tooltip"
+                                            data-original-title="Voir l'élève">
+                                            <i class="fa fa-eye fa-lg fa-fw"></i>
+                                        </a>
+
+                                        <a
+                                            class="btn btn-sm btn-primary float-right"
+                                            href="#" data-toggle="tooltip"
+                                            data-original-title="Modifier l'élève">
+                                            <i class="fa fa-edit fa-lg fa-fw"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -70,7 +82,21 @@
                                     <td>NDIAYE</td>
                                     <td>00/00/0000</td>
                                     <td>6ème</td>
-                                    <td>$320,800</td>
+                                    <td class="clearfix">
+                                        <a
+                                            class="btn btn-sm btn-success float-left"
+                                            href="#" data-toggle="tooltip"
+                                            data-original-title="Voir l'élève">
+                                            <i class="fa fa-eye fa-lg fa-fw"></i>
+                                        </a>
+
+                                        <a
+                                            class="btn btn-sm btn-primary float-right"
+                                            href="#" data-toggle="tooltip"
+                                            data-original-title="Modifier l'élève">
+                                            <i class="fa fa-edit fa-lg fa-fw"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -89,4 +115,5 @@
     <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

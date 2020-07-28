@@ -61,6 +61,9 @@ Route::resource('payement', 'PayementController');
 //Surveillant
 Route::resource('surveillant', 'SurveillantController');
 
+//Professeur
+Route::resource('professeur', 'ProfesseurController');
+
 //////////////////////////////////////////////////
 
 //Compte User
@@ -81,8 +84,7 @@ Route::resource('notes', 'NoteController');
 //Parent
 Route::resource('parent', 'ParentController');
 
-//Professeur
-Route::resource('professeur', 'ProfesseurController');
+
 
 //Statistique
 Route::resource('statistique', 'StatistiqueController');

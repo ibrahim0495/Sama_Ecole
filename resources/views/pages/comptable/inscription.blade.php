@@ -279,4 +279,5 @@
 
 @section('extra-js')
     <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

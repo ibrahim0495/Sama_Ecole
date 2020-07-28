@@ -79,7 +79,7 @@
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->
-    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+
     <!-- Demo JS - remove this in your project -->
     {{-- <script src="{{ asset('assets/js/demo.min.js') }}"></script> --}}
     <script src="{{ asset('assets/vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>

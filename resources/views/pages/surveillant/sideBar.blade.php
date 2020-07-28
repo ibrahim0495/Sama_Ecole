@@ -29,22 +29,22 @@
                         </li>
                         {{--  Professeur  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-dashboards">
+                            <a class="nav-link active" href="#navbar-professeur" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-professeur">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Professeur</span>
                             </a>
-                            <div class="collapse" id="navbar-dashboards">
+                            <div class="collapse" id="navbar-professeur">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        <span class="sidenav-mini-icon"> E </span>
-                                        <span class="sidenav-normal">Enregistrer</span>
+                                        <a href="{{  route('professeur.create') }}" class="nav-link">
+                                            <span class="sidenav-mini-icon"> E </span>
+                                            <span class="sidenav-normal">Enregistrer</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        <span class="sidenav-mini-icon"> L </span>
-                                        <span class="sidenav-normal"> Lister</span>
+                                        <a href="{{ route('surveillant.index') }}" class="nav-link">
+                                            <span class="sidenav-mini-icon"> L </span>
+                                            <span class="sidenav-normal"> Lister</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -59,11 +59,11 @@
 
                         {{--  Absence  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-dashboards">
+                            <a class="nav-link active" href="#navbar-absences" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-absences">
                                 <i class="ni ni-shop text-primary"></i>
                             <span class="nav-link-text">Absence</span>
                             </a>
-                            <div class="collapse" id="navbar-dashboards">
+                            <div class="collapse" id="navbar-absences">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
@@ -83,11 +83,11 @@
 
                         {{--  Retard  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-dashboards">
+                            <a class="nav-link active" href="#navbar-retard" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-retard">
                                 <i class="ni ni-shop text-primary"></i>
                             <span class="nav-link-text">Retard</span>
                             </a>
-                            <div class="collapse" id="navbar-dashboards">
+                            <div class="collapse" id="navbar-retard">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
@@ -107,11 +107,11 @@
 
                         {{--  Emploi du temps  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-dashboards">
+                            <a class="nav-link active" href="#navbar-edt" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-edt">
                                 <i class="ni ni-shop text-primary"></i>
                             <span class="nav-link-text">Emploi du temps</span>
                             </a>
-                            <div class="collapse" id="navbar-dashboards">
+                            <div class="collapse" id="navbar-edt">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
@@ -131,11 +131,11 @@
 
                         {{--  Notes  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-dashboards">
+                            <a class="nav-link active" href="#navbar-notes" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-notes">
                                 <i class="ni ni-shop text-primary"></i>
                             <span class="nav-link-text">Notes élèves</span>
                             </a>
-                            <div class="collapse" id="navbar-dashboards">
+                            <div class="collapse" id="navbar-notes">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
@@ -149,11 +149,11 @@
 
                         {{--  Bulletin de notes  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-dashboards">
+                            <a class="nav-link active" href="#navbar-bulletins" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-bulletins">
                                 <i class="ni ni-shop text-primary"></i>
                             <span class="nav-link-text">Bulletin de notes</span>
                             </a>
-                            <div class="collapse" id="navbar-dashboards">
+                            <div class="collapse" id="navbar-bulletins">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
