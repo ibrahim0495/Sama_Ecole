@@ -42,7 +42,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('surveillant.index') }}" class="nav-link">
+                                        <a href="{{ route('professeur.index') }}" class="nav-link">
                                             <span class="sidenav-mini-icon"> L </span>
                                             <span class="sidenav-normal"> Lister</span>
                                         </a>
