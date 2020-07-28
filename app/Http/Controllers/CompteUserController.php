@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Personne;
 use Illuminate\Http\Request;
 
 class CompteUserController extends Controller
@@ -13,7 +14,28 @@ class CompteUserController extends Controller
      */
     public function index()
     {
-        //
+
+    }
+
+    function login_store(Request $request){
+
+        $this->validate($request, [
+            'password' => 'required',
+            'email' => 'required'
+        ]);
+        $personne = Personne::where('email',$request->email)->where('motDePasse', $request->password)->first();
+        if(($personne != null) && ($personne->profil=='directeur')){
+            session(['user'=> $personne]);
+            return view('pages.directeur.home');
+        }
+        else if(($personne != null) && ($personne->profil=='parent')){
+            session(['user'=> $personne]);
+            return view('pages.parent.master_par');
+        }
+        else{
+            session()->flash('erreur', 'Veuillez revoir vos parametres de connexion, elle a echoue!');
+            return redirect()->route('login');
+        }
     }
 
     /**
