@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', function () {
     return view('auth.login');
-});
+})->name('login');
+Route::post('/loginme', 'CompteUserController@login_store');
+
 Route::get('/dashboard', function () {
     return view('pages.directeur.add_exemple');
 });
