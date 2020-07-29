@@ -17,27 +17,6 @@ class CompteUserController extends Controller
 
     }
 
-    function login_store(Request $request){
-
-        $this->validate($request, [
-            'password' => 'required',
-            'email' => 'required'
-        ]);
-        $personne = Personne::where('email',$request->email)->where('motDePasse', $request->password)->first();
-        if(($personne != null) && ($personne->profil=='directeur')){
-            session(['user'=> $personne]);
-            return view('pages.directeur.home');
-        }
-        else if(($personne != null) && ($personne->profil=='parent')){
-            session(['user'=> $personne]);
-            return view('pages.parent.master_par');
-        }
-        else{
-            session()->flash('erreur', 'Veuillez revoir vos parametres de connexion, elle a echoue!');
-            return redirect()->route('login');
-        }
-    }
-
     /**
      * Show the form for creating a new resource.
      *

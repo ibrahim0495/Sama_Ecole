@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\models\Personne;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -39,21 +39,24 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function index(Request $request)
+    public function login(Request $request)
     {
         $this->validate($request, [
-            'password' => 'required',
-            'email' => 'required'
+        'password' => 'required',
+        'email' => 'required'
         ]);
-     /*   $personne = Personne::where('email',$request->login)->where('password', $request->password)->first();
-        if(($personne != null) & ($personne->profil=='directeur')){
+        $personne = Personne::where('email',$request->email)->where('motDePasse', $request->password)->first();
+        if(($personne != null) && ($personne->profil=='directeur')){
             session(['user'=> $personne]);
-           // dd(session('user'));
-            return redirect()->route('/dashboard');
+            return view('pages.directeur.home');
+        }
+        else if(($personne != null) && ($personne->profil=='parent')){
+            session(['user'=> $personne]);
+            return view('pages.parent.master_par');
         }
         else{
-            session()->flash('erreur', 'Veuillez revoir vos parametres de connexion, elle a echoue!');
+            session()->flash('erreur', 'Veuillez revoir vos parametres de connexion !');
             return redirect()->route('login');
-        } */
+        }
     }
 }

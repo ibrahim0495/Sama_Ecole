@@ -13,7 +13,7 @@ class DirecteurController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -80,5 +80,10 @@ class DirecteurController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function create_surveillant($id)
+    {
+        return view('pages.directeur.create_Surveillant');
     }
 }

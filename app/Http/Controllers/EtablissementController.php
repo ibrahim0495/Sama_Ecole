@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 
 class EtablissementController extends Controller
@@ -13,7 +14,7 @@ class EtablissementController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.directeur.create_Etablissement');
     }
 
     /**
@@ -23,7 +24,7 @@ class EtablissementController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
