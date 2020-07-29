@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SurveillantController extends Controller
+class ReinscriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class SurveillantController extends Controller
      */
     public function index()
     {
-        return view('pages.surveillant.dashboard');
+        //
     }
 
     /**
@@ -23,7 +23,8 @@ class SurveillantController extends Controller
      */
     public function create()
     {
-        //
+        $nom_page = "reinscription_create";
+        return view('pages.comptable.reinscription', compact('nom_page'));
     }
 
     /**

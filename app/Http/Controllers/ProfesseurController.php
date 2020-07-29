@@ -13,7 +13,7 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.surveillant.lister_professeur');
     }
 
     /**
@@ -23,7 +23,7 @@ class ProfesseurController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.surveillant.add_professeur');
     }
 
     /**
@@ -34,7 +34,7 @@ class ProfesseurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect(route('professeur.index'));
     }
 
     /**

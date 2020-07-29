@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-
-Route::post('/loginme', 'Auth.LoginController@login')->name('loginme');
-
-Route::get('/dashboard', function () {
-    return view('pages.directeur.add_exemple');
-});
+Route::post('/loginme','Auth.LoginController@login')->name('loginme');
 
 Route::get('/', function () {
     return view('index');
@@ -29,8 +26,13 @@ Route::get('/', function () {
 
 Route::get('/info_eleve','EleveController@show_eleve');
 //Liste des Routes
+//Pour tout le monde
+
+//Eleve
+Route::resource('eleve', 'EleveController');
 
 
+///////////////////////////////////////
 //Absence
 Route::resource('etablissement', 'EtablissementController');
 
@@ -46,16 +48,30 @@ Route::resource('chat', 'ChatController');
 //Classe
 Route::resource('classe', 'ClasseController');
 
+//SalleClasse
+Route::resource('salle_classe', 'SalleClasseController');
+
 /* Ouzy_dev route's */
 
-//Comptable
+//Comptable fonctionnalites
 Route::resource('comptable', 'ComptableController');
 
 //Inscription
 Route::resource('inscription', 'InscriptionController');
 
+//Réinscription
+Route::resource('reinscription', 'ReinscriptionController');
+
 //Payement
 Route::resource('payement', 'PayementController');
+
+//Surveillant fonctionnalites
+
+//Surveillant
+Route::resource('surveillant', 'SurveillantController');
+
+//Professeur
+Route::resource('professeur', 'ProfesseurController');
 
 //////////////////////////////////////////////////
 
@@ -64,9 +80,6 @@ Route::resource('user', 'CompteUserController');
 
 //Directeur
 Route::resource('directeur', 'DirecteurController');
-
-//Eleve
-Route::resource('eleve', 'EleveController');
 
 //Emploi du temps
 Route::resource('edt', 'EmploiDuTempsController');
@@ -79,15 +92,12 @@ Route::resource('notes', 'NoteController');
 
 //Parent
 Route::resource('parent', 'ParentController');
+Route::resource('parentEleve', 'ParentEleveController');
 
-//Professeur
-Route::resource('professeur', 'ProfesseurController');
 
 //Statistique
 Route::resource('statistique', 'StatistiqueController');
 
-//Surveillant
-Route::resource('surveillant', 'SurveillantController');
 
 
 
