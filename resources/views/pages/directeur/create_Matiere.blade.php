@@ -16,28 +16,25 @@
 <div class="card mb-4">
     <!-- Card header -->
     <div class="card-header">
-        <h3 class="mb-0">Enregistrer matière</h3>
+        <h3 class="mb-0">Enregistrement d'une matière</h3>
     </div>
-        <!-- Card body -->
-        <div class="card-body">
-            <form method="POST" action="{{ route('matiere.create') }}">
-                @csrf
-                <div class="row">
-                    <div class="col-md-12">
-                        {{-- Nom --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="example2cols2Input">Nom</label>
-                            <input type="text" class="form-control" name="nom" placeholder="Saisir le nom">
-                        </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <form action="{{ route('matiere.store') }}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-md-3"></div>
+                {{-- Nom Classe --}}
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label class="form-control-label" for="example2cols2Input">Nom</label>
+                        <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la matière">
                     </div>
-                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">
-                    Valider
-                </button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 

@@ -13,6 +13,7 @@ class EleveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -91,12 +92,5 @@ class EleveController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function show_eleve(){
-        $classe= Classe::first();
-        $anneeScolaire = AnneeScolaire::first();
-
-        return view('pages.directeur.show_eleve');
     }
 }

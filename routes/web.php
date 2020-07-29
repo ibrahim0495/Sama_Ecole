@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+<<<<<<< HEAD
 
 Route::post('/loginme', 'Auth.LoginController@login')->name('loginme');
 
 Route::get('/dashboard', function () {
     return view('pages.directeur.add_exemple');
 });
+=======
+Route::post('/loginme','Auth.LoginController@login')->name('loginme');
+>>>>>>> datte_branch
 
 Route::get('/', function () {
     return view('index');
@@ -33,6 +39,7 @@ Route::get('/info_eleve','EleveController@show_eleve');
 
 //Eleve
 Route::resource('eleve', 'EleveController');
+
 
 ///////////////////////////////////////
 //Absence
@@ -49,6 +56,9 @@ Route::resource('chat', 'ChatController');
 
 //Classe
 Route::resource('classe', 'ClasseController');
+
+//SalleClasse
+Route::resource('salle_classe', 'SalleClasseController');
 
 /* Ouzy_dev route's */
 
@@ -91,7 +101,7 @@ Route::resource('notes', 'NoteController');
 
 //Parent
 Route::resource('parent', 'ParentController');
-
+Route::resource('parentEleve', 'ParentEleveController');
 
 
 //Statistique

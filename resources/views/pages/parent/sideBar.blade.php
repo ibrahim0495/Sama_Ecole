@@ -22,7 +22,7 @@
                         <!-- Nav items -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                            <a href="{{route('parentEleve.index')}}" class="nav-link">
                                 <span class="sidenav-mini-icon"> E </span>
                                 <i class="ni ni-align-left-2 text-default"></i>
                                 <span class="nav-link-text"><h4> enfants</h4></span>
