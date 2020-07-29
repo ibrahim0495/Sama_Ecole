@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\AnneeScolaire;
+use App\models\Classe;
 
 class EleveController extends Controller
 {
@@ -89,5 +91,12 @@ class EleveController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function show_eleve(){
+        $classe= Classe::first();
+        $anneeScolaire = AnneeScolaire::first();
+
+        return view('pages.directeur.show_eleve');
     }
 }

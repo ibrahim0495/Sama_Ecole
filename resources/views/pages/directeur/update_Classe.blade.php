@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_dir', ['title' => ' |Matiere'])
+@extends('pages.directeur.master_dir', ['title' => ' |Classe'])
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')
@@ -6,7 +6,6 @@
 @endsection
 
 @section('contenu_page')
-
 <div class="card mb-4">
 </div>
 <div class="card mb-4">
@@ -16,11 +15,11 @@
 <div class="card mb-4">
     <!-- Card header -->
     <div class="card-header">
-        <h3 class="mb-0">Mise à jour matière</h3>
+        <h3 class="mb-0">Mise à jour classe</h3>
     </div>
         <!-- Card body -->
         <div class="card-body">
-            <form method="POST" action="{{ route('matiere.update') }}">
+            <form method="POST" action="{{ route('classe.update') }}">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -42,7 +41,6 @@
 </div>
 
 @endsection
-
 
 {{--  Pour les fichier js dont ce page a besoin ici  --}}
 @section('extra-js')
