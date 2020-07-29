@@ -23,7 +23,9 @@ class SurveillantController extends Controller
      */
     public function create()
     {
-        //
+        $personnel = "surveillant";
+        $profils = "directeur";
+        return view('layouts.add_personnel', compact('personnel', 'profils'));
     }
 
     /**

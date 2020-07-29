@@ -14,7 +14,7 @@ class EtablissementController extends Controller
      */
     public function index()
     {
-        return view('pages.directeur.create_Etablissement');
+
     }
 
     /**
@@ -24,7 +24,7 @@ class EtablissementController extends Controller
      */
     public function create()
     {
-
+        return view('pages.directeur.create_Etablissement');
     }
 
     /**
