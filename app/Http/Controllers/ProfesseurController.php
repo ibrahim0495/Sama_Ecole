@@ -23,7 +23,9 @@ class ProfesseurController extends Controller
      */
     public function create()
     {
-        return view('pages.surveillant.add_professeur');
+        $personnel = "professeur";
+        $profils = "surveillant";
+        return view('layouts.add_personnel', compact('personnel', 'profils'));
     }
 
     /**

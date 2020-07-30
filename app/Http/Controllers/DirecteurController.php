@@ -13,7 +13,7 @@ class DirecteurController extends Controller
      */
     public function index()
     {
-
+        return view('pages.directeur.home');
     }
 
     /**

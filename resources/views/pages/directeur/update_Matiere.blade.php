@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_dir', ['title' => ' |Matiere'])
+@extends('pages.directeur.master_directeur', ['title' => ' |Matiere'])
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')

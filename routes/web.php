@@ -25,11 +25,11 @@ Route::get('/dashboard', function () {
     return view('pages.directeur.add_exemple');
 });
 
+
 Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/info_eleve','EleveController@show_eleve');
 //Liste des Routes
 //Pour tout le monde
 

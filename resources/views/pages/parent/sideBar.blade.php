@@ -22,24 +22,30 @@
                         <!-- Nav items -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                            <a href="{{route('parentEleve.index')}}" class="nav-link">
-                                <span class="sidenav-mini-icon"> E </span>
-                                <i class="ni ni-align-left-2 text-default"></i>
-                                <span class="nav-link-text"><h4> enfants</h4></span>
+                                <a class="nav-link" href="{{ route('parent.index') }}">
+                                    <i class="ni ni-shop text-primary"></i>
+                                    <span class="nav-link-text">Tableau de bord</span>
                                 </a>
                             </li>
+
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                <span class="sidenav-mini-icon"> N </span>
-                                <i class="ni ni-bell-55"></i>
-                                <span class=""><h4>Notifications</h4></span>
+                                <a class="nav-link" href="{{ route('parentEleve.index') }}">
+                                    <i class="ni ni-shop text-primary"></i>
+                                    <span class="nav-link-text">Mes enfants</span>
                                 </a>
                             </li>
+
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                <span class="sidenav-mini-icon"> M </span>
-                                <i class="ni ni-ungroup"></i>
-                                <span class="nav-link-text"><h4>Mensualité</h4></span>
+                                <a class="nav-link" href="#">
+                                    <i class="ni ni-bell-55 text-primary"></i>
+                                    <span class="nav-link-text">Notifications</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="ni ni-money-coins text-primary"></i>
+                                    <span class="nav-link-text">Mensualité</span>
                                 </a>
                             </li>
                         </ul>

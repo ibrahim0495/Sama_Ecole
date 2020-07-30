@@ -1,12 +1,5 @@
 <!--
-=========================================================
-* Argon Dashboard PRO - v1.2.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro
-* Copyright  Creative Tim (http://www.creative-tim.com)
-* Coded by www.creative-tim.com
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
 -->
 <!DOCTYPE html>
 <html>
@@ -79,9 +72,8 @@
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->
+    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 
-    <!-- Demo JS - remove this in your project -->
-    {{-- <script src="{{ asset('assets/js/demo.min.js') }}"></script> --}}
     <script src="{{ asset('assets/vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>
 
     @yield('extra-js')
