@@ -13,7 +13,7 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.professeur.master_prof');
     }
 
     /**

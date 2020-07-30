@@ -35,7 +35,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('salleClasse.index') }}" class="nav-link">
+                                            <a href="" class="nav-link">
                                             <span class="sidenav-mini-icon"> A </span>
                                             <span class="sidenav-normal"> Salle de classe</span>
                                             </a>

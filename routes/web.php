@@ -23,6 +23,10 @@ Route::get('/dashboard', function () {
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/comptableee', function () {
+    $nom_page = "calendier_payement";
+    return view('pages.comptable.dashboard', compact('nom_page'));
+});
 //Liste des Routes
 
 
