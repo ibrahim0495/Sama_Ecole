@@ -78,19 +78,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('reinscription.create') }}">
                                 <i class="ni ni-chart-pie-35 text-info"></i>
                                 <span class="nav-link-text">Réinscription</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('payement.create') }}">
-                                <i class="ni ni-calendar-grid-58 text-red"></i>
+                                <i class="ni ni-money-coins text-red"></i>
                                 <span class="nav-link-text">Payement</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('eleve.create') }}">
                                 <i class="ni ni-hat-3 text-green"></i>
                                 <span class="nav-link-text">Nos classes</span>
                             </a>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Personne;
 use Illuminate\Http\Request;
 
 class CompteUserController extends Controller
@@ -13,7 +14,7 @@ class CompteUserController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

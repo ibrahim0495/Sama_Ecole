@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\models\AnneeScolaire;
+use App\models\Classe;
 use Illuminate\Http\Request;
 
-class SurveillantController extends Controller
+class ParentEleveController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,10 @@ class SurveillantController extends Controller
      */
     public function index()
     {
-        return view('pages.surveillant.dashboard');
+        // $classe= Classe::first();
+       //  $anneeScolaire = AnneeScolaire::first();
+
+       return view('pages.parent.show_enfant');
     }
 
     /**

@@ -6,33 +6,36 @@
 @endsection
 
 @section('contenu_page')
-
-<div class="container">
-    <div class="card-body">
-        <form method="POST" action="">
-            @csrf
-          <!-- Input groups with icon -->
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <div class="input-group input-group-merge">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                  </div>
-                  <input class="form-control" placeholder="Nom classe" type="text">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-success">Valider</button>
-            </div>
-          </div>
-
-          <!-- Input groups with icon -->
-        </form>
-      </div>
+<div class="card mb-4">
+</div>
+<div class="card mb-4">
+</div>
+<div class="card mb-4">
+</div>
+<div class="card mb-4">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Enregistrement d'une classe</h3>
     </div>
- </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <form action="{{ route('classe.store') }}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-md-3"></div>
+                {{-- Nom Classe --}}
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label class="form-control-label" for="example2cols2Input">Nom</label>
+                        <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la classe">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 @endsection
 

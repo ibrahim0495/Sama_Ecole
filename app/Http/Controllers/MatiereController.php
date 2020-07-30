@@ -13,7 +13,7 @@ class MatiereController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.directeur.create_Matiere');
     }
 
     /**

@@ -33,7 +33,7 @@
 
 <body>
     <!-- Sidenav -->
-    @include('pages.directeur.sideBar')
+
 
     <!-- Main content -->
     <div class="main-content" id="panel">

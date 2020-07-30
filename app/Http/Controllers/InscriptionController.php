@@ -23,7 +23,8 @@ class InscriptionController extends Controller
      */
     public function create()
     {
-        return view('pages.comptable.inscription');
+        $nom_page = "inscription_create";
+        return view('pages.comptable.inscription', compact('nom_page'));
     }
 
     /**
