@@ -19,7 +19,12 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::post('/loginme','Auth.LoginController@login')->name('loginme');
+Route::post('/loginme', 'Auth.LoginController@login')->name('loginme');
+
+Route::get('/dashboard', function () {
+    return view('pages.directeur.add_exemple');
+});
+
 
 Route::get('/', function () {
     return view('index');
