@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_directeur', ['title' => ' |Eleve'])
+@extends('pages.directeur.master_directeur', ['title' => ' |Surveillant'])
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')
@@ -6,12 +6,12 @@
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Elèves</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Surveillant</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
             <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Directeur/Lister Eleves</li>
+            <li class="breadcrumb-item active" aria-current="page">Directeur/Lister Surveillants</li>
         </ol>
     </nav>
 @endsection
@@ -24,9 +24,9 @@
         <div class="card">
             <!-- Card header -->
             <div class="card-header">
-                <h3 class="mb-0">Eleves</h3>
+                <h3 class="mb-0">Surveillant</h3>
                 <p class="text-sm mb-0">
-                    Liste des  eleves de la classe (nom_classe)
+                    Liste des Surveillants
                 </p>
             </div>
             <div class="table-responsive py-4">
@@ -47,8 +47,46 @@
                     </tfoot>
                     <tbody>
                         <tr>
-                            <td>Ousmane</td>
+                            <td>Pape</td>
                             <td>NDIAYE</td>
+                            <td class="clearfix">
+                                <a
+                                    class="btn btn-sm btn-success float-left"
+                                    href="#" data-toggle="modal" data-target="#surveillant"
+                                    data-original-title="Voir le surveillant">
+                                    <i class="fa fa-eye fa-lg fa-fw"></i>
+                                </a>
+
+                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-gradient-blue ql-color-white">
+                                                <h5 class="modal-title" id="eleve">Pape NDIAYE</h5><br>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+
+                                            </div>
+                                            <div class="modal-body">
+                                                Adresse : <strong>Thiaroye</strong><br>
+                                                <div class="dropdown-divider"></div>
+                                                Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
+                                                <div class="dropdown-divider"></div>
+                                                sexe :  <strong>M</strong><br>
+                                                <div class="dropdown-divider"></div>
+                                                Téléphone :  <strong>77 012 25 45</strong><br>
+                                                <div class="dropdown-divider"></div>
+                                                email :  <strong>hamidou@gmail.com</strong><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Malick</td>
+                            <td>Diop</td>
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-success float-left"
@@ -61,15 +99,13 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Ousmane NDIAYE</h5><br>
+                                                <h5 class="modal-title" id="eleve">Malick Diop</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
 
                                             </div>
                                             <div class="modal-body">
-                                                matricule : <strong>001221810</strong><br>
-                                                <div class="dropdown-divider"></div>
                                                 Adresse : <strong>Thiaroye</strong><br>
                                                 <div class="dropdown-divider"></div>
                                                 Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
@@ -88,7 +124,7 @@
 
                         <tr>
                             <td>Ousmane</td>
-                            <td>NDIAYE</td>
+                            <td>Diouf</td>
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-success float-left"
@@ -101,55 +137,13 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Ousmane NDIAYE</h5><br>
+                                                <h5 class="modal-title" id="eleve">Ousmane Diouf</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
 
                                             </div>
                                             <div class="modal-body">
-                                                matricule : <strong>001221810</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Adresse : <strong>Thiaroye</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                sexe :  <strong>M</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Téléphone :  <strong>77 012 25 45</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                email :  <strong>hamidou@gmail.com</strong><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Ousmane</td>
-                            <td>NDIAYE</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#eleve"
-                                    data-original-title="Voir l'élève">
-                                    <i class="fa fa-eye fa-lg fa-fw"></i>
-                                </a>
-
-                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Hamidou NDIAYE</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-
-                                            </div>
-                                            <div class="modal-body">
-                                                matricule : <strong>001221810</strong><br>
-                                                <div class="dropdown-divider"></div>
                                                 Adresse : <strong>Thiaroye</strong><br>
                                                 <div class="dropdown-divider"></div>
                                                 Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>

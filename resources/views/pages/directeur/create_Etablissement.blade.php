@@ -10,8 +10,8 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Enregistrer établissement</li>
+            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Directeur/Enregistrer établissement</li>
         </ol>
     </nav>
 @endsection
@@ -20,7 +20,7 @@
     <div class="card mb-4">
         <!-- Card header -->
         <div class="card-header">
-            <h3 class="mb-0">Enregistrer un Surveillant</h3>
+            <h3 class="mb-0">Enregistrer un Etablissement</h3>
         </div>
         <!-- Card body -->
         <div class="card-body">
@@ -29,19 +29,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-header">
-                            <h4 class="mb-0">Informations personnelles du surveillant</h4>
-                        </div>
-                    </div>
-                    {{-- Prénoms --}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="InputPrénom">Prénom</label>
-                            <div class="input-group input-group-merge">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)" name="prenom">
-                            </div>
+                            <h4 class="mb-0">Informations d'un établissement</h4>
                         </div>
                     </div>
 

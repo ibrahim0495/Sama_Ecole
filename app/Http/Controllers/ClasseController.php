@@ -13,7 +13,7 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.directeur.show_classe');
     }
 
     /**
@@ -45,7 +45,7 @@ class ClasseController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

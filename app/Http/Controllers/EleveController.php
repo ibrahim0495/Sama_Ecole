@@ -42,11 +42,16 @@ class EleveController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->profils=='directeur'){
+            $nom_page = "info_eleve";
+            return view('pages.directeur.show_info_eleve', compact('nom_page'));
+        }
         $profils = "comptable";
         if ($profils == "comptable") {
             $nom_page = "eleve_store";
             return view('pages.comptable.nos_eleves', compact('nom_page'));
         }
+
     }
 
     /**

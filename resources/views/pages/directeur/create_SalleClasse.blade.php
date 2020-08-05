@@ -36,7 +36,7 @@
                             <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la salle">
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Directeur/Enregistrer Salle de Classe</button>
                     </div>
                 </div>
             </form>
