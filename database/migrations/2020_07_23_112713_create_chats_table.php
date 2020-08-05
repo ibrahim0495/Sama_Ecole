@@ -18,7 +18,7 @@ class CreateChatsTable extends Migration
             $table->string('sender');
             $table->string('receiver');
             $table->string('message');
-            $table->string('fichier');
+            $table->string('fichier')->nullable();
             $table->timestamps();
         });
     }

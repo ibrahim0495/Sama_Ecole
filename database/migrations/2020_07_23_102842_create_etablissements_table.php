@@ -19,8 +19,8 @@ class CreateEtablissementsTable extends Migration
             $table->string('telephone');
             $table->string('email');
             $table->string('adresse');
-            $table->string('logo');
-            $table->string('acronyme');
+            $table->string('logo')->nullable();
+            $table->string('acronyme')->nullable();
             $table->timestamps();
         });
     }

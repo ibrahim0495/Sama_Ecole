@@ -20,7 +20,7 @@ class CreateInscriptionsTable extends Migration
             $table->unsignedBigInteger('anneeScolaire_id');
             $table->integer('montant');
             $table->integer('reliquat');
-            $table->string('type_paiement');
+            $table->string('type_paiement')->nullable();
             $table->timestamps();
         });
     }

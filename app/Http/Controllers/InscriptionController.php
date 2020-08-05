@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Classe;
 use Illuminate\Http\Request;
 
 class InscriptionController extends Controller
@@ -24,6 +25,7 @@ class InscriptionController extends Controller
     public function create()
     {
         $nom_page = "inscription_create";
+        dd($this->Classe->getClasse());
         return view('pages.comptable.inscription', compact('nom_page'));
     }
 

@@ -17,14 +17,14 @@ class CreatePersonnesTable extends Migration
             $table->string('login')->primary();
             $table->string('prenom');
             $table->string('nom');
-            $table->string('telephone');
+            $table->string('telephone')->unique()->nullable();
             $table->string('adresse');
             $table->string('motDePasse');
             $table->string('nomImgPers');
-            $table->string('etatPers');
+            $table->boolean('etatPers')->default(1);
             $table->string('profil');
             $table->string('langue');
-            $table->string('email');
+            $table->string('email')->unique()->nullable();
             $table->timestamps();
         });
     }
