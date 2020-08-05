@@ -13,7 +13,7 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        return view('pages.surveillant.lister_professeur');
+        return view('pages.professeur.dashboard');
     }
 
     /**
@@ -36,7 +36,7 @@ class ProfesseurController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect(route('professeur.index'));
+        return redirect(route('professeurs.index'));
     }
 
     /**
@@ -83,4 +83,17 @@ class ProfesseurController extends Controller
     {
         //
     }
+
+    public function messages(){
+        return view('pages.professeur.message');
+    }
+
+    public function post_classe(Request $request){
+       return redirect()->route('professeurs.classes');
+    }
+
+    public function index_classe(){
+        return view('pages.professeur.classes');
+    }
 }
+

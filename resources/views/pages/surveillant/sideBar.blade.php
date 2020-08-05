@@ -36,13 +36,13 @@
                             <div class="collapse" id="navbar-professeur">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="{{  route('professeur.create') }}" class="nav-link">
+                                        <a href="{{  route('professeurs.create') }}" class="nav-link">
                                             <span class="sidenav-mini-icon"> E </span>
                                             <span class="sidenav-normal">Enregistrer</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('professeur.index') }}" class="nav-link">
+                                        <a href="{{ route('professeurs.index') }}" class="nav-link">
                                             <span class="sidenav-mini-icon"> L </span>
                                             <span class="sidenav-normal"> Lister</span>
                                         </a>
