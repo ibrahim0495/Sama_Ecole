@@ -42,6 +42,7 @@ Route::resource('eleve', 'EleveController');
 Route::resource('etablissement', 'EtablissementController');
 
 //Année Scolaire
+Route::get('annee-scolaire/liste','AnneeScolaireController@liste_annee')->name('annee-scolaire.liste');
 Route::resource('annee-scolaire', 'AnneeScolaireController');
 
 //Bulletin
@@ -73,6 +74,7 @@ Route::resource('payement', 'PayementController');
 //Surveillant fonctionnalites
 
 //Surveillant
+Route::get('surveillant/liste', 'SurveillantController@lister_surveillant')->name('surveillant.liste');
 Route::resource('surveillant', 'SurveillantController');
 
 //Professeur

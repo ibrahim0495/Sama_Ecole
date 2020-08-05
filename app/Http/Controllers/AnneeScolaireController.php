@@ -23,7 +23,7 @@ class AnneeScolaireController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.directeur.create_annee_scolaire');
     }
 
     /**
@@ -81,4 +81,10 @@ class AnneeScolaireController extends Controller
     {
         //
     }
+
+    public function liste_annee()
+    {
+        return view('pages.directeur.show_annee_scolaire');
+    }
+
 }

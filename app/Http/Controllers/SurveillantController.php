@@ -83,4 +83,11 @@ class SurveillantController extends Controller
     {
         //
     }
+
+    public function lister_surveillant()
+    {
+
+        return view('pages.directeur.show_surveillant');
+    }
+
 }
