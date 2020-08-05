@@ -106,8 +106,48 @@
 
 @section('contenu_page')
     <div class="row">
-        <div class="col-xl-8">
-            <h1>Statistique Ici</h1>
-        </div>
+            <div class="col-xl-6">
+              <!--* Card header *-->
+              <!--* Card body *-->
+              <!--* Card init *-->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                  <!-- Surtitle -->
+                  <h6 class="surtitle">Growth</h6>
+                  <!-- Title -->
+                  <h5 class="h3 mb-0">Sales value</h5>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="chart">
+                    <!-- Chart wrapper -->
+                    <canvas id="chart-points" class="chart-canvas"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <!--* Card header *-->
+              <!--* Card body *-->
+              <!--* Card init *-->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                  <!-- Surtitle -->
+                  <h6 class="surtitle">Users</h6>
+                  <!-- Title -->
+                  <h5 class="h3 mb-0">Audience overview</h5>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="chart">
+                    <!-- Chart wrapper -->
+                    <canvas id="chart-doughnut" class="chart-canvas"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
     </div>
 @endsection

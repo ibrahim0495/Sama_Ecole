@@ -18,7 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-Route::post('/loginme','Auth.LoginController@login')->name('loginme');
+
+Route::post('/loginme', 'Auth.LoginController@login')->name('loginme');
+
+Route::get('/dashboard', function () {
+    return view('pages.directeur.add_exemple');
+});
+
 
 Route::get('/', function () {
     return view('index');
@@ -70,8 +76,12 @@ Route::resource('payement', 'PayementController');
 Route::resource('surveillant', 'SurveillantController');
 
 //Professeur
-Route::resource('professeur', 'ProfesseurController');
-
+Route::get('professeurs/messages','ProfesseurController@messages')->name('professeur.messages');
+Route::post('professeurs/classes', 'ProfesseurController@post_classe')->name('professeurs.classes');
+Route::get('professeurs/classes', 'ProfesseurController@index_classe')->name('professeurs.classes');
+Route::resource('notes','NoteController');
+Route::resource('professeurs', 'ProfesseurController');
+//Route::get('professeur/messages','ProfesseurController@messages')->name('professeur.messages');
 //////////////////////////////////////////////////
 
 //Compte User

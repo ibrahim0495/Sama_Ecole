@@ -13,7 +13,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.professeur.show_notes');
     }
 
     /**
@@ -23,7 +23,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.professeur.create_note');
     }
 
     /**
@@ -34,7 +34,7 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('notes.index');
     }
 
     /**

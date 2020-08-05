@@ -105,9 +105,48 @@
 @endsection
 
 @section('contenu_page')
-    <div class="row">
-        <div class="col-xl-8">
-            <h1>Statistique Ici</h1>
+<div class="row">
+    <div class="col-xl-6">
+      <!--* Card header *-->
+      <!--* Card body *-->
+      <!--* Card init *-->
+      <div class="card">
+        <!-- Card header -->
+        <div class="card-header">
+          <!-- Surtitle -->
+          <h6 class="surtitle">Partners</h6>
+          <!-- Title -->
+          <h5 class="h3 mb-0">Affiliate traffic</h5>
         </div>
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="chart">
+            <!-- Chart wrapper -->
+            <canvas id="chart-pie" class="chart-canvas"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="col-xl-6">
+      <!--* Card header *-->
+      <!--* Card body *-->
+      <!--* Card init *-->
+      <div class="card">
+        <!-- Card header -->
+        <div class="card-header">
+          <!-- Surtitle -->
+          <h6 class="surtitle">Overview</h6>
+          <!-- Title -->
+          <h5 class="h3 mb-0">Product comparison</h5>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="chart">
+            <!-- Chart wrapper -->
+            <canvas id="chart-bar-stacked" class="chart-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
