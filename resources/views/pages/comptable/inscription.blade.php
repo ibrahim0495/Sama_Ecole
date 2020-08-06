@@ -1,7 +1,8 @@
 @extends('pages.comptable.master_comptable', ['title' => ' | Inscription'])
 
 @section('extra-css')
-
+    <link rel="stylesheet" href="{{ asset('assets/vendor/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
 @endsection
 
 @section('breadcrumb')
@@ -32,25 +33,26 @@
                         </div>
                     </div>
 
-                    {{-- Classe --}}
+                    {{-- Classe (name="classe_id") --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="exampleFormControlSelect1">Classe</label>
-                            <select class="form-control"  data-toggle="select" id="exampleFormControlSelect1">
-                                <option>6ème</option>
-                                <option>5ème</option>
-                                <option>4ème</option>
+                            <label class="form-control-label" for="FormControlSelect2">Classe</label>
+                            <select class="form-control" name="classe_id" data-toggle="select">
+                                @foreach ($liste_classe as $item)
+                                    <option value="{{ $item->classe_id }}">{{ $item->nom }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
 
-                    {{-- Année Scolaire --}}
+                    {{-- Année Scolaire (name="anneeScolaire_id") --}}
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="exampleFormControlSelect2">Année-Scolaire</label>
-                            <select class="form-control" id="exampleFormControlSelect2">
-                                <option>2019-2020</option>
-                                <option>2020-2021</option>
+                            <select class="form-control" name="anneeScolaire_id" data-toggle="select">
+                                @foreach ($liste_annee_sco as $item)
+                                    <option value="{{ $item->anneeScolaire_id }}">{{ $item->nom_anneesco }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -62,7 +64,7 @@
                             <h4 class="mb-0">Informations personnelles de l'élève</h4>
                         </div>
                     </div>
-                    {{-- Prénoms --}}
+                    {{-- Prénoms (prenom) --}}
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="InputPrénom">Prénom</label>
@@ -70,7 +72,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)">
+                                <input type="text" name="prenom" class="form-control" placeholder="Saisir le(s) prénom(s)">
                             </div>
                         </div>
                     </div>
@@ -83,16 +85,16 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Saisir le nom">
+                                <input type="text" name="nom" class="form-control" placeholder="Saisir le nom">
                             </div>
                         </div>
                     </div>
 
-                    {{-- Date de naissance --}}
+                    {{-- Date de naissance (name="dateNaissance") --}}
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="exampleDatepicker">Date de naissance</label>
-                            <input class="form-control datepicker" placeholder="Saisir la date de naissance" type="text" value="06/20/2018">
+                            <input class="form-control datepicker" name="dateNaissance" placeholder="Saisir la date de naissance" type="text" value="06/20/2018">
                         </div>
                     </div>
 
@@ -101,7 +103,7 @@
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2InputLieuNaiss">Lieu de naissance</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Lieu de naissance" type="text">
+                                <input class="form-control" name="lieuNaissance" placeholder="Lieu de naissance" type="text">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                                 </div>
@@ -114,7 +116,7 @@
                         <div class="form-group">
                             <label class="form-control-label" for="InputAdresse">Adresse</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Adresse" type="text">
+                                <input class="form-control" name="adresse" placeholder="Adresse" type="text">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                                 </div>
@@ -126,7 +128,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="exampleFormControlSelectSexe">Sexe</label>
-                            <select class="form-control" id="exampleFormControlSelectSexe">
+                            <select class="form-control" name="sexe" id="exampleFormControlSelectSexe">
                                 <option>Garçon</option>
                                 <option>Fille</option>
                             </select>
@@ -141,7 +143,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="text">
+                                <input class="form-control" name="telephone" placeholder="Numéro de téléphone" type="text">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>
@@ -157,7 +159,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Montant versée" type="text">
+                                <input class="form-control" name="montant" placeholder="Montant versée" type="text">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><small class="font-weight-bold">Franc CFA</small></span>
                                 </div>
@@ -200,7 +202,7 @@
                                 <div class='input-group-prepend'>\n\
                                     <span class='input-group-text'><i class='fas fa-user'></i></span>\n\
                                 </div>\n\
-                                <input type='text' class='form-control' id='examplePrenomParent' placeholder='Saisir le(s) prénom(s)'>\n\
+                                <input type='text' name='prenom_parent' class='form-control' id='examplePrenomParent' placeholder='Saisir le(s) prénom(s)'>\n\
                             </div>\n\
                         </div>\n\
                     </div>\n\
@@ -212,7 +214,7 @@
                                 <div class='input-group-prepend'>\n\
                                     <span class='input-group-text'><i class='fas fa-user'></i></span>\n\
                                 </div>\n\
-                                <input type='text' class='form-control' id='exampleNomParent' placeholder='Saisir le nom'>\n\
+                                <input type='text' name='nom_parent' class='form-control' id='exampleNomParent' placeholder='Saisir le nom'>\n\
                             </div>\n\
                         </div>\n\
                     </div>\n\
@@ -224,7 +226,7 @@
                                 <div class='input-group-prepend'>\n\
                                     <span class='input-group-text'><i class='fas fa-globe-americas'></i></span>\n\
                                 </div>\n\
-                                <input type='text' class='form-control' id='exampleTelephoneParent' placeholder='Saisir le numéro de téléphone'>\n\
+                                <input type='text' name='telephone_parent' class='form-control' id='exampleTelephoneParent' placeholder='Saisir le numéro de téléphone'>\n\
                                 <div class='input-group-append'>\n\
                                     <span class='input-group-text'><i class='fas fa-phone'></i></span>\n\
                                 </div>\n\
@@ -236,7 +238,7 @@
                         <div class='form-group'>\n\
                             <label class='form-control-label' for='exampleAdresseParent'>Adresse</label>\n\
                             <div class='input-group input-group-merge'>\n\
-                                <input type='text' class='form-control' id='exampleAdresseParent' placeholder='Adresse'>\n\
+                                <input type='text' name='adresse_parent' class='form-control' id='exampleAdresseParent' placeholder='Adresse'>\n\
                                 <div class='input-group-append'>\n\
                                     <span class='input-group-text'><i class='fas fa-map-marker'></i></span>\n\
                                 </div>\n\
@@ -253,7 +255,7 @@
                                 <div class='input-group-prepend'>\n\
                                     <span class='input-group-text'><i class='fas fa-globe-americas'></i></span>\n\
                                 </div>\n\
-                                <input type='text' class='form-control' id='exampleTelephoneParent' placeholder='Saisir le numéro de téléphone ou le nom utilisateur'>\n\
+                                <input type='text' name='info_ancien_parent' class='form-control' id='exampleTelephoneParent' placeholder='Saisir le numéro de téléphone ou le nom utilisateur'>\n\
                                 <div class='input-group-append'>\n\
                                     <span class='input-group-text'><i class='fas fa-phone'></i></span>\n\
                                 </div>\n\
@@ -279,5 +281,7 @@
 
 @section('extra-js')
     <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

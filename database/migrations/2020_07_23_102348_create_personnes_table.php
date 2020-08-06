@@ -20,7 +20,7 @@ class CreatePersonnesTable extends Migration
             $table->string('telephone')->unique()->nullable();
             $table->string('adresse');
             $table->string('motDePasse');
-            $table->string('nomImgPers');
+            $table->string('nomImgPers')->nullable();
             $table->boolean('etatPers')->default(1);
             $table->string('profil');
             $table->string('langue');
