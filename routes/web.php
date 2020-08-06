@@ -19,7 +19,7 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::post('/loginme', 'Auth.LoginController@login')->name('loginme');
+Route::post('/loginme', 'LoginController@login')->name('loginme');
 
 Route::get('/dashboard', function () {
     return view('pages.directeur.add_exemple');
@@ -42,7 +42,6 @@ Route::resource('eleve', 'EleveController');
 Route::resource('etablissement', 'EtablissementController');
 
 //Année Scolaire
-Route::get('annee-scolaire/liste','AnneeScolaireController@liste_annee')->name('annee-scolaire.liste');
 Route::resource('annee-scolaire', 'AnneeScolaireController');
 
 //Bulletin

@@ -73,6 +73,31 @@
                                 </ul>
                             </div>
                         </li>
+
+                        {{--  Salle Classe  --}}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#navbar-salleClasse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-salleClasse">
+                                <i class="ni ni-shop text-primary"></i>
+                                <span class="nav-link-text">Salle Classe</span>
+                            </a>
+                            <div class="collapse" id="navbar-salleClasse">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('salle_classe.create') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> E </span>
+                                        <span class="sidenav-normal"> Enregistrer</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('salle_classe.index') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> L </span>
+                                        <span class="sidenav-normal"> Lister</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
                         {{--  Matiere  --}}
                         <li class="nav-item">
                             <a class="nav-link active" href="#navbar-matiere" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-matiere">
@@ -162,8 +187,11 @@
                                             <div class="form-group">
                                                 <label for="">Année Scolaire</label>
                                                 <select  class="form-control" name="annee" value="" required>
-                                                    <option>2018-2019</option>
-                                                    <option>2019-2020</option>
+                                                    @if (!empty($anneeScolaire))
+                                                        @foreach ($anneeScolaire as $annee)
+                                                            <option>{{ $annee->nom_anneesco }}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
 
@@ -194,7 +222,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('annee-scolaire.liste') }}" class="nav-link">
+                                        <a href="{{ route('annee-scolaire.index') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> L </span>
                                         <span class="sidenav-normal"> Lister</span>
                                         </a>

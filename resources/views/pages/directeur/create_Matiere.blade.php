@@ -35,6 +35,15 @@
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
                             <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la matière">
                         </div>
+                        {{-- Langue --}}
+                        <div class="form-group">
+                            <label class="form-control-label" for="example2cols2Input">Langue</label>
+                            <select name="langue" class="form-control" id="example2cols2Select">
+                                <option value="Francais">Francais</option>
+                                <option value="Anglais">Anglais</option>
+                                <option value="Arabe">Arabe</option>
+                            </select>
+                        </div>
 
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>
                     </div>

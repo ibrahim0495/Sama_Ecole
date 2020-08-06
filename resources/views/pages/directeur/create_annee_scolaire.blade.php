@@ -26,7 +26,8 @@
         <!-- Card body -->
         <div class="card-body">
             <form action="{{ route('annee-scolaire.store') }}" method="post">
-                @csrf
+                {{ csrf_field() }}
+                {{method_field('PUT')}}
                 <div class="row">
                     <div class="col-md-3"></div>
                     {{-- Nom Classe --}}

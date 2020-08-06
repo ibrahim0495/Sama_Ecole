@@ -79,19 +79,19 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom">
+                                                    <input type="text" class="form-control" name="nom" value="{{$eta->nom}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Adresse</label>
-                                                        <input type="text" class="form-control" name="adresse">
+                                                        <input type="text" class="form-control" name="adresse" value="{{$eta->adresse}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Email</label>
-                                                        <input type="text" class="form-control" name="email" >
+                                                        <input type="text" class="form-control" name="email" value="{{$eta->email}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Telephone</label>
-                                                        <input type="text" class="form-control" name="telephone" >
+                                                        <input type="text" class="form-control" name="telephone" value="{{$eta->telephone}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

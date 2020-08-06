@@ -43,7 +43,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)">
+                                <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)" name="prenom">
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Saisir le nom">
+                                <input type="text" class="form-control" placeholder="Saisir le nom" name="nom">
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="text">
+                                <input class="form-control" placeholder="Numéro de téléphone" type="text" name="telephone">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>
@@ -95,7 +95,7 @@
                         <div class="form-group">
                             <label class="form-control-label" for="InputAdresse">Adresse</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Adresse" type="text">
+                                <input class="form-control" placeholder="Adresse" type="text" name="adresse">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                                 </div>
@@ -103,6 +103,28 @@
                         </div>
                     </div>
 
+                    {{-- Langue --}}
+                    <div class="form-group">
+                        <label class="form-control-label" for="example2cols2Input">Langue</label>
+                        <select name="langue" class="form-control" id="example2cols2Select">
+                            <option value="Francais">Francais</option>
+                            <option value="Anglais">Anglais</option>
+                            <option value="Arabe">Arabe</option>
+                        </select>
+                    </div>
+
+                    {{-- MotDePasse --}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="InputMotDePasse">Mot de passe</label>
+                            <div class="input-group input-group-merge">
+                                <input class="form-control" value="1234" type="password" disabled name="mdp">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg btn-block">

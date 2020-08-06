@@ -34,18 +34,22 @@
                     <thead class="thead-light">
                         <tr>
                             <th>Nom</th>
+                            <th>Langue</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
+                            <th>Langue</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($matiere as $mat)
                         <tr>
-                            <td>Francais</td>
+                            <td>{{$mat->nom_matiere}}</td>
+                            <td>{{$mat->langue}}</td>
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
@@ -61,12 +65,17 @@
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                        <form action="{{ route('matiere.store')}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
+                                        <form action="{{ route('matiere.update', $mat->matiere_id)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
                                                 <div class="modal-body">
-                                                    {{  csrf_field() }}
+                                                    {{ csrf_field() }}
+                                                    {{method_field('PUT')}}
                                                     <div class="form-group">
                                                         <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="Francais">
+                                                    <input type="text" class="form-control" name="nom" value="{{$mat->nom_matiere}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Langue</label>
+                                                        <input type="text" class="form-control" name="langue" value="{{$mat->langue}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -78,77 +87,7 @@
                                 </div>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>Anglais</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1"                                            data-original-title="Creer ou modifier note">
-                                    <i class="fa fa-edit fa-lg fa-fw"></i>
-                                </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Matières</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        <form action="{{ route('matiere.store')}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
-                                                <div class="modal-body">
-                                                    {{  csrf_field() }}
-                                                    <div class="form-group">
-                                                        <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="Anglais">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Arabe</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1"                                            data-original-title="Creer ou modifier note">
-                                    <i class="fa fa-edit fa-lg fa-fw"></i>
-                                </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Matières</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        <form action="{{ route('matiere.store')}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
-                                                <div class="modal-body">
-                                                    {{  csrf_field() }}
-                                                    <div class="form-group">
-                                                        <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="Arabe">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>

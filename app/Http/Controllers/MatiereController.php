@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Matiere;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class MatiereController extends Controller
 {
@@ -13,7 +16,9 @@ class MatiereController extends Controller
      */
     public function index()
     {
-        return view('pages.directeur.show_matiere');
+        $matiere = Matiere::orderBy('nom_matiere', 'desc')->get();
+
+        return view('pages.directeur.show_matiere', compact('matiere'));
     }
 
     /**
@@ -34,7 +39,17 @@ class MatiereController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nom'=> 'required',
+            'langue'=> 'required'
+        ]);
+        $matiere = Matiere::create([
+            'nom_matiere'=> $request->nom,
+            'langue'=> $request->langue
+        ]);
+
+        session()->flash('Matière enregistrée avec succès');
+        return redirect()->route('matiere.index');
     }
 
     /**
@@ -68,7 +83,34 @@ class MatiereController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $matiere = Matiere::where('matiere_id', '=', $id)->first();
+        $newData = [];
+        $error = false;
+
+        if (isset($request->nom)) {
+            //Gestion de erreurs
+            if (Str::length($request->nom) <= 2) {
+                $error = true;
+                session()->flash('message', "Vérifier le nom");
+            } else {
+                $newData['nom_matiere'] = $request->nom;
+            }
+
+        }
+        //Apres tu fais les autres gestion d'erreurs
+
+        if (isset($request->langue)) {
+            $newData['langue'] = $request->langue;
+        }
+
+        if (!$error && $matiere) {
+            //$etablissement->update($newData);
+            $affected = DB::table('matieres')
+              ->where('matiere_id', $id)
+              ->update($newData);
+            session()->flash('message', "La modification s'est effectuée avec succes!");
+            return redirect()->route('matiere.index');
+        }
     }
 
     /**

@@ -46,9 +46,10 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($surveillant as $surv)
                         <tr>
-                            <td>Pape</td>
-                            <td>NDIAYE</td>
+                            <td>{{$surv->prenom}}</td>
+                            <td>{{$surv->nom}}</td>
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-success float-left"
@@ -57,109 +58,79 @@
                                     <i class="fa fa-eye fa-lg fa-fw"></i>
                                 </a>
 
-                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="surveillant" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Pape NDIAYE</h5><br>
+                                                <h5 class="modal-title" id="surveillant">{{$surv->prenom}} {{$surv->nom}}</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
 
                                             </div>
                                             <div class="modal-body">
-                                                Adresse : <strong>Thiaroye</strong><br>
+                                                Adresse : <strong>{{$surv->adresse}}</strong><br>
                                                 <div class="dropdown-divider"></div>
-                                                Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
                                                 <div class="dropdown-divider"></div>
-                                                sexe :  <strong>M</strong><br>
+                                                Téléphone :  <strong>{{$surv->telephone}}</strong><br>
                                                 <div class="dropdown-divider"></div>
-                                                Téléphone :  <strong>77 012 25 45</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                email :  <strong>hamidou@gmail.com</strong><br>
+                                                email :  <strong>{{$surv->email}}</strong><br>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>Malick</td>
-                            <td>Diop</td>
-                            <td class="clearfix">
                                 <a
-                                    class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#eleve"
-                                    data-original-title="Voir l'élève">
-                                    <i class="fa fa-eye fa-lg fa-fw"></i>
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-toggle="modal" data-target="#UpdateSurv" data-original-title="Creer ou modifier note">
+                                    <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-
-                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="UpdateSurv" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Malick Diop</h5><br>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="UpdateSurv">Modifier Surveillant ( {{$surv->nom}} )</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
-
                                             </div>
-                                            <div class="modal-body">
-                                                Adresse : <strong>Thiaroye</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                sexe :  <strong>M</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Téléphone :  <strong>77 012 25 45</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                email :  <strong>hamidou@gmail.com</strong><br>
-                                            </div>
+                                        <form
+                                            action="{{ route('surveillant.update', $surv->login ) }}" method="POST"
+                                            class="inline-block" onsubmit="return confirm('Voulez vous modifier cet établissement?')">
+                                                {{ csrf_field() }}
+                                                {{method_field('PUT')}}
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Prenom</label>
+                                                    <input type="text" class="form-control" name="prenom" value="{{$surv->prenom}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Nom</label>
+                                                    <input type="text" class="form-control" name="nom" value="{{$surv->nom}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Adresse</label>
+                                                        <input type="text" class="form-control" name="adresse" value="{{$surv->adresse}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Email</label>
+                                                        <input type="text" class="form-control" name="email" value="{{$surv->email}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Telephone</label>
+                                                        <input type="text" class="form-control" name="telephone" value="{{$surv->telephone}}">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>Ousmane</td>
-                            <td>Diouf</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#eleve"
-                                    data-original-title="Voir l'élève">
-                                    <i class="fa fa-eye fa-lg fa-fw"></i>
-                                </a>
-
-                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Ousmane Diouf</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-
-                                            </div>
-                                            <div class="modal-body">
-                                                Adresse : <strong>Thiaroye</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                sexe :  <strong>M</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Téléphone :  <strong>77 012 25 45</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                email :  <strong>hamidou@gmail.com</strong><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>
