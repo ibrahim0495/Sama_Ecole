@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnneeScolaire extends Model
 {
-    //
+    protected $fillable = ['anneeScolaire_id', 'nom_anneesco'];
 }
