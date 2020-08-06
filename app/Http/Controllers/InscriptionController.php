@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\models\AnneeScolaire;
 use App\models\Classe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InscriptionController extends Controller
 {
@@ -25,8 +27,9 @@ class InscriptionController extends Controller
     public function create()
     {
         $nom_page = "inscription_create";
-        dd($this->Classe->getClasse());
-        return view('pages.comptable.inscription', compact('nom_page'));
+        $liste_classe = Classe::orderBy('nom', 'desc')->get();
+        $liste_annee_sco = DB::table('anneescolaires')->get();
+        return view('pages.comptable.inscription', compact('nom_page', 'liste_classe', 'liste_annee_sco'));
     }
 
     /**
