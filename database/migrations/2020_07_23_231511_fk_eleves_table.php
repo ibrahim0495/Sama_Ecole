@@ -17,6 +17,9 @@ class FkElevesTable extends Migration
             $table->foreign('loginEleve')->references('login')->on('personnes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->foreign('login_parent')->references('login')->on('parents')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -28,7 +31,9 @@ class FkElevesTable extends Migration
     public function down()
     {
         Schema::table('eleves', function (Blueprint $table) {
-            $table->dropForeign(['login']);
+            $table->dropForeign(['loginEleve']);
+            $table->dropForeign(['login_parent']);
+
         });
     }
 }

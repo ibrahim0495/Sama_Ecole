@@ -19,6 +19,7 @@ class CreateElvesTable extends Migration
             $table->date('dateNaissance');
             $table->string('lieuNaissance');
             $table->string('sexe');
+            $table->string('login_parent');
             $table->timestamps();
         });
     }
