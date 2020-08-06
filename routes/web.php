@@ -39,8 +39,6 @@ Route::resource('eleve', 'EleveController');
 
 ///////////////////////////////////////
 //Absence
-Route::get('etablissement/liste', 'EtablissementController@lister_etablissement')->name('etablissement.liste');
-Route::post('etablissement/MAJ', 'EtablissementController@update')->name('etablissement.MAJ');
 Route::resource('etablissement', 'EtablissementController');
 
 //Année Scolaire
