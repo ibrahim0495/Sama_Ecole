@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\models\Etablissement;
 use Illuminate\Http\Request;
 
 class EtablissementController extends Controller
@@ -35,7 +35,22 @@ class EtablissementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nom'=> 'required',
+            'telephone'=> 'required',
+            'email' => 'required',
+            'adresse'=> 'required'
+        ]);
+
+        $etablissement= Etablissement::create([
+            'nom'=> $request->nom,
+            'telephone'=> $request->telephone,
+            'email'=> $request->email,
+            'adresse'=> $request->adresse
+        ]);
+
+        session()->flash('Etablissement enregistré avec succès');
+        return redirect()->route('etablissement.create');
     }
 
     /**
@@ -69,7 +84,22 @@ class EtablissementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nom'=> 'required',
+            'telephone'=> 'required',
+            'email' => 'required',
+            'adresse'=> 'required'
+        ]);
+        $etablissement= Etablissement::find($id);
+        Etablissement::where('etablissement_id', $id)
+                        ->update([
+                            'nom'=> $request->nom,
+                            'telephone'=> $request->telephone,
+                            'email'=> $request->email,
+                            'adresse'=> $request->adresse
+                        ]);
+        session()->flash('message', "La modification s'est effectuee avec succes!");
+        return redirect()->route('directeur.index');
     }
 
     /**
@@ -81,5 +111,12 @@ class EtablissementController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function lister_etablissement()
+    {
+        $etablissement= Etablissement::all();
+
+        return view('pages.directeur.show_etablissement', compact('etablissement'));
     }
 }

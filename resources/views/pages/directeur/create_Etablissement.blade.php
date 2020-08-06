@@ -24,7 +24,7 @@
         </div>
         <!-- Card body -->
         <div class="card-body">
-            <form method="POST" action="{{ route('surveillant.store') }}">
+            <form method="POST" action="{{ route('etablissement.store') }}">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">

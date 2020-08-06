@@ -42,9 +42,9 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                        <span class="sidenav-mini-icon"> M </span>
-                                        <span class="sidenav-normal"> Modifier</span>
+                                        <a href="{{ route('etablissement.liste') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> L </span>
+                                        <span class="sidenav-normal"> lister</span>
                                         </a>
                                     </li>
                                 </ul>
