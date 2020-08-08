@@ -53,25 +53,25 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1"                                            data-original-title="Creer ou modifier note">
+                                    href="#" data-toggle="modal" data-target="#UpdateMatiere" data-original-title="Modifier matiere">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="UpdateMatiere" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Matière</h5><br>
+                                                <h5 class="modal-title" id="UpdateMatiere">Modifier Matière</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                        <form action="{{ route('matiere.update', $mat->matiere_id)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
+                                            <form action="{{ route('matiere.update', $mat->matiere_id)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
                                                 <div class="modal-body">
                                                     {{ csrf_field() }}
                                                     {{method_field('PUT')}}
                                                     <div class="form-group">
                                                         <label>Nom</label>
-                                                    <input type="text" class="form-control" name="nom" value="{{$mat->nom_matiere}}">
+                                                        <input type="text" class="form-control" name="nom" value="{{$mat->nom_matiere}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Langue</label>
@@ -79,7 +79,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
+                                                <input type="submit" class="btn btn-primary" name="" value="Modifier">
                                                 </div>
                                             </form>
                                         </div>
@@ -99,13 +99,13 @@
 
 {{--  Pour les fichier js dont ce page a besoin ici  --}}
 @section('extra-js')
-    <script src="{{ asset('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+<script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

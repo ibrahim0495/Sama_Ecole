@@ -89,6 +89,7 @@ Route::resource('professeurs', 'ProfesseurController');
 Route::resource('user', 'CompteUserController');
 
 //Directeur
+Route::post('directeur/liste_eleve', 'DirecteurController@list_eleve')->name('directeur.liste_eleve');
 Route::resource('directeur', 'DirecteurController');
 
 //Emploi du temps

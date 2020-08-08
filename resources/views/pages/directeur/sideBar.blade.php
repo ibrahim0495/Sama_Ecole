@@ -170,23 +170,23 @@
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                <form action="{{ route('eleve.store')}}" method="POST" class="inline-block">
+                                <form action="{{ route('directeur.liste_eleve')}}" method="POST" class="inline-block">
                                     <input type="hidden" name="profils" value="directeur">
                                         <div class="modal-body">
                                             {{  csrf_field() }}
                                             <div class="form-group">
                                                 <label for="">nom classe</label>
-                                                <select  class="form-control" name="nom-classe" value="" required>
-                                                    <option>6emeA</option>
-                                                    <option>TleC</option>
-                                                    <option>4emeA</option>
-                                                    <option>1èreB</option>
-
+                                                <select  class="form-control" name="classe" required>
+                                                    @if (!empty($nomClasse))
+                                                        @foreach ($nomClasse as $cl)
+                                                            <option>{{ $cl->nom }}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Année Scolaire</label>
-                                                <select  class="form-control" name="annee" value="" required>
+                                                <select  class="form-control" name="annee" required>
                                                     @if (!empty($anneeScolaire))
                                                         @foreach ($anneeScolaire as $annee)
                                                             <option>{{ $annee->nom_anneesco }}</option>
