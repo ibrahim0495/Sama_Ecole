@@ -16,13 +16,18 @@ class ClasseController extends Controller
      */
     public function index()
     {
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
         $classe= DB::table('classes')
                     ->join('surveillants','surveillants.login','=','classes.login_surveillant')
                     ->join('personnes','personnes.login','=','surveillants.login')
                     ->select('classes.*','personnes.prenom','personnes.nom as nom_per')
                     ->get();
 
-        return view('pages.directeur.show_classe',compact('classe'));
+        return view('pages.directeur.show_classe',compact('classe','nomClasse','anneeScolaire'));
     }
 
     /**

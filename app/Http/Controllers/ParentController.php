@@ -13,7 +13,8 @@ class ParentController extends Controller
      */
     public function index()
     {
-        return view('pages.parent.index');
+        $login_parent='lamine@gmail.com';
+        return view('pages.parent.index',compact('login_parent'));
     }
 
     /**

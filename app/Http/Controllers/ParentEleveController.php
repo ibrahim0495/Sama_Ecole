@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\AnneeScolaire;
 use App\models\Classe;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ParentEleveController extends Controller
@@ -17,8 +18,28 @@ class ParentEleveController extends Controller
     {
         // $classe= Classe::first();
        //  $anneeScolaire = AnneeScolaire::first();
+        $eleve= DB::table('eleves')
+                    ->join('parents','parents.login','=','eleves.login_parent')
+                    ->join('personnes','personnes.login','=','eleves.loginEleve')
+                    ->select('personnes.prenom','personnes.nom','personnes.adresse','personnes.telephone','personnes.login')
+                    ->where('login_parent','lamine@gmail.com')
+                    ->get();
 
-       return view('pages.parent.show_enfant');
+        $noteDevoir=DB::table('eleves')
+                    ->join('devoirs','devoirs.loginEleve','=','eleves.loginEleve')
+                    ->join('matieres','matieres.matiere_id','=','devoirs.matiere_id')
+                    ->select('matieres.nom_matiere','devoirs.note','devoirs.loginEleve','devoirs.semestre')
+                    ->distinct()
+                    ->get();
+
+        $noteCompo=DB::table('eleves')
+                    ->join('compositions','compositions.loginEleve','=','eleves.loginEleve')
+                    ->join('matieres','matieres.matiere_id','=','compositions.matiere_id')
+                    ->select('matieres.nom_matiere','compositions.note','compositions.loginEleve','compositions.semestre')
+                    ->distinct()
+                    ->get();
+
+       return view('pages.parent.show_enfant',compact('eleve','noteDevoir','noteCompo'));
     }
 
     /**
