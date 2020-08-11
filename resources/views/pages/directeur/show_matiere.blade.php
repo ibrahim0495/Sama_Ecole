@@ -53,14 +53,23 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#UpdateMatiere" data-original-title="Modifier matiere">
+                                    href="#" data-toggle="modal" data-target="#UpdateMatiere{{$mat->matiere_id}}" data-original-title="Modifier matiere">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <div class="modal fade" id="UpdateMatiere" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-original-title="Supprimer">
+                                    <form action="{{ route('matiere.destroy', $mat->matiere_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette matiere')">
+                                        {{csrf_field() }}
+                                        {{ method_field('DELETE')}}
+                                        <i class="fa fa-trash fa-lg fa-fw"><input type="submit" value=""></i>
+                                      </form>
+                                </a>
+                                <div class="modal fade" id="UpdateMatiere{{$mat->matiere_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="UpdateMatiere">Modifier Matière</h5><br>
+                                                <h5 class="modal-title" id="UpdateMatiere{{$mat->matiere_id}}">Modifier Matière</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>

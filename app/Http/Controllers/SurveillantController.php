@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Directeur;
+use App\models\Classe;
 use App\models\Personne;
 use App\models\Surveillant;
 use Illuminate\Http\Request;
@@ -115,9 +115,20 @@ class SurveillantController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $surveillant = Personne::where('login', '=', $id)->first();
         $newData = [];
         $error = false;
+
+        if($request->action=='desactiver'){
+            $newData['etatPers']=0;
+            $affected = DB::table('personnes')
+            ->where('login', $id)
+            ->update($newData);
+          session()->flash('message', "La modification s'est effectuée avec succes!");
+          return redirect()->route('surveillant.liste');
+
+        }
 
         if (isset($request->nom)) {
             //Gestion de erreurs
@@ -177,12 +188,19 @@ class SurveillantController extends Controller
 
     public function lister_surveillant()
     {
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
         $surveillant= DB::table('personnes')
                         ->join('surveillants','personnes.login','=','surveillants.login')
+                        ->where('etatPers',1)
+                        ->select('personnes.*')
                         -> orderBy('nom', 'desc')
                         ->get();
 
-        return view('pages.directeur.show_surveillant', compact('surveillant'));
+        return view('pages.directeur.show_surveillant', compact('surveillant','nomClasse','anneeScolaire'));
     }
 
 }

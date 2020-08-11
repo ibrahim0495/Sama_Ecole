@@ -102,6 +102,7 @@ Route::resource('matiere', 'MatiereController');
 Route::resource('notes', 'NoteController');
 
 //Parent
+Route::get('parentEleve/voirNote', 'ParentEleveController@voir_note')->name('parentEleve.voirNote');
 Route::resource('parent', 'ParentController');
 Route::resource('parentEleve', 'ParentEleveController');
 

@@ -59,14 +59,24 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1"                                            data-original-title="Creer ou modifier note">
+                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1{{$cl->classe_id}}" data-original-title="Creer ou modifier note">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-original-title="Supprimer">
+                                    <form action="{{ route('classe.destroy', $cl->classe_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette classe')">
+                                        {{csrf_field() }}
+                                        {{ method_field('DELETE')}}
+                                        <i class="fa fa-trash fa-lg fa-fw"> <input type="submit" value=""></i>
+                                      </form>
+                                </a>
+
+                                <div class="modal fade" id="CreateOrUpdateNote1{{$cl->classe_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Classes</h5><br>
+                                                <h5 class="modal-title" id="CreateOrUpdateNote1{{$cl->classe_id}}">Modifier Classes</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>

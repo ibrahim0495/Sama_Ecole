@@ -141,6 +141,11 @@ class ClasseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('classes')
+                ->where('classe_id',$id)
+                -> delete();
+
+        session()->flash('message', "La suppression s'est effectuee avec succes");
+        return redirect()->route('classe.index');
     }
 }

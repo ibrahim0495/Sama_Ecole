@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Classe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -15,10 +16,11 @@ class AnneeScolaireController extends Controller
      */
     public function index()
     {
+        $nomClasse= Classe::orderBy('nom')->get();
         $anneeScolaire= DB::table('anneeScolaires')
                         ->select()
                         ->get();
-        return view('pages.directeur.show_annee_scolaire', compact('anneeScolaire'));
+        return view('pages.directeur.show_annee_scolaire', compact('anneeScolaire','nomClasse'));
     }
 
     /**
@@ -118,7 +120,12 @@ class AnneeScolaireController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('anneeScolaires')
+                ->where('anneeScolaire_id',$id)
+                -> delete();
+
+        session()->flash('message', "La suppression s'est effectuee avec succes");
+        return redirect()->route('annee-scolaire.index');
     }
 
 }

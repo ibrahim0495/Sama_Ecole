@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Matiere;
+use App\models\Classe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -16,9 +17,14 @@ class MatiereController extends Controller
      */
     public function index()
     {
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
         $matiere = Matiere::orderBy('nom_matiere', 'desc')->get();
 
-        return view('pages.directeur.show_matiere', compact('matiere'));
+        return view('pages.directeur.show_matiere', compact('matiere','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -121,6 +127,11 @@ class MatiereController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('matieres')
+                ->where('matiere_id',$id)
+                -> delete();
+
+        session()->flash('message', "La suppression s'est effectuee avec succes");
+        return redirect()->route('matiere.index');
     }
 }

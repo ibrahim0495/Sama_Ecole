@@ -106,6 +106,7 @@ class DirecteurController extends Controller
                         ->join('classes','classes.classe_id','=','eleves.classe_id')
                         ->join('inscriptions','inscriptions.loginEleve','=','eleves.loginEleve')
                         ->join('anneeScolaires','anneeScolaires.anneeScolaire_id','=','inscriptions.anneeScolaire_id')
+                        ->where('personnes.profil','eleve')
                         ->where('classes.nom', $request->classe)
                         ->where('anneeScolaires.nom_anneesco', $request->annee)
                         ->select('personnes.*','eleves.*')

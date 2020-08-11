@@ -50,14 +50,23 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1" data-original-title="Creer ou modifier note">
+                                    href="#" data-toggle="modal" data-target="#UpdateAnnee{{$annee->anneeScolaire_id}}" data-original-title="Creer ou modifier note">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-original-title="Supprimer">
+                                    <form action="{{ route('annee-scolaire.destroy', $annee->anneeScolaire_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette annee')">
+                                        {{csrf_field() }}
+                                        {{ method_field('DELETE')}}
+                                        <input type="submit" class="fa fa-trash fa-lg fa-fw" value="">
+                                      </form>
+                                </a>
+                                <div class="modal fade" id="UpdateAnnee{{$annee->anneeScolaire_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Année</h5><br>
+                                                <h5 class="modal-title" id="UpdateAnnee{{$annee->anneeScolaire_id}}">Modifier Année</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>

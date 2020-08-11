@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Salle;
+use App\models\Classe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +16,13 @@ class SalleClasseController extends Controller
      */
     public function index()
     {
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
         $salle= Salle::orderBy('nom_salle', 'desc')->get();
-        return view('pages.directeur.show_salle', compact('salle'));
+        return view('pages.directeur.show_salle', compact('salle','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -109,6 +115,11 @@ class SalleClasseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('salles')
+                ->where('nom_salle',$id)
+                -> delete();
+
+        session()->flash('message', "La suppression s'est effectuee avec succes");
+        return redirect()->route('salle_classe.index');
     }
 }

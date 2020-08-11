@@ -58,85 +58,14 @@
                                     <td>{{$el->nom}}</td>
                                     <td>{{$el->adresse}}</td>
                                     <td>{{$el->telephone}}</td>
-                                    <td class="clearfix">
-                                        <a
-                                            class="btn btn-sm btn-primary"
-                                            href="#" data-toggle="modal" data-target="#VoirNotes"
-                                            data-original-title="Creer ou modifier note">
-                                            <i class="fa fa-eye fa-lg fa-fw"></i>
-                                        </a>
+                                    <td class="clearfix" id="voir{{$el->loginEleve}}">
 
-                                        <div class="modal fade" id="VoirNotes" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="VoirNotes">Notes devoirs</h5><br>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="table-responsive py-4">
-                                                        <table class="table table-flush" id="datatable-basic">
-                                                            <thead class="thead-light">
-                                                                <tr>
-                                                                    <th>Matiere</th>
-                                                                    <th>Moyenne devoir</th>
-                                                                    <th>Semestre</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tfoot>
-                                                                <tr>
-                                                                    <th>Matiere</th>
-                                                                    <th>Moyenne devoir</th>
-                                                                    <th>Semestre</th>
-                                                                </tr>
-                                                            </tfoot>
-                                                            <tbody>
-                                                                @foreach ($noteDevoir as $noteD)
-                                                                @if ($el->login==$noteD->loginEleve)
-                                                                <tr>
-                                                                    <td>{{$noteD->nom_matiere}}</td>
-                                                                    <td>{{$noteD->note}}</td>
-                                                                    <td>{{$noteD->semestre}}</td>
-                                                                </tr>
-                                                                @endif
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="table-responsive py-4">
-                                                        <table class="table table-flush" id="datatable-basic">
-                                                            <thead class="thead-light">
-                                                                <tr>
-                                                                    <th>Matiere</th>
-                                                                    <th>Composition</th>
-                                                                    <th>Semestre</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tfoot>
-                                                                <tr>
-                                                                    <th>Matiere</th>
-                                                                    <th>Composition</th>
-                                                                    <th>Semestre</th>
-                                                                </tr>
-                                                            </tfoot>
-                                                            <tbody>
-                                                                @foreach ($noteCompo as $noteC)
-                                                                @if ($el->login==$noteC->loginEleve)
-                                                                <tr>
-                                                                    <td>{{$noteC->nom_matiere}}</td>
-                                                                    <td>{{$noteC->note}}</td>
-                                                                    <td>{{$noteC->semestre}}</td>
-                                                                </tr>
-                                                                @endif
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                <form action="{{ route('parentEleve.voirNote') }}" method="get" id="voir{{$el->loginEleve}}">
+                                                    <input type="hidden" name="login" value="{{$el->loginEleve}}">
+                                                    <i class="fa fa-eye fa-lg fa-fw" class="btn btn-sm btn-primary">
+                                                         <input type="submit" value="voir">
+                                                    </i>
+                                                </form>
                                     </td>
                                 </tr>
                             @endforeach

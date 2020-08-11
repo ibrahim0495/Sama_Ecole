@@ -53,14 +53,24 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1"                                            data-original-title="Creer ou modifier note">
+                                    href="#" data-toggle="modal" data-target="#VoirSalle{{$sal->nom_salle}}"
+                                    data-original-title="Creer ou modifier note">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-original-title="Supprimer">
+                                    <form action="{{ route('salle_classe.destroy', $sal->nom_salle) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette salle')">
+                                        {{csrf_field() }}
+                                        {{ method_field('DELETE')}}
+                                        <i class="fa fa-trash fa-lg fa-fw"><input type="submit" value=""></i>
+                                      </form>
+                                </a>
+                                <div class="modal fade" id="VoirSalle{{$sal->nom_salle}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Salle</h5><br>
+                                                <h5 class="modal-title" id="VoirSalle{{$sal->nom_salle}}">Modifier Salle</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -71,7 +81,7 @@
                                                     {{method_field('PUT')}}
                                                     <div class="form-group">
                                                         <label>Nom</label>
-                                                    <input type="text" class="form-control" name="nom" value="{{$sal->nom_salle}}">
+                                                    <input type="text" class="form-control" name="nom" value="{{$sal->nom_salle}}" disabled>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Capacité</label>
@@ -79,7 +89,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
+                                                <input type="submit" class="btn btn-primary" name="" value="Modifier">
                                                 </div>
                                             </form>
                                         </div>

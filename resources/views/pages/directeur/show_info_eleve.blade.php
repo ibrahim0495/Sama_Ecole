@@ -53,16 +53,16 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#eleve"
+                                    href="#" data-toggle="modal" data-target="#Eleve{{$list->login}}"
                                     data-original-title="Voir l'élève">
                                     <i class="fa fa-eye fa-lg fa-fw"></i>
                                 </a>
 
-                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="Eleve{{$list->login}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">{{$list->prenom}} {{$list->nom}}</h5><br>
+                                                <h5 class="modal-title" id="Eleve{{$list->login}}">{{$list->prenom}} {{$list->nom}}</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>

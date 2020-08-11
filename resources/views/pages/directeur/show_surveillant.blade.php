@@ -36,6 +36,7 @@
                             <th>Prénom</th>
                             <th>Nom</th>
                             <th>Actions</th>
+                            <th>Désactiver</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -43,6 +44,7 @@
                             <th>Prénom</th>
                             <th>Nom</th>
                             <th>Actions</th>
+                            <th>Désactiver</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -53,12 +55,19 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#surveillant"
+                                    href="#" data-toggle="modal" data-target="#surveillant{{$surv->login}}"
                                     data-original-title="Voir le surveillant">
                                     <i class="fa fa-eye fa-lg fa-fw"></i>
                                 </a>
 
-                                <div class="modal fade" id="surveillant" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-toggle="modal" data-target="#UpdateSurv{{$surv->login}}"
+                                    data-original-title="Modifier surveillant">
+                                    <i class="fa fa-edit fa-lg fa-fw"></i>
+                                </a>
+
+                                <div class="modal fade" id="surveillant{{$surv->login}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-gradient-blue ql-color-white">
@@ -80,12 +89,7 @@
                                     </div>
                                 </div>
 
-                                <a
-                                    class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#UpdateSurv" data-original-title="Creer ou modifier note">
-                                    <i class="fa fa-edit fa-lg fa-fw"></i>
-                                </a>
-                                <div class="modal fade" id="UpdateSurv" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="UpdateSurv{{$surv->login}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -128,6 +132,20 @@
                                         </div>
                                     </div>
                                 </div>
+                            </td>
+                            <td>
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-original-title="Supprimer" data-target="#Supprimer{{$surv->login}}">
+                                    <div id="Supprimer{{$surv->login}}">
+                                        <form action="{{ route('surveillant.update', $surv->login ) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous désactiver ce surveillant')">
+                                            {{csrf_field() }}
+                                            {{ method_field('DELETE')}}
+                                            <input type="hidden" name="action" value="desactiver"/>
+                                            <button type="submit" class="btn btn-primary">Desactiver</button>
+                                        </form>
+                                    </div>
+                                </a>
                             </td>
                         </tr>
                         @endforeach

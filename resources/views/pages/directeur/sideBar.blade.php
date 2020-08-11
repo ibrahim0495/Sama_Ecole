@@ -159,7 +159,7 @@
                                         </a>
                                     </li>
 
-                                    {{--Pop-up montrant un formulaire pour le choix de la classe du semetre et de la matiere--}}
+                                    {{--Pop-up montrant un formulaire pour le choix de la classe et de l'annee scolaire--}}
 
                          <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
