@@ -6,6 +6,8 @@ use App\models\AnneeScolaire;
 use App\models\Classe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class InscriptionController extends Controller
 {
@@ -40,7 +42,36 @@ class InscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $montant_inscription = Str::afterLast($request->classe_id, '::');
+        $classe_id = Str::beforeLast($request->classe_id, '::');
+        $this->validate($request, [
+            'classe_id' => 'required',
+            'anneeScolaire_id' => 'required',
+            'prenom' => 'required|min:2|max:50',
+            'nom' => 'required|min:2|max:30',
+            'dateNaissance' => 'required|date|before:'.date('m/d/Y'),
+            'lieuNaissance' => 'required|min:2|max:30',
+            'adresse' => 'required|min:2|max:30',
+            'sexe' => 'required',
+            'telephone' => 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:personnes',
+            'montant' => 'required|numeric|lte:'.$montant_inscription,
+            'type_parent' => 'required',
+        ]);
+
+        if ($request->type_parent == 'new') {
+            $validator = Validator::make($request->all(), [
+                'prenom_parent' => 'required|min:2|max:50',
+                'nom_parent' => 'required|min:2|max:30',
+                'telephone_parent' => 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:personnes',
+                'adresse_parent' => 'required|min:2|max:30',
+            ])->validate();
+        } else {
+            $validator = Validator::make($request->all(), [
+                'info_ancien_parent' => 'required'
+            ]);
+        }
+
+
     }
 
     /**
