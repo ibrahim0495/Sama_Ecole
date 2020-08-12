@@ -5,179 +5,129 @@
 
 @endsection
 
-@section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Surveillant</h6>
-    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Directeur/Lister Surveillants</li>
-        </ol>
-    </nav>
-@endsection
-
 @section('contenu_page')
 
-<!-- Table -->
-<div class="row">
-    <div class="col">
-        <div class="card">
-            <!-- Card header -->
-            <div class="card-header">
-                <h3 class="mb-0">Surveillant</h3>
-                <p class="text-sm mb-0">
-                    Liste des Surveillants
-                </p>
+<div class="card mb-12">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Modification du Surveillant : {{$surveillantActif->login}}</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <form method="POST" action="{{ route('directeur.surveillant.update', $surveillantActif->login) }}">
+            @csrf
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-header">
+                        <div class="row">
+                        <h4 class="mb-0">Informations personnelles</h4>
+                       
+                        </div>
+                    </div>
+                    
+                </div>
+                {{-- Prénoms --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="InputPrénom">Prénom</label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                        <input type="text" value="{{$surveillantActif->prenom}}" name="prenom" class="form-control" placeholder="Saisir le(s) prénom(s)">
+                        </div>
+                        {!! $errors->first('prenom', '<p class="errors">:message</p>')!!}
+                    </div>
+                </div>
+
+                {{-- Nom --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="InputNom">Nom</label>
+                         <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" name="nom" value="{{$surveillantActif->nom}}" class="form-control" placeholder="Saisir le nom">
+                        </div>
+                        {!! $errors->first('nom', '<p class="errors">:message</p>')!!}
+                    </div>
+                </div>
+
+                {{-- Téléphone --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="InputTéléphone">Téléphone</label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
+                            </div>
+                            <input class="form-control" name="telephone" value="{{$surveillantActif->telephone}}" placeholder="Numéro de téléphone" type="text">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                            </div>
+                        </div>
+                        {!! $errors->first('telephone', '<p class="errors">:message</p>')!!}
+                    </div>
+                </div>
+
+                {{-- Email --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="InputEmail">Email</label>
+                        <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input class="form-control" value="{{$surveillantActif->email}}" placeholder="Email address" type="email" name="email">
+                        </div>
+                        {!! $errors->first('email', '<p class="errors">:message</p>')!!}
+                    </div>
+                </div>
+
+                {{-- Adresse --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="InputAdresse">Adresse</label>
+                        <div class="input-group input-group-merge">
+                            <input class="form-control" placeholder="Adresse" name="adresse" type="text" value="{{$surveillantActif->adresse}}">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                            </div>
+                        </div>
+                        {!! $errors->first('adresse', '<p class="errors">:message</p>')!!}
+                    </div>
+                </div>
+                <div class="col-md-6"> 
+                    <div class="form group">
+                        <label class="form-control-label" for="InputStatus">Activer/Désactiver</label><br>
+                        <label class="custom-toggle custom-toggle-success ">
+                            <input type="checkbox" {{$surveillantActif->etatPers ? 'checked' : '' }} name="status">
+                            <span class="custom-toggle-slider rounded-circle" data-label-off="Non" data-label-on="Oui"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <a class="btn btn-outline-danger btn-lg btn-block" href="{{route('directeur.surveillant.liste')}}">
+                        Annuler
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-outline-success btn-lg btn-block">
+                        Enregistrer
+                    </button>
+                </div>
             </div>
-            <div class="table-responsive py-4">
-                <table class="table table-flush" id="datatable-basic">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr>
-                            <td>Pape</td>
-                            <td>NDIAYE</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#surveillant"
-                                    data-original-title="Voir le surveillant">
-                                    <i class="fa fa-eye fa-lg fa-fw"></i>
-                                </a>
 
-                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Pape NDIAYE</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-
-                                            </div>
-                                            <div class="modal-body">
-                                                Adresse : <strong>Thiaroye</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                sexe :  <strong>M</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Téléphone :  <strong>77 012 25 45</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                email :  <strong>hamidou@gmail.com</strong><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Malick</td>
-                            <td>Diop</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#eleve"
-                                    data-original-title="Voir l'élève">
-                                    <i class="fa fa-eye fa-lg fa-fw"></i>
-                                </a>
-
-                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Malick Diop</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-
-                                            </div>
-                                            <div class="modal-body">
-                                                Adresse : <strong>Thiaroye</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                sexe :  <strong>M</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Téléphone :  <strong>77 012 25 45</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                email :  <strong>hamidou@gmail.com</strong><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Ousmane</td>
-                            <td>Diouf</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#eleve"
-                                    data-original-title="Voir l'élève">
-                                    <i class="fa fa-eye fa-lg fa-fw"></i>
-                                </a>
-
-                                <div class="modal fade" id="eleve" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="eleve">Ousmane Diouf</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-
-                                            </div>
-                                            <div class="modal-body">
-                                                Adresse : <strong>Thiaroye</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Année et lieu de naissance : <strong>12/10/2015 à Dakar</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                sexe :  <strong>M</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Téléphone :  <strong>77 012 25 45</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                email :  <strong>hamidou@gmail.com</strong><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
+           
+        </form>
     </div>
 </div>
-
 @endsection
 
 {{--  Pour les fichier js dont ce page a besoin ici  --}}
 @section('extra-js')
-    <script src="{{ asset('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+
 @endsection

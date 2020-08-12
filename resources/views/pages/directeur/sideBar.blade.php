@@ -29,7 +29,7 @@
                         </li>
                         {{--  Etablissement  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-etablissement" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-etablissement">
+                            <a class="nav-link" href="#navbar-etablissement" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-etablissement">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Etablissement</span>
                             </a>
@@ -52,7 +52,7 @@
                         </li>
                         {{--  Classe  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-classe" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-classe">
+                            <a class="nav-link" href="#navbar-classe" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-classe">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Classe</span>
                             </a>
@@ -75,7 +75,7 @@
                         </li>
                         {{--  Matiere  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-matiere" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-matiere">
+                            <a class="nav-link" href="#navbar-matiere" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-matiere">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Matiere</span>
                             </a>
@@ -98,7 +98,7 @@
                         </li>
                         {{--  Surveillant  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-surveillant" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-surveillant">
+                            <a class="nav-link" href="#navbar-surveillant" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-surveillant">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Surveillant</span>
                             </a>
@@ -111,7 +111,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('surveillant.liste') }}" class="nav-link">
+                                        <a href="{{ route('directeur.surveillant.liste') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> L </span>
                                         <span class="sidenav-normal"> Lister</span>
                                         </a>
@@ -121,7 +121,7 @@
                         </li>
                         {{--  Eleve  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-eleve" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-eleve">
+                            <a class="nav-link" href="#navbar-eleve" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-eleve">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Eleve</span>
                             </a>
@@ -181,7 +181,7 @@
                         </li>
                         {{--  Annee Scolaire  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-annee" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-annee">
+                            <a class="nav-link" href="#navbar-annee" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-annee">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Année Scolaire</span>
                             </a>

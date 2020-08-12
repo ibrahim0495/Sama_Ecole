@@ -1,38 +1,9 @@
-@extends('pages.'.$profils.'.master_'.$profils.'', ['title' => ' | Enregistrer {{ $personnel }}'])
 
-@section('extra-css')
-
-@endsection
-
-@section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">{{ $personnel }}</h6>
-    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-            <li class="breadcrumb-item">
-                <a href="{{ route(''.$profils.'.index') }}">
-                    <i class="fas fa-home"></i>
-                </a>
-            </li>
-            <li class="breadcrumb-item"><a href="{{ route(''.$profils.'.index') }}">{{ $profils }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Enregistrer {{ $personnel }}</li>
-        </ol>
-    </nav>
-@endsection
-
-@section('contenu_page')
-    <div class="card mb-4">
-        <!-- Card header -->
-        <div class="card-header">
-            <h3 class="mb-0">Enregistrer un {{ $personnel }}</h3>
-        </div>
-        <!-- Card body -->
-        <div class="card-body">
-            <form method="POST" action="{{ route(''.$personnel.'.store') }}">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-header">
-                            <h4 class="mb-0">Informations personnelles du {{ $personnel }}</h4>
+                            <h4 class="mb-0">Informations personnelles du Surveillant</h4>
                         </div>
                     </div>
                     {{-- Prénoms --}}
@@ -43,8 +14,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)">
+                                <input type="text" class="form-control" name="prenom" placeholder="Saisir le(s) prénom(s)">
                             </div>
+                            {!! $errors->first('prenom', '<p class="text-danger">:message</p>')!!}
                         </div>
                     </div>
 
@@ -56,8 +28,10 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Saisir le nom">
+                                <input type="text" class="form-control" name="nom" placeholder="Saisir le nom">
                             </div>
+                            {!! $errors->first('nom', '<p class="text-danger">:message</p>')!!}
+
                         </div>
                     </div>
 
@@ -69,11 +43,12 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="text">
+                                <input class="form-control" placeholder="Numéro de téléphone" type="text" name="telephone">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>
                             </div>
+                            {!! $errors->first('telephone', '<p class="text-danger">:message</p>')!!}
                         </div>
                     </div>
 
@@ -81,12 +56,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="InputEmail">Email</label>
-                        <div class="input-group input-group-merge">
-                            <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Email address" type="email" name="email">
                             </div>
-                            <input class="form-control" placeholder="Email address" type="email" name="email">
-                        </div>
+                            {!! $errors->first('email', '<p class="text-danger">:message</p>')!!}
                         </div>
                     </div>
 
@@ -95,11 +71,12 @@
                         <div class="form-group">
                             <label class="form-control-label" for="InputAdresse">Adresse</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Adresse" type="text">
+                                <input class="form-control" placeholder="Adresse" type="text" name="adresse">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                                 </div>
                             </div>
+                            {!! $errors->first('adresse', '<p class="text-danger">:message</p>')!!}
                         </div>
                     </div>
 
@@ -108,11 +85,4 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-block">
                     Enregistrer
                 </button>
-            </form>
-        </div>
-    </div>
-@endsection
-
-@section('extra-js')
-
-@endsection
+           

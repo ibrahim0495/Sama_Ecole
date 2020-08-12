@@ -71,10 +71,15 @@ Route::resource('reinscription', 'ReinscriptionController');
 //Payement
 Route::resource('payement', 'PayementController');
 
+//Directeur
+Route::get('directeur/surveillant/liste', 'SurveillantController@lister_surveillant')->name('directeur.surveillant.liste');
+Route::post('directeur/suveillant/update/{surveillant}', 'SurveillantController@update_surveillant')->name('directeur.surveillant.update');
+Route::get('directeur/suveillant/show/{surveillant}',  'SurveillantController@show_surveillant')->name('directeur.surveillant.show');
+Route::post('directeur/suveillant/destroy/{surveillant}',  'SurveillantController@destroy_surveillant')->name('directeur.surveillant.destroy');
+Route::resource('directeur', 'DirecteurController');
 //Surveillant fonctionnalites
 
 //Surveillant
-Route::get('surveillant/liste', 'SurveillantController@lister_surveillant')->name('surveillant.liste');
 Route::resource('surveillant', 'SurveillantController');
 
 //Professeur
@@ -89,9 +94,6 @@ Route::resource('professeurs', 'ProfesseurController');
 //Compte User
 Route::resource('user', 'CompteUserController');
 
-//Directeur
-Route::resource('directeur', 'DirecteurController');
-
 //Emploi du temps
 Route::resource('edt', 'EmploiDuTempsController');
 
@@ -105,12 +107,5 @@ Route::resource('notes', 'NoteController');
 Route::resource('parent', 'ParentController');
 Route::resource('parentEleve', 'ParentEleveController');
 
-
 //Statistique
 Route::resource('statistique', 'StatistiqueController');
-
-
-
-
-
-
