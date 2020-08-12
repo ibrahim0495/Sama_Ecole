@@ -58,14 +58,16 @@
                                     <td>{{$el->nom}}</td>
                                     <td>{{$el->adresse}}</td>
                                     <td>{{$el->telephone}}</td>
-                                    <td class="clearfix" id="voir{{$el->loginEleve}}">
-
-                                                <form action="{{ route('parentEleve.voirNote') }}" method="get" id="voir{{$el->loginEleve}}">
+                                    <td class="clearfix">
+                                            <a
+                                                class="btn btn-sm btn-primary"
+                                                href="#" data-original-title="Voir">
+                                                <form action="{{ route('parentEleve.voirNote') }}" method="get" class="inline-block">
+                                                    {{csrf_field() }}
                                                     <input type="hidden" name="login" value="{{$el->loginEleve}}">
-                                                    <i class="fa fa-eye fa-lg fa-fw" class="btn btn-sm btn-primary">
-                                                         <input type="submit" value="voir">
-                                                    </i>
+                                                    <i class="fa fa-eye fa-lg fa-fw"> <input type="submit" value="voir"></i>
                                                 </form>
+                                            </a>
                                     </td>
                                 </tr>
                             @endforeach

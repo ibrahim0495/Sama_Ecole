@@ -62,7 +62,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="Eleve{{$list->login}}">{{$list->prenom}} {{$list->nom}}</h5><br>
+                                                <h5 class="modal-title" id="Eleve">{{$list->prenom}} {{$list->nom}}</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
