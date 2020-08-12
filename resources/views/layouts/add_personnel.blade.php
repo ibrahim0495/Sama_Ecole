@@ -14,7 +14,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="prenom" placeholder="Saisir le(s) prénom(s)">
+                                <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)" name="prenom">
                             </div>
                             {!! $errors->first('prenom', '<p class="text-danger">:message</p>')!!}
                         </div>
@@ -28,7 +28,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="nom" placeholder="Saisir le nom">
+                                <input type="text" class="form-control" placeholder="Saisir le nom" name="nom">
                             </div>
                             {!! $errors->first('nom', '<p class="text-danger">:message</p>')!!}
 
@@ -80,9 +80,20 @@
                         </div>
                     </div>
 
+                    {{-- Langue --}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="example2cols2Input">Langue</label>
+                            <select name="langue" class="form-control" id="example2cols2Select">
+                                <option value="Francais">Francais</option>
+                                <option value="Anglais">Anglais</option>
+                                <option value="Arabe">Arabe</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                <button type="submit" class="btn btn-outline-primary btn-lg btn-block">
                     Enregistrer
                 </button>
            

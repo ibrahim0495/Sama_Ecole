@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Classe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DirecteurController extends Controller
 {
@@ -13,7 +15,11 @@ class DirecteurController extends Controller
      */
     public function index()
     {
-        return view('pages.directeur.home');
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+        return view('pages.directeur.home', compact('anneeScolaire','nomClasse'));
     }
 
     /**
@@ -86,4 +92,32 @@ class DirecteurController extends Controller
     {
         return view('pages.directeur.create_Surveillant');
     }
+
+    public function list_eleve(Request $request)
+    {
+        $this->validate($request, [
+            'classe'=> 'required',
+            'annee'=> 'required'
+        ]);
+
+        $class =$request->classe;
+        $list_eleve= DB::table('personnes')
+                        ->join('eleves','personnes.login','=','eleves.loginEleve')
+                        ->join('classes','classes.classe_id','=','eleves.classe_id')
+                        ->join('inscriptions','inscriptions.loginEleve','=','eleves.loginEleve')
+                        ->join('anneeScolaires','anneeScolaires.anneeScolaire_id','=','inscriptions.anneeScolaire_id')
+                        ->where('personnes.profil','eleve')
+                        ->where('classes.nom', $request->classe)
+                        ->where('anneeScolaires.nom_anneesco', $request->annee)
+                        ->select('personnes.*','eleves.*')
+                        ->get();
+
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                                        ->select()
+                                        ->get();
+        $nom_page = "info_eleve";
+        return view('pages.directeur.show_info_eleve', compact('nom_page','list_eleve','class','nomClasse','anneeScolaire'));
+    }
+
 }

@@ -37,7 +37,7 @@
                             <th>Adresse</th>
                             <th>Email</th>
                             <th>Téléphone</th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -46,7 +46,7 @@
                             <th>Adresse</th>
                             <th>Email</th>
                             <th>Téléphone</th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -59,14 +59,23 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1" data-original-title="Creer ou modifier note">
+                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1{{$eta->etablissement_id}}" data-original-title="Creer ou modifier note">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-original-title="Supprimer">
+                                    <form action="{{ route('etablissement.destroy', $eta->etablissement_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cet etablissement')">
+                                        {{csrf_field() }}
+                                        {{ method_field('DELETE')}}
+                                       <i class="fa fa-trash fa-lg fa-fw"> <input type="submit" value=""></i>
+                                      </form>
+                                </a>
+                                <div class="modal fade" id="CreateOrUpdateNote1{{$eta->etablissement_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier établissement ( {{$eta->nom}} )</h5><br>
+                                                <h5 class="modal-title" id="CreateOrUpdateNote1{{$eta->etablissement_id}}">Modifier établissement ( {{$eta->nom}} )</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -79,19 +88,19 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom">
+                                                    <input type="text" class="form-control" name="nom" value="{{$eta->nom}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Adresse</label>
-                                                        <input type="text" class="form-control" name="adresse">
+                                                        <input type="text" class="form-control" name="adresse" value="{{$eta->adresse}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Email</label>
-                                                        <input type="text" class="form-control" name="email" >
+                                                        <input type="text" class="form-control" name="email" value="{{$eta->email}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Telephone</label>
-                                                        <input type="text" class="form-control" name="telephone" >
+                                                        <input type="text" class="form-control" name="telephone" value="{{$eta->telephone}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

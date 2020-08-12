@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Etablissement;
+use App\models\Classe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -16,9 +17,14 @@ class EtablissementController extends Controller
      */
     public function index()
     {
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
         $etablissement= Etablissement::orderBy('nom', 'desc')->get();
 
-        return view('pages.directeur.show_etablissement', compact('etablissement'));
+        return view('pages.directeur.show_etablissement', compact('etablissement','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -141,6 +147,11 @@ class EtablissementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('etablissements')
+                ->where('etablissement_id',$id)
+                -> delete();
+
+        session()->flash('message', "La suppression s'est effectuee avec succes");
+        return redirect()->route('etablissement.index');
     }
 }

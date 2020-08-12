@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\models\AnneeScolaire;
 use App\models\Classe;
+use App\models\Personne;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ParentEleveController extends Controller
@@ -17,8 +19,15 @@ class ParentEleveController extends Controller
     {
         // $classe= Classe::first();
        //  $anneeScolaire = AnneeScolaire::first();
+        $eleve= DB::table('eleves')
+                    ->join('parents','parents.login','=','eleves.login_parent')
+                    ->join('personnes','personnes.login','=','eleves.loginEleve')
+                    ->select('personnes.prenom','personnes.nom','personnes.adresse','personnes.telephone','eleves.loginEleve')
+                    ->where('login_parent','lamine@gmail.com')
+                    ->get();
 
-       return view('pages.parent.show_enfant');
+
+       return view('pages.parent.show_enfant',compact('eleve'));
     }
 
     /**
@@ -85,5 +94,31 @@ class ParentEleveController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function voir_note(Request $request)
+    {
+        $eleve = Personne::where('login', '=', $request->login)->first();
+
+        if($eleve){
+            $noteDevoir=DB::table('eleves')
+                    ->join('devoirs','devoirs.loginEleve','=','eleves.loginEleve')
+                    ->join('matieres','matieres.matiere_id','=','devoirs.matiere_id')
+                    ->where('eleves.loginEleve',$request->login)
+                    ->select('matieres.nom_matiere','devoirs.note','devoirs.loginEleve','devoirs.semestre')
+                    ->distinct()
+                    ->get();
+
+            $noteCompo=DB::table('eleves')
+                    ->join('compositions','compositions.loginEleve','=','eleves.loginEleve')
+                    ->join('matieres','matieres.matiere_id','=','compositions.matiere_id')
+                    ->where('eleves.loginEleve',$request->login)
+                    ->select('matieres.nom_matiere','compositions.note','compositions.loginEleve','compositions.semestre')
+                    ->distinct()
+                    ->get();
+
+        }
+
+        return view('pages.parent.show_noteEnfant',compact('noteDevoir','noteCompo'));
     }
 }

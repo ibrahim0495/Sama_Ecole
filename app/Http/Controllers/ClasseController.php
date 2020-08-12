@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Classe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ClasseController extends Controller
 {
@@ -13,7 +16,18 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        return view('pages.directeur.show_classe');
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
+        $classe= DB::table('classes')
+                    ->join('surveillants','surveillants.login','=','classes.login_surveillant')
+                    ->join('personnes','personnes.login','=','surveillants.login')
+                    ->select('classes.*','personnes.prenom','personnes.nom as nom_per')
+                    ->get();
+
+        return view('pages.directeur.show_classe',compact('classe','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -23,7 +37,12 @@ class ClasseController extends Controller
      */
     public function create()
     {
-        return view('pages.directeur.create_Classe');
+        $surveillant= DB::table('surveillants')
+                        ->join('personnes','personnes.login','=','surveillants.login')
+                        ->select('surveillants.login','personnes.prenom','personnes.nom')
+                        ->get();
+
+        return view('pages.directeur.create_Classe', compact('surveillant'));
     }
 
     /**
@@ -34,7 +53,21 @@ class ClasseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nom'=> 'required',
+            'montant_inscription'=> 'required',
+            'montant_mensuel'=> 'required',
+            'loginSurveillant'=> 'required'
+        ]);
+        $classe = Classe::create([
+            'nom'=> $request->nom,
+            'montant_inscription'=> $request->montant_inscription,
+            'montant_mensuel'=> $request->montant_mensuel,
+            'login_surveillant'=> $request->loginSurveillant
+        ]);
+
+        session()->flash('Classe enregistrée avec succès');
+        return redirect()->route('classe.index');
     }
 
     /**
@@ -68,7 +101,36 @@ class ClasseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $classe = Classe::where('classe_id', '=', $id)->first();
+        $newData = [];
+        $error = false;
+
+        if (isset($request->nom)) {
+            //Gestion de erreurs
+            if (Str::length($request->nom) <= 2) {
+                $error = true;
+                session()->flash('message', "Vérifier le nom");
+            } else {
+                $newData['nom'] = $request->nom;
+            }
+
+        }
+        //Apres tu fais les autres gestion d'erreurs
+
+        if (isset($request->montant_inscription)) {
+            $newData['montant_inscription'] = $request->montant_inscription;
+        }
+        if (isset($request->montant_mensuel)) {
+            $newData['montant_mensuel'] = $request->montant_mensuel;
+        }
+
+        if (!$error && $classe) {
+            $affected = DB::table('classes')
+              ->where('classe_id', $id)
+              ->update($newData);
+            session()->flash('message', "La modification s'est effectuée avec succes!");
+            return redirect()->route('classe.index');
+        }
     }
 
     /**
@@ -79,6 +141,11 @@ class ClasseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('classes')
+                ->where('classe_id',$id)
+                -> delete();
+
+        session()->flash('message', "La suppression s'est effectuee avec succes");
+        return redirect()->route('classe.index');
     }
 }

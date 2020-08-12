@@ -52,198 +52,25 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr>
-                                <td>Ousmane</td>
-                                <td>NDIAYE</td>
-                                <td>Dakar</td>
-                                <td>77 000 00 00</td>
-                                <td class="clearfix">
-                                    <a
-                                        class="btn btn-sm btn-primary"
-                                        href="#" data-toggle="modal" data-target="#VoirNotes"
-                                        data-original-title="Creer ou modifier note">
-                                        <i class="fa fa-eye fa-lg fa-fw"></i>
-                                    </a>
-
-                                    <div class="modal fade" id="VoirNotes" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="VoirNotes">Notes</h5><br>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="table-responsive py-4">
-                                                    <table class="table table-flush" id="datatable-basic">
-                                                        <thead class="thead-light">
-                                                            <tr>
-                                                                <th>Matiere</th>
-                                                                <th>Moyenne devoir</th>
-                                                                <th>Composition</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>Matiere</th>
-                                                                <th>Moyenne devoir</th>
-                                                                <th>Composition</th>
-                                                            </tr>
-                                                        </tfoot>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Francais</td>
-                                                                <td>11.5</td>
-                                                                <td>12</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Anglais</td>
-                                                                <td>15.75</td>
-                                                                <td>17</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Arabe</td>
-                                                                <td>18</td>
-                                                                <td>19</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Ousmane</td>
-                                <td>NDIAYE</td>
-                                <td>00/00/0000</td>
-                                <td>6ème</td>
-                                <td class="clearfix">
-                                    <a
-                                        class="btn btn-sm btn-primary"
-                                        href="#" data-toggle="modal" data-target="#VoirNotes"
-                                        data-original-title="Creer ou modifier note">
-                                        <i class="fa fa-eye fa-lg fa-fw"></i>
-                                    </a>
-
-                                    <div class="modal fade" id="VoirNotes" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="VoirNotes">Notes</h5><br>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="table-responsive py-4">
-                                                    <table class="table table-flush" id="datatable-basic">
-                                                        <thead class="thead-light">
-                                                            <tr>
-                                                                <th>Matiere</th>
-                                                                <th>Moyenne devoir</th>
-                                                                <th>Composition</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>Matiere</th>
-                                                                <th>Moyenne devoir</th>
-                                                                <th>Composition</th>
-                                                            </tr>
-                                                        </tfoot>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Francais</td>
-                                                                <td>11.5</td>
-                                                                <td>12</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Anglais</td>
-                                                                <td>15.75</td>
-                                                                <td>17</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Arabe</td>
-                                                                <td>18</td>
-                                                                <td>19</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Ousmane</td>
-                                <td>NDIAYE</td>
-                                <td>00/00/0000</td>
-                                <td>6ème</td>
-                                <td class="clearfix">
-                                    <a
-                                        class="btn btn-sm btn-primary"
-                                        href="#" data-toggle="modal" data-target="#VoirNotes"
-                                        data-original-title="Creer ou modifier note">
-                                        <i class="fa fa-eye fa-lg fa-fw"></i>
-                                    </a>
-
-                                    <div class="modal fade" id="VoirNotes" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="VoirNotes">Notes</h5><br>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="table-responsive py-4">
-                                                    <table class="table table-flush" id="datatable-basic">
-                                                        <thead class="thead-light">
-                                                            <tr>
-                                                                <th>Matiere</th>
-                                                                <th>Moyenne devoir</th>
-                                                                <th>Composition</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>Matiere</th>
-                                                                <th>Moyenne devoir</th>
-                                                                <th>Composition</th>
-                                                            </tr>
-                                                        </tfoot>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Francais</td>
-                                                                <td>11.5</td>
-                                                                <td>12</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Anglais</td>
-                                                                <td>15.75</td>
-                                                                <td>17</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Arabe</td>
-                                                                <td>18</td>
-                                                                <td>19</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
+                            @foreach ($eleve as $el)
+                                <tr>
+                                    <td>{{$el->prenom}}</td>
+                                    <td>{{$el->nom}}</td>
+                                    <td>{{$el->adresse}}</td>
+                                    <td>{{$el->telephone}}</td>
+                                    <td class="clearfix">
+                                            <a
+                                                class="btn btn-sm btn-primary"
+                                                href="#" data-original-title="Voir">
+                                                <form action="{{ route('parentEleve.voirNote') }}" method="get" class="inline-block">
+                                                    {{csrf_field() }}
+                                                    <input type="hidden" name="login" value="{{$el->loginEleve}}">
+                                                    <i class="fa fa-eye fa-lg fa-fw"> <input type="submit" value="voir"></i>
+                                                </form>
+                                            </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

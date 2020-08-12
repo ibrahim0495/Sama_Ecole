@@ -34,43 +34,61 @@
                     <thead class="thead-light">
                         <tr>
                             <th>Nom</th>
+                            <th>Langue</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
+                            <th>Langue</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($matiere as $mat)
                         <tr>
-                            <td>Francais</td>
+                            <td>{{$mat->nom_matiere}}</td>
+                            <td>{{$mat->langue}}</td>
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1"                                            data-original-title="Creer ou modifier note">
+                                    href="#" data-toggle="modal" data-target="#UpdateMatiere{{$mat->matiere_id}}" data-original-title="Modifier matiere">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="#" data-original-title="Supprimer">
+                                    <form action="{{ route('matiere.destroy', $mat->matiere_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette matiere')">
+                                        {{csrf_field() }}
+                                        {{ method_field('DELETE')}}
+                                        <i class="fa fa-trash fa-lg fa-fw"><input type="submit" value=""></i>
+                                      </form>
+                                </a>
+                                <div class="modal fade" id="UpdateMatiere{{$mat->matiere_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Matière</h5><br>
+                                                <h5 class="modal-title" id="UpdateMatiere{{$mat->matiere_id}}">Modifier Matière</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                        <form action="{{ route('matiere.store')}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
+                                            <form action="{{ route('matiere.update', $mat->matiere_id)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
                                                 <div class="modal-body">
-                                                    {{  csrf_field() }}
+                                                    {{ csrf_field() }}
+                                                    {{method_field('PUT')}}
                                                     <div class="form-group">
                                                         <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="Francais">
+                                                        <input type="text" class="form-control" name="nom" value="{{$mat->nom_matiere}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Langue</label>
+                                                        <input type="text" class="form-control" name="langue" value="{{$mat->langue}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
+                                                <input type="submit" class="btn btn-primary" name="" value="Modifier">
                                                 </div>
                                             </form>
                                         </div>
@@ -78,77 +96,7 @@
                                 </div>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>Anglais</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1"                                            data-original-title="Creer ou modifier note">
-                                    <i class="fa fa-edit fa-lg fa-fw"></i>
-                                </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Matières</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        <form action="{{ route('matiere.store')}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
-                                                <div class="modal-body">
-                                                    {{  csrf_field() }}
-                                                    <div class="form-group">
-                                                        <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="Anglais">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Arabe</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1"                                            data-original-title="Creer ou modifier note">
-                                    <i class="fa fa-edit fa-lg fa-fw"></i>
-                                </a>
-                                <div class="modal fade" id="CreateOrUpdateNote1" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1">Modifier Matières</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        <form action="{{ route('matiere.store')}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
-                                                <div class="modal-body">
-                                                    {{  csrf_field() }}
-                                                    <div class="form-group">
-                                                        <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="Arabe">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -160,13 +108,13 @@
 
 {{--  Pour les fichier js dont ce page a besoin ici  --}}
 @section('extra-js')
-    <script src="{{ asset('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+<script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

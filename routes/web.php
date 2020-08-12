@@ -19,7 +19,7 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::post('/loginme', 'Auth.LoginController@login')->name('loginme');
+Route::post('/loginme', 'LoginController@login')->name('loginme');
 
 Route::get('/dashboard', function () {
     return view('pages.directeur.add_exemple');
@@ -42,7 +42,6 @@ Route::resource('eleve', 'EleveController');
 Route::resource('etablissement', 'EtablissementController');
 
 //Année Scolaire
-Route::get('annee-scolaire/liste','AnneeScolaireController@liste_annee')->name('annee-scolaire.liste');
 Route::resource('annee-scolaire', 'AnneeScolaireController');
 
 //Bulletin
@@ -76,7 +75,7 @@ Route::get('directeur/surveillant/liste', 'SurveillantController@lister_surveill
 Route::post('directeur/suveillant/update/{surveillant}', 'SurveillantController@update_surveillant')->name('directeur.surveillant.update');
 Route::get('directeur/suveillant/show/{surveillant}',  'SurveillantController@show_surveillant')->name('directeur.surveillant.show');
 Route::post('directeur/suveillant/destroy/{surveillant}',  'SurveillantController@destroy_surveillant')->name('directeur.surveillant.destroy');
-Route::resource('directeur', 'DirecteurController');
+
 //Surveillant fonctionnalites
 
 //Surveillant
@@ -94,6 +93,10 @@ Route::resource('professeurs', 'ProfesseurController');
 //Compte User
 Route::resource('user', 'CompteUserController');
 
+//Directeur
+Route::post('directeur/liste_eleve', 'DirecteurController@list_eleve')->name('directeur.liste_eleve');
+Route::resource('directeur', 'DirecteurController');
+
 //Emploi du temps
 Route::resource('edt', 'EmploiDuTempsController');
 
@@ -104,6 +107,7 @@ Route::resource('matiere', 'MatiereController');
 Route::resource('notes', 'NoteController');
 
 //Parent
+Route::get('parentEleve/voirNote', 'ParentEleveController@voir_note')->name('parentEleve.voirNote');
 Route::resource('parent', 'ParentController');
 Route::resource('parentEleve', 'ParentEleveController');
 

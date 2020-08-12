@@ -65,7 +65,7 @@
 
                                 <form action="{{ route('directeur.surveillant.destroy', $surveillantActif->login) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez-vous supprimer le surveillant {{$surveillantActif->prenom}} {{$surveillantActif->nom}} ?'">
                                     {{csrf_field() }}
-                                    <button type="submit" class ="btn btn-sm btn-danger float-left"><i class="ni ni-fat-remove ni-lg"></i></button>
+                                    <button type="submit" class ="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
                                 </form>
 
                                 

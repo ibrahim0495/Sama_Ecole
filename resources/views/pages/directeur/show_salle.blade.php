@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_directeur', ['title' => ' |Liste_annee'])
+@extends('pages.directeur.master_directeur', ['title' => ' |Liste_salle'])
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')
@@ -6,12 +6,12 @@
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Année Scolaire</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Salle</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
             <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Directeur/Lister année scolaire</li>
+            <li class="breadcrumb-item active" aria-current="page">Directeur/Lister Salle de classe</li>
         </ol>
     </nav>
 @endsection
@@ -24,9 +24,9 @@
         <div class="card">
             <!-- Card header -->
             <div class="card-header">
-                <h3 class="mb-0">Année</h3>
+                <h3 class="mb-0">Salle</h3>
                 <p class="text-sm mb-0">
-                    Liste des années académiques
+                    Liste des salles
                 </p>
             </div>
             <div class="table-responsive py-4">
@@ -34,54 +34,62 @@
                     <thead class="thead-light">
                         <tr>
                             <th>Nom</th>
+                            <th>Capacité</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
+                            <th>Capacité</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($anneeScolaire as $annee)
+                        @foreach ($salle as $sal)
                         <tr>
-                            <td>{{ $annee->nom_anneesco }}</td>
+                            <td>{{$sal->nom_salle}}</td>
+                            <td>{{$sal->capacite}}</td>
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#UpdateAnnee{{$annee->anneeScolaire_id}}" data-original-title="Creer ou modifier note">
+                                    href="#" data-toggle="modal" data-target="#VoirSalle{{$sal->nom_salle}}"
+                                    data-original-title="Creer ou modifier note">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
                                 <a
                                     class="btn btn-sm btn-primary"
                                     href="#" data-original-title="Supprimer">
-                                    <form action="{{ route('annee-scolaire.destroy', $annee->anneeScolaire_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette annee')">
+                                    <form action="{{ route('salle_classe.destroy', $sal->nom_salle) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette salle')">
                                         {{csrf_field() }}
                                         {{ method_field('DELETE')}}
-                                        <input type="submit" class="fa fa-trash fa-lg fa-fw" value="">
+                                        <i class="fa fa-trash fa-lg fa-fw"><input type="submit" value=""></i>
                                       </form>
                                 </a>
-                                <div class="modal fade" id="UpdateAnnee{{$annee->anneeScolaire_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="VoirSalle{{$sal->nom_salle}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="UpdateAnnee{{$annee->anneeScolaire_id}}">Modifier Année</h5><br>
+                                                <h5 class="modal-title" id="VoirSalle{{$sal->nom_salle}}">Modifier Salle</h5><br>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                        <form action="{{ route('annee-scolaire.update', $annee->anneeScolaire_id)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
+                                        <form action="{{ route('salle_classe.update', $sal->nom_salle)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
                                                 <div class="modal-body">
-                                                    {{  csrf_field() }}
+                                                    {{ csrf_field() }}
                                                     {{method_field('PUT')}}
                                                     <div class="form-group">
                                                         <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="{{$annee->nom_anneesco}}">
+                                                    <input type="text" class="form-control" name="nom" value="{{$sal->nom_salle}}" disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Capacité</label>
+                                                        <input type="text" class="form-control" name="capacite" value="{{$sal->capacite}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
+                                                <input type="submit" class="btn btn-primary" name="" value="Modifier">
                                                 </div>
                                             </form>
                                         </div>

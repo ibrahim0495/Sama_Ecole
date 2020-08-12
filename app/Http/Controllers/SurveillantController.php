@@ -7,6 +7,10 @@ use App\models\Personne;
 use App\models\Surveillant;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use App\models\Classe;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class SurveillantController extends Controller
 {
@@ -65,7 +69,7 @@ class SurveillantController extends Controller
                 'nomImgPers' => $image,
                 'etatPers' => 1,
                 'profil' => 'Surveillant',
-                'langue' => 'fr',
+                'langue' => $request->langue,
                 'email' => $request->email
             ]);
 
@@ -118,9 +122,68 @@ class SurveillantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(String $surveillantActif, Request $request)
+    public function update(String $id, Request $request)
     {
-        dd('djjdjd');
+        // code Datte
+        $surveillant = Personne::where('login', '=', $id)->first();
+        $newData = [];
+        $error = false;
+
+        if($request->action=='desactiver'){
+            $newData['etatPers']=0;
+            $affected = DB::table('personnes')
+            ->where('login', $id)
+            ->update($newData);
+          session()->flash('message', "La modification s'est effectuée avec succes!");
+          return redirect()->route('surveillant.liste');
+
+        }
+
+        if (isset($request->nom)) {
+            //Gestion de erreurs
+            if (Str::length($request->nom) <= 2) {
+                $error = true;
+                session()->flash('message', "Vérifier le nom");
+            } else {
+                $newData['nom'] = $request->nom;
+            }
+
+        }
+        if (isset($request->prenom)) {
+            //Gestion de erreurs
+            if (Str::length($request->prenom) <= 2) {
+                $error = true;
+                session()->flash('message', "Vérifier le prenom");
+            } else {
+                $newData['prenom'] = $request->prenom;
+            }
+
+        }
+
+        //Apres tu fais les autres gestion d'erreurs
+
+        if (isset($request->telephone)) {
+            $newData['telephone'] = $request->telephone;
+        }
+
+        if (isset($request->email)) {
+            $newData['email'] = $request->email;
+        }
+
+        if (isset($request->adresse)) {
+            $newData['adresse'] = $request->adresse;
+        }
+
+
+        if (!$error && $surveillant) {
+            $affected = DB::table('personnes')
+              ->where('login', $id)
+              ->update($newData);
+            session()->flash('message', "La modification s'est effectuée avec succes!");
+            return redirect()->route('surveillant.liste');
+        }
+
+        // fin code datte
     }
 
     /**
@@ -139,6 +202,8 @@ class SurveillantController extends Controller
         //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
         $surveillantsActifs = Personne::where('profil','=','Surveillant')->get();
         return view('pages.directeur.index_surveillant',compact('surveillantsActifs'));
+
+        
     }
 
     public function show_surveillant(String $login)
@@ -170,6 +235,7 @@ class SurveillantController extends Controller
         $request->session()->flash('notification.message', " Le surveillant #$surveillantActif a été bien modifié");
 
         return redirect(route('directeur.surveillant.liste'));
+        
     }
 
     public function destroy_surveillant(String $login)

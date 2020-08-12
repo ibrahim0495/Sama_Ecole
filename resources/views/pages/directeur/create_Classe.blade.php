@@ -35,6 +35,22 @@
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
                             <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la classe">
                         </div>
+                        <div class="form-group">
+                            <label>Montant inscription</label>
+                            <input type="number" class="form-control" name="montant_inscription" placeholder="Saisir montant de l'inscription">
+                        </div>
+                        <div class="form-group">
+                            <label>Montant mensuel</label>
+                            <input type="number" class="form-control" name="montant_mensuel" placeholder="Saisir le montant de la mensualité">
+                        </div>
+                        <div class="form-group">
+                            <label>Surveillant associé</label>
+                            <select name="loginSurveillant" class="form-control">
+                                @foreach ($surveillant as $surv)
+                                <option value="{{$surv->login}}">{{$surv->prenom}} {{$surv->nom}}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>
                     </div>

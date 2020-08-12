@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Salle;
+use App\models\Classe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SalleClasseController extends Controller
 {
@@ -13,7 +16,13 @@ class SalleClasseController extends Controller
      */
     public function index()
     {
-        //
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
+        $salle= Salle::orderBy('nom_salle', 'desc')->get();
+        return view('pages.directeur.show_salle', compact('salle','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -34,7 +43,18 @@ class SalleClasseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nom'=> 'required',
+            'capacite'=> 'required'
+        ]);
+
+        $salle= Salle::create([
+            'nom_salle'=> $request->nom,
+            'capacite'=> $request->capacite
+        ]);
+
+        session()->flash('Salle enregistrée avec succès');
+        return redirect()->route('salle_classe.index');
     }
 
     /**
@@ -68,7 +88,23 @@ class SalleClasseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $salle = Salle::where('nom_salle', '=', $id)->first();
+        $newData = [];
+        $error = false;
+
+        //Apres tu fais les autres gestion d'erreurs
+
+        if (isset($request->capacite)) {
+            $newData['capacite'] = $request->capacite;
+        }
+
+        if (!$error && $salle) {
+            $affected = DB::table('salles')
+              ->where('nom_salle', $id)
+              ->update($newData);
+            session()->flash('message', "La modification s'est effectuée avec succes!");
+            return redirect()->route('salle_classe.index');
+        }
     }
 
     /**
@@ -79,6 +115,11 @@ class SalleClasseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('salles')
+                ->where('nom_salle',$id)
+                -> delete();
+
+        session()->flash('message', "La suppression s'est effectuee avec succes");
+        return redirect()->route('salle_classe.index');
     }
 }

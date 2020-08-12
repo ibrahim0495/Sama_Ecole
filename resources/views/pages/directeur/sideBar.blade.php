@@ -73,6 +73,31 @@
                                 </ul>
                             </div>
                         </li>
+
+                        {{--  Salle Classe  --}}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#navbar-salleClasse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-salleClasse">
+                                <i class="ni ni-shop text-primary"></i>
+                                <span class="nav-link-text">Salle Classe</span>
+                            </a>
+                            <div class="collapse" id="navbar-salleClasse">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('salle_classe.create') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> E </span>
+                                        <span class="sidenav-normal"> Enregistrer</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('salle_classe.index') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> L </span>
+                                        <span class="sidenav-normal"> Lister</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
                         {{--  Matiere  --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-matiere" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-matiere">
@@ -134,7 +159,7 @@
                                         </a>
                                     </li>
 
-                                    {{--Pop-up montrant un formulaire pour le choix de la classe du semetre et de la matiere--}}
+                                    {{--Pop-up montrant un formulaire pour le choix de la classe et de l'annee scolaire--}}
 
                          <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -145,25 +170,28 @@
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                <form action="{{ route('eleve.store')}}" method="POST" class="inline-block">
+                                <form action="{{ route('directeur.liste_eleve')}}" method="POST" class="inline-block">
                                     <input type="hidden" name="profils" value="directeur">
                                         <div class="modal-body">
                                             {{  csrf_field() }}
                                             <div class="form-group">
                                                 <label for="">nom classe</label>
-                                                <select  class="form-control" name="nom-classe" value="" required>
-                                                    <option>6emeA</option>
-                                                    <option>TleC</option>
-                                                    <option>4emeA</option>
-                                                    <option>1èreB</option>
-
+                                                <select  class="form-control" name="classe" required>
+                                                    @if (!empty($nomClasse))
+                                                        @foreach ($nomClasse as $cl)
+                                                            <option>{{ $cl->nom }}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Année Scolaire</label>
-                                                <select  class="form-control" name="annee" value="" required>
-                                                    <option>2018-2019</option>
-                                                    <option>2019-2020</option>
+                                                <select  class="form-control" name="annee" required>
+                                                    @if (!empty($anneeScolaire))
+                                                        @foreach ($anneeScolaire as $annee)
+                                                            <option>{{ $annee->nom_anneesco }}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
 
@@ -194,7 +222,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('annee-scolaire.liste') }}" class="nav-link">
+                                        <a href="{{ route('annee-scolaire.index') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> L </span>
                                         <span class="sidenav-normal"> Lister</span>
                                         </a>

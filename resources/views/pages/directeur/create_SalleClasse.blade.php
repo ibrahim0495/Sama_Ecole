@@ -10,7 +10,7 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page">Enregistrer</li>
         </ol>
     </nav>
@@ -25,8 +25,8 @@
         </div>
         <!-- Card body -->
         <div class="card-body">
-            <form action="" method="post">
-                @csrf
+            <form action="{{ route('salle_classe.store') }}" method="post">
+                {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-3"></div>
                     {{-- Nom Classe --}}
@@ -35,8 +35,12 @@
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
                             <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la salle">
                         </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="example2cols2Input">Capacité</label>
+                            <input type="text" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle">
+                        </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Directeur/Enregistrer Salle de Classe</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>
                     </div>
                 </div>
             </form>
