@@ -57,20 +57,20 @@
                             <td>{{$eta->email}}</td>
                             <td>{{$eta->telephone}}</td>
                             <td class="clearfix">
+
                                 <a
-                                    class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1{{$eta->etablissement_id}}" data-original-title="Creer ou modifier note">
+                                    class="btn btn-sm btn-success float-left"
+                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1{{$eta->etablissement_id}}"
+                                    data-original-title="Creer ou modifier note">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <a
-                                    class="btn btn-sm btn-primary"
-                                    href="#" data-original-title="Supprimer">
-                                    <form action="{{ route('etablissement.destroy', $eta->etablissement_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cet etablissement')">
+
+                                <form action="{{ route('etablissement.destroy', $eta->etablissement_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cet etablissement')">
                                         {{csrf_field() }}
                                         {{ method_field('DELETE')}}
-                                       <i class="fa fa-trash fa-lg fa-fw"> <input type="submit" value=""></i>
-                                      </form>
-                                </a>
+                                        <button type="submit" class="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
+                                </form>
+
                                 <div class="modal fade" id="CreateOrUpdateNote1{{$eta->etablissement_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

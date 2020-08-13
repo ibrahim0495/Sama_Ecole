@@ -57,15 +57,13 @@
                                     data-original-title="Creer ou modifier note">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
-                                <a
-                                    class="btn btn-sm btn-primary"
-                                    href="#" data-original-title="Supprimer">
-                                    <form action="{{ route('salle_classe.destroy', $sal->nom_salle) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette salle')">
+
+                                <form action="{{ route('salle_classe.destroy', $sal->nom_salle) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous supprimer cette salle')">
                                         {{csrf_field() }}
                                         {{ method_field('DELETE')}}
-                                        <i class="fa fa-trash fa-lg fa-fw"><input type="submit" value=""></i>
-                                      </form>
-                                </a>
+                                        <button type="submit" class="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
+                                </form>
+
                                 <div class="modal fade" id="VoirSalle{{$sal->nom_salle}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

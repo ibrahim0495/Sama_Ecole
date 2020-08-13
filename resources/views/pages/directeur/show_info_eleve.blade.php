@@ -53,37 +53,10 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#Eleve{{$list->login}}"
+                                    href="{{route('directeur.eleve.show', $list->login)}}"
                                     data-original-title="Voir l'élève">
                                     <i class="fa fa-eye fa-lg fa-fw"></i>
                                 </a>
-
-                                <div class="modal fade" id="Eleve{{$list->login}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-gradient-blue ql-color-white">
-                                                <h5 class="modal-title" id="Eleve">{{$list->prenom}} {{$list->nom}}</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-
-                                            </div>
-                                            <div class="modal-body">
-                                                matricule : <strong>{{$list->code}}</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Adresse : <strong>{{$list->adresse}}</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Année et lieu de naissance : <strong>{{$list->dateNaissance}} à {{$list->lieuNaissance}}</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                sexe :  <strong>{{$list->sexe}}</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                Téléphone :  <strong>{{$list->telephone}}</strong><br>
-                                                <div class="dropdown-divider"></div>
-                                                email :  <strong>{{$list->email}}</strong><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
                         @endforeach

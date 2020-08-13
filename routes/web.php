@@ -94,6 +94,7 @@ Route::resource('professeurs', 'ProfesseurController');
 Route::resource('user', 'CompteUserController');
 
 //Directeur
+Route::get('directeur/eleve/show{eleve}', 'DirecteurController@show_Det_eleve')->name('directeur.eleve.show');
 Route::post('directeur/liste_eleve', 'DirecteurController@list_eleve')->name('directeur.liste_eleve');
 Route::resource('directeur', 'DirecteurController');
 

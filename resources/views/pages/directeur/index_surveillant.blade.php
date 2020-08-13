@@ -68,13 +68,13 @@
                                     <button type="submit" class ="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
                                 </form>
 
-                                
+
 
                             </td>
-                            
+
                         </tr>
                         @endforeach
-                        
+
 
                     </tbody>
                 </table>
