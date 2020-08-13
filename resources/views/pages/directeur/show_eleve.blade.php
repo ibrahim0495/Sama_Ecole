@@ -157,6 +157,9 @@
                     </div>
                 </div>
         </div>
+        <a class="btn btn-outline-danger btn-lg btn-block" href=javascript:history.go(-1)>
+            Retour
+        </a>
         </form>
         @endforeach
     </div>
