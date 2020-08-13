@@ -22,6 +22,16 @@
         <div class="card-header">
             <h3 class="mb-0">Inscription</h3>
         </div>
+        <br>
+        @if (session('error_sql'))
+            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text"><strong>Erreur!</strong> {{ session('error_sql') }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <!-- Card body -->
         <div class="card-body">
             <form method="POST" action="{{ route('inscription.store') }}">
@@ -73,6 +83,17 @@
                         <div class="card-header">
                             <h4 class="mb-0">Informations personnelles de l'élève</h4>
                         </div>
+                    </div>
+                    <div class="col-md-8 offset-2">
+                        @if (session('error_info_eleve'))
+                            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                <span class="alert-text"><strong>Erreur!</strong> {{ session('error_info_eleve') }}</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                     </div>
                     {{-- Prénoms (prenom) --}}
                     <div class="col-md-6">
@@ -231,6 +252,17 @@
                             <h4 class="mb-0">Informations du parent</h4>
                         </div>
                     </div>
+                    <div class="col-md-8 offset-2">
+                        @if (session('erreur_old_parent'))
+                                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Erreur!</strong> {{ session('erreur_old_parent') }}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                    </div>
 
                     {{-- Parent infos --}}
                     <div class="col-md-6">
@@ -327,7 +359,7 @@
                     "\n\
                     <div class='col-md-6'>\n\
                         <div class='form-group'>\n\
-                            <label class='form-control-label' for='exampleTelephoneParent'>Téléphone</label>\n\
+                            <label class='form-control-label' for='exampleTelephoneParent'>Téléphone ou login</label>\n\
                             <div class='input-group input-group-merge'>\n\
                                 <div class='input-group-prepend'>\n\
                                     <span class='input-group-text'><i class='fas fa-globe-americas'></i></span>\n\
@@ -342,6 +374,9 @@
                                 </div>\n\
                             </div>\n\
                             @error('info_ancien_parent') <div class='text-danger'>{{ $message }}</div> @enderror\n\
+                            @if (session('error_info_anc_par'))\n\
+                                <div class='text-danger'>{{ session('error_info_anc_par') }}</div>\n\
+                            @endif\n\
                         </div>\n\
                     </div>\n";
                         var choix= document.getElementById("parent").value;
