@@ -101,6 +101,7 @@ class DirecteurController extends Controller
         ]);
 
         $class =$request->classe;
+
         $list_eleve= DB::table('personnes')
                         ->join('eleves','personnes.login','=','eleves.loginEleve')
                         ->join('classes','classes.classe_id','=','eleves.classe_id')
@@ -118,6 +119,23 @@ class DirecteurController extends Controller
                                         ->get();
         $nom_page = "info_eleve";
         return view('pages.directeur.show_info_eleve', compact('nom_page','list_eleve','class','nomClasse','anneeScolaire'));
+    }
+
+    public function show_Det_eleve(String $login)
+    {
+
+        $eleve = DB::table('personnes')
+                                ->join('eleves','eleves.loginEleve','=','personnes.login')
+                                ->where('login','=',$login)
+                                ->select('personnes.*','eleves.*')
+                                ->get();
+
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
+        return view('pages.directeur.show_eleve ',compact('eleve','nomClasse','anneeScolaire'));
     }
 
 }

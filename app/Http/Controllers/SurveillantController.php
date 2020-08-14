@@ -31,7 +31,7 @@ class SurveillantController extends Controller
      */
     public function create()
     {
-        
+
         return view('pages.directeur.create_surveillant');
     }
 
@@ -48,11 +48,11 @@ class SurveillantController extends Controller
         $personne = new Personne();
 
         $login =  $personne->generateLogin($nom,$prenom); // le login est generer automatique d'apres son prenom nom;
-        
+
         $password = $personne->generateRandomString(); //ceci genere le mot de passe par defaut
 
         $image = "avatarWin10.png";  // elle est l'avatar photo profils par defaut
-        
+
         $etablissement_id = 1; //etablissement doit etre generer automatiquement d'apres le directeur connecter;
 
         $surveillant = Personne::where('login', $login)->first();
@@ -78,7 +78,7 @@ class SurveillantController extends Controller
                     'login' => $login
                 ]);
             }
-            
+
             $request->session()->flash('notification.type','alert-success');
 
             $request->session()->flash('notification.message', " L'enregistrement a été bien effectué");
@@ -212,13 +212,18 @@ class SurveillantController extends Controller
 
     public function lister_surveillant()
     {
+        // liste des classes et des annees pour le menu directeur
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
         //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
         $surveillants = Personne::where('profil','=','Surveillant')->get();
         
         $status = 'Tout';
         return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
 
-        
     }
 
     public function lister_surveillants_actifs(){
@@ -242,7 +247,7 @@ class SurveillantController extends Controller
 
     public function show_surveillant(String $login)
     {
-        
+
         $surveillantActif = Personne::where('profil','=','Surveillant')->where('login','=',$login)->first();
 
         return view('pages.directeur.show_surveillant ',compact('surveillantActif'));
@@ -269,13 +274,13 @@ class SurveillantController extends Controller
         $request->session()->flash('notification.message', " Le surveillant #$surveillantActif a été bien modifié");
 
         return redirect(route('directeur.surveillant.liste'));
-        
+
     }
 
     public function store_classes(Request $request){
-        return $request->classesss;
+        return $request;
 
 
     }
-    
+
 }

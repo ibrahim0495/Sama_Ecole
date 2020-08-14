@@ -25,9 +25,8 @@
                 <!-- Card header -->
                 <div class="card-header">
                     <h3 class="mb-0">Notes</h3>
-                    <p class="text-sm mb-0">
-                        Liste des notes de mon enfant dans l'établissement (nom_etablissement)
-                    </p>
+                    <br>
+                <a class="btn btn-primary" href=javascript:history.go(-1)>Retour</a>
                 </div>
                 <div class="table-responsive py-4">
                     <table class="table table-flush" id="datatable-basic">
