@@ -24,7 +24,7 @@
 
                         {{--Tableau de bord du professeur et page d'acceuil--}}
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ route('professeurs.index')}}">
+                        <a class="nav-link" href="{{ route('professeur.index')}}">
                                 <i class="ni ni-chart-pie-35 text-primary"></i>
                                 <span class="nav-link-text">Tableau de bord</span>
                             </a>

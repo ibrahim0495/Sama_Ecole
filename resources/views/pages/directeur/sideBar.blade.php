@@ -121,16 +121,40 @@
                                 </ul>
                             </div>
                         </li>
-                        {{--  Surveillant  --}}
+                        {{--  Comptable  --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#navbar-comptable" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-comptable">
+                                <i class="fa fa-user-alt text-info"></i>
+                                <span class="nav-link-text">Comptable</span>
+                            </a>
+                            <div class="collapse" id="navbar-comptable">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{route('directeur.comptable.create')}}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> E </span>
+                                        <span class="sidenav-normal"> Enregistrer</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a href="{{route('directeur.comptable.liste')}}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> L </span>
+                                        <span class="sidenav-normal"> Lister</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        {{-- Surveillant --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-surveillant" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-surveillant">
-                                <i class="ni ni-shop text-primary"></i>
+                                <i class="fa fa-user-alt text-green"></i>
                                 <span class="nav-link-text">Surveillant</span>
                             </a>
                             <div class="collapse" id="navbar-surveillant">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="{{ route('surveillant.create') }}" class="nav-link">
+                                        <a href="{{ route('directeur.surveillant.create') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> E </span>
                                         <span class="sidenav-normal"> Enregistrer</span>
                                         </a>

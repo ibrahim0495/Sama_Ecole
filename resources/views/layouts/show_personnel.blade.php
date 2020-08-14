@@ -3,8 +3,12 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card-header">
-            <h4 class="mb-0">Informations personnelles du Surveillant</h4>
+            <div class="row">
+            <h4 class="mb-0">Informations personnelles</h4>
+        
+            </div>
         </div>
+        
     </div>
     {{-- Prénoms --}}
     <div class="col-md-6">
@@ -14,9 +18,9 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-            <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)" value="{{ old('prenom') ?? ''}}" name="prenom">
+            <input type="text" value="{{$personne->prenom}}" name="prenom" class="form-control" placeholder="Saisir le(s) prénom(s)">
             </div>
-            {!! $errors->first('prenom', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('prenom', '<p class="errors">:message</p>')!!}
         </div>
     </div>
 
@@ -24,14 +28,13 @@
     <div class="col-md-6">
         <div class="form-group">
             <label class="form-control-label" for="InputNom">Nom</label>
-                <div class="input-group input-group-merge">
+            <div class="input-group input-group-merge">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Saisir le nom" value="{{ old('nom') ?? ''}}" name="nom">
+                <input type="text" name="nom" value="{{$personne->nom}}" class="form-control" placeholder="Saisir le nom">
             </div>
-            {!! $errors->first('nom', '<p class="text-danger">:message</p>')!!}
-
+            {!! $errors->first('nom', '<p class="errors">:message</p>')!!}
         </div>
     </div>
 
@@ -43,12 +46,12 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                 </div>
-                <input class="form-control" placeholder="Numéro de téléphone" type="text" value="{{ old('telephone') ?? ''}}" name="telephone">
+                <input class="form-control" name="telephone" value="{{$personne->telephone}}" placeholder="Numéro de téléphone" type="text">
                 <div class="input-group-append">
                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                 </div>
             </div>
-            {!! $errors->first('telephone', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('telephone', '<p class="errors">:message</p>')!!}
         </div>
     </div>
 
@@ -60,9 +63,9 @@
                 <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email address" type="email" value="{{ old('email') ?? ''}}" name="email">
+                <input class="form-control" value="{{$personne->email}}" placeholder="Email address" type="email" name="email">
             </div>
-            {!! $errors->first('email', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('email', '<p class="errors">:message</p>')!!}
         </div>
     </div>
 
@@ -71,29 +74,24 @@
         <div class="form-group">
             <label class="form-control-label" for="InputAdresse">Adresse</label>
             <div class="input-group input-group-merge">
-                <input class="form-control" placeholder="Adresse" type="text" value="{{ old('adresse') ?? ''}}" name="adresse">
+                <input class="form-control" placeholder="Adresse" name="adresse" type="text" value="{{$personne->adresse}}">
                 <div class="input-group-append">
                     <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                 </div>
             </div>
-            {!! $errors->first('adresse', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('adresse', '<p class="errors">:message</p>')!!}
+        </div>
+    </div>
+    <div class="col-md-6"> 
+        <div class="form group">
+            <label class="form-control-label" for="InputStatus">Activer/Désactiver</label><br>
+            <label class="custom-toggle custom-toggle-success ">
+                <input type="checkbox" {{$personne->etatPers ? 'checked' : '' }} name="status">
+                <span class="custom-toggle-slider rounded-circle" data-label-off="Non" data-label-on="Oui"></span>
+            </label>
         </div>
     </div>
 
-    {{-- Langue --}}
-    <div class="col-md-6">
-        <div class="form-group">
-            <label class="form-control-label" for="example2cols2Input">Langue</label>
-            <select name="langue" class="form-control" id="example2cols2Select">
-                <option value="français">Français</option>
-                <option value="anglais">Anglais</option>
-                <option value="arabe">Arabe</option>
-            </select>
-        </div>
-    </div>
-</div>
+    <div class="col-md-2"></div>
 
-<button type="submit" class="btn btn-outline-primary btn-lg btn-block">
-    Enregistrer
-</button>
-
+    

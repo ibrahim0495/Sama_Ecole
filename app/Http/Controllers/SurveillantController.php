@@ -192,18 +192,52 @@ class SurveillantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $login)
     {
-        //
+        $delete = Personne::where('login', $login)->delete();
+        if($delete){
+            session()->flash('notification.type','alert-success'); 
+
+            session()->flash('notification.message', " Le surveillant a été supprimé avec succés !");
+            return redirect(route('directeur.surveillant.liste'));
+        }else{
+            session()->flash('notification.type','alert-danger');
+
+            session()->flash('notification.message', " Le surveillant n'a pas pu etre supprimé !");
+            return redirect(route('directeur.surveillant.liste'));
+        }
+       
+
     }
 
     public function lister_surveillant()
     {
         //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
-        $surveillantsActifs = Personne::where('profil','=','Surveillant')->get();
-        return view('pages.directeur.index_surveillant',compact('surveillantsActifs'));
+        $surveillants = Personne::where('profil','=','Surveillant')->get();
+        
+        $status = 'Tout';
+        return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
 
         
+    }
+
+    public function lister_surveillants_actifs(){
+        //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
+
+        $surveillants = Personne::where('profil', 'Surveillant')->where('etatPers', 1)->get();
+        $status = 'Actif(s)';
+
+        return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
+    }
+
+    public function lister_surveillants_inactifs(){
+        //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
+
+        $surveillants = Personne::where('profil', 'Surveillant')->where('etatPers', 0)->get();
+
+        $status = 'Inactif(s)';
+
+        return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
     }
 
     public function show_surveillant(String $login)
@@ -238,21 +272,9 @@ class SurveillantController extends Controller
         
     }
 
-    public function destroy_surveillant(String $login)
-    {
-        $delete = Personne::where('login', $login)->delete();
-        if($delete){
-            session()->flash('notification.type','alert-success'); 
+    public function store_classes(Request $request){
+        return $request->classesss;
 
-            session()->flash('notification.message', " Le surveillant a supprimé avec succés !");
-            return redirect(route('directeur.surveillant.liste'));
-        }else{
-            session()->flash('notification.type','alert-danger');
-
-            session()->flash('notification.message', " Le surveillant n'a pas pu etre supprimé !");
-            return redirect(route('directeur.surveillant.liste'));
-        }
-       
 
     }
     

@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Sama Ecole">
         <meta name="author" content="Sama Ecole">
-        <title>Sama Ecole</title>
+        <title>{{$title ?? ''}}</title>
         <!-- Favicon -->
         {{--  <link rel="icon" href="../../assets/img/brand/favicon.png" type="image/png">  --}}
         <!-- Fonts -->
@@ -57,6 +57,15 @@
 
         <!-- Page content -->
         <div class="container-fluid mt--6">
+            @if (session()->has('notification.message'))
+            <div class="alert {{ session()->get('notification.type')}} alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-notification-70"></i></span>
+                <span class="alert-text">{{ session()->get('notification.message')}} </span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div> 
+        @endif
             {{--  Contenu de la page ici  --}}
             @yield('contenu_page')
         </div>

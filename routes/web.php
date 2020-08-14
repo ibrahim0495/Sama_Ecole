@@ -38,6 +38,28 @@ Route::resource('eleve', 'EleveController');
 
 
 ///////////////////////////////////////
+
+//Directeur
+
+//crud Surveillant
+Route::get('directeur/surveillant/liste', 'SurveillantController@lister_surveillant')->name('directeur.surveillant.liste');
+Route::get('directeur/surveillant/create', 'SurveillantController@create')->name('directeur.surveillant.create');
+Route::get('directeur/surveillant/listeActif', 'SurveillantController@lister_surveillants_actifs')->name('directeur.surveillant.listeActif');
+Route::get('directeur/surveillant/listeInactif', 'SurveillantController@lister_surveillants_inactifs')->name('directeur.surveillant.listeInactif');
+Route::post('directeur/surveillant/update/{surveillant}', 'SurveillantController@update_surveillant')->name('directeur.surveillant.update');
+Route::get('directeur/surveillant/show/{surveillant}',  'SurveillantController@show_surveillant')->name('directeur.surveillant.show');
+Route::post('directeur/surveillant/storeClasses',  'SurveillantController@store_classes')->name('directeur.surveillant.storeClasses');
+
+// Route::post('directeur/surveillant/destroy/{surveillant}',  'SurveillantController@destroy')->name('directeur.surveillant.destroy');
+
+//crud Comptable
+Route::get('directeur/Comptable/liste', 'ComptableController@lister_comptables')->name('directeur.comptable.liste');
+Route::get('directeur/Comptable/listeActif', 'ComptableController@lister_comptables_actifs')->name('directeur.comptable.listeActif');
+Route::get('directeur/Comptable/listeInactif', 'ComptableController@lister_comptables_inactifs')->name('directeur.comptable.listeInactif');
+Route::get('directeur/comptable/create', 'ComptableController@create')->name('directeur.comptable.create');
+Route::get('directeur/comptable/show/{comptable}',  'ComptableController@show_comptable')->name('directeur.comptable.show');
+
+    
 //Absence
 Route::resource('etablissement', 'EtablissementController');
 
@@ -70,15 +92,15 @@ Route::resource('reinscription', 'ReinscriptionController');
 //Payement
 Route::resource('payement', 'PayementController');
 
-//Directeur
-Route::get('directeur/surveillant/liste', 'SurveillantController@lister_surveillant')->name('directeur.surveillant.liste');
-Route::post('directeur/suveillant/update/{surveillant}', 'SurveillantController@update_surveillant')->name('directeur.surveillant.update');
-Route::get('directeur/suveillant/show/{surveillant}',  'SurveillantController@show_surveillant')->name('directeur.surveillant.show');
-Route::post('directeur/suveillant/destroy/{surveillant}',  'SurveillantController@destroy_surveillant')->name('directeur.surveillant.destroy');
 
 //Surveillant fonctionnalites
 
 //Surveillant
+Route::get('surveillant/professeur/create', 'ProfesseurController@create')->name('surveillant.professeur.create');
+Route::get('surveillant/professeur/liste', 'ProfesseurController@lister_professeur')->name('surveillant.professeur.liste');
+Route::get('surveillant/professeur/listeActif', 'ProfesseurController@lister_professeurs_actifs')->name('surveillant.professeur.listeActif');
+Route::get('surveillant/professeur/listeInactif', 'ProfesseurController@lister_professeurs_inactifs')->name('surveillant.professeur.listeInactif');
+Route::get('surveillant/professeur/show/{professeur}',  'ProfesseurController@show_professeur')->name('surveillant.professeur.show');
 Route::resource('surveillant', 'SurveillantController');
 
 //Professeur
@@ -86,7 +108,7 @@ Route::get('professeurs/messages','ProfesseurController@messages')->name('profes
 Route::post('professeurs/classes', 'ProfesseurController@post_classe')->name('professeurs.classes');
 Route::get('professeurs/classes', 'ProfesseurController@index_classe')->name('professeurs.classes');
 Route::resource('notes','NoteController');
-Route::resource('professeurs', 'ProfesseurController');
+Route::resource('professeur', 'ProfesseurController');
 //Route::get('professeur/messages','ProfesseurController@messages')->name('professeur.messages');
 //////////////////////////////////////////////////
 
