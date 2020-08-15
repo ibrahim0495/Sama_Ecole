@@ -5,13 +5,18 @@
 
 @endsection
 
+@section('breadcrumb')
+    <h6 class="h2 text-white d-inline-block mb-0">Classe</h6>
+    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Directeur/Modifier classe</li>
+        </ol>
+    </nav>
+@endsection
+
 @section('contenu_page')
-<div class="card mb-4">
-</div>
-<div class="card mb-4">
-</div>
-<div class="card mb-4">
-</div>
 <div class="card mb-4">
     <!-- Card header -->
     <div class="card-header">
@@ -19,21 +24,63 @@
     </div>
     <!-- Card body -->
     <div class="card-body">
-        <form action="{{ route('classe.update') }}" method="post">
-            @csrf
-            <div class="row">
-                <div class="col-md-3"></div>
-                {{-- Nom Classe --}}
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label class="form-control-label" for="example2cols2Input">Nom</label>
-                    <input type="text" name="nom" class="form-control" id="example2cols2Input" value="{{}}">
-                    </div>
+        @foreach ($classe as $cl)
+        <form action="{{ route('classe.update', $cl->classe_id)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier cette classse?')">
+            <div class="modal-body">
 
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Modifier</button>
+                {{ csrf_field() }}
+                {{method_field('PUT')}}
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" class="form-control" name="nom" value="{{$cl->nom}}">
+                    @error('nom')
+                                <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label>Montant inscription</label>
+                    <input type="number" class="form-control" name="montant_inscription" value="{{$cl->montant_inscription}}">
+                    @error('montant_inscription')
+                                <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label>Montant mensuel</label>
+                    <input type="number" class="form-control" name="montant_mensuel" value="{{$cl->montant_mensuel}}">
+                    @error('montant_mensuel')
+                                <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label>Surveillant</label>
+                    <input type="text" class="form-control" name="surveillant" value="{{$cl->prenom}} {{$cl->nom_per}}" disabled>
+                    @error('surveillant')
+                                <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                </div>
+            <div class="col-md-6">
+                <a class="btn btn-outline-danger btn-lg btn-block" href="{{route('classe.index')}}">
+                    Annuler
+                </a>
             </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-outline-success btn-lg btn-block">
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+        </div>
         </form>
+        @endforeach
     </div>
 </div>
 

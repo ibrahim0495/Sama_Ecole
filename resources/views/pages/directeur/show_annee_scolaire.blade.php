@@ -25,9 +25,8 @@
             <!-- Card header -->
             <div class="card-header">
                 <h3 class="mb-0">Année</h3>
-                <p class="text-sm mb-0">
-                    Liste des années académiques
-                </p>
+                <br>
+            <a class="btn btn-primary" href="{{ route('annee-scolaire.create') }}">Ajouter nouvelle Matière</a>
             </div>
             <div class="table-responsive py-4">
                 <table class="table table-flush" id="datatable-basic">
@@ -50,7 +49,7 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#UpdateAnnee{{$annee->anneeScolaire_id}}" data-original-title="Creer ou modifier note">
+                                    href="{{ route('annee-scolaire.show', $annee->anneeScolaire_id)}}">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
 
@@ -59,32 +58,6 @@
                                         {{ method_field('DELETE')}}
                                         <button type="submit" class="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
                                 </form>
-
-                                <div class="modal fade" id="UpdateAnnee{{$annee->anneeScolaire_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="UpdateAnnee{{$annee->anneeScolaire_id}}">Modifier Année</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        <form action="{{ route('annee-scolaire.update', $annee->anneeScolaire_id)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
-                                                <div class="modal-body">
-                                                    {{  csrf_field() }}
-                                                    {{method_field('PUT')}}
-                                                    <div class="form-group">
-                                                        <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="{{$annee->nom_anneesco}}">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="OK">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
                         @endforeach

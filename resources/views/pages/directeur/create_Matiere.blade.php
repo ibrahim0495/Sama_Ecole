@@ -34,6 +34,9 @@
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
                             <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la matière">
+                            @error('nom')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         {{-- Langue --}}
                         <div class="form-group">
@@ -43,6 +46,9 @@
                                 <option value="Anglais">Anglais</option>
                                 <option value="Arabe">Arabe</option>
                             </select>
+                            @error('langue')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>

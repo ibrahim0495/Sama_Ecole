@@ -46,7 +46,7 @@ class MatiereController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nom'=> 'required',
+            'nom'=> 'required|min:4',
             'langue'=> 'required'
         ]);
         $matiere = Matiere::create([
@@ -54,7 +54,8 @@ class MatiereController extends Controller
             'langue'=> $request->langue
         ]);
 
-        session()->flash('Matière enregistrée avec succès');
+        $request->session()->flash('notification.type','alert-success');
+        $request->session()->flash('notification.message', " Enregistrement effectuée avec succés!");
         return redirect()->route('matiere.index');
     }
 
@@ -66,7 +67,15 @@ class MatiereController extends Controller
      */
     public function show($id)
     {
-        //
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
+        $matiere = Matiere::where('matiere_id', $id)
+                            ->get();
+
+        return view('pages.directeur.update_Matiere', compact('matiere','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -110,11 +119,11 @@ class MatiereController extends Controller
         }
 
         if (!$error && $matiere) {
-            //$etablissement->update($newData);
             $affected = DB::table('matieres')
               ->where('matiere_id', $id)
               ->update($newData);
-            session()->flash('message', "La modification s'est effectuée avec succes!");
+              $request->session()->flash('notification.type','alert-success');
+              $request->session()->flash('notification.message', " Modification effectuée avec succés!");
             return redirect()->route('matiere.index');
         }
     }

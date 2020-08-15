@@ -25,9 +25,8 @@
             <!-- Card header -->
             <div class="card-header">
                 <h3 class="mb-0">Etablissement</h3>
-                <p class="text-sm mb-0">
-                    Liste des établissements
-                </p>
+                <br>
+            <a class="btn btn-primary" href="{{ route('etablissement.create') }}">Ajouter nouveau etablissement</a>
             </div>
             <div class="table-responsive py-4">
                 <table class="table table-flush" id="datatable-basic">
@@ -60,8 +59,7 @@
 
                                 <a
                                     class="btn btn-sm btn-success float-left"
-                                    href="#" data-toggle="modal" data-target="#CreateOrUpdateNote1{{$eta->etablissement_id}}"
-                                    data-original-title="Creer ou modifier note">
+                                    href="{{ route('etablissement.show', $eta->etablissement_id)}}">
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
 
@@ -70,46 +68,6 @@
                                         {{ method_field('DELETE')}}
                                         <button type="submit" class="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
                                 </form>
-
-                                <div class="modal fade" id="CreateOrUpdateNote1{{$eta->etablissement_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="CreateOrUpdateNote1{{$eta->etablissement_id}}">Modifier établissement ( {{$eta->nom}} )</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        <form
-                                            action="{{ route('etablissement.update', $eta->etablissement_id ) }}" method="POST"
-                                            class="inline-block" onsubmit="return confirm('Voulez vous modifier cet établissement?')">
-                                                {{ csrf_field() }}
-                                                {{method_field('PUT')}}
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label>Nom</label>
-                                                    <input type="text" class="form-control" name="nom" value="{{$eta->nom}}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Adresse</label>
-                                                        <input type="text" class="form-control" name="adresse" value="{{$eta->adresse}}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="text" class="form-control" name="email" value="{{$eta->email}}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Telephone</label>
-                                                        <input type="text" class="form-control" name="telephone" value="{{$eta->telephone}}">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
                         @endforeach

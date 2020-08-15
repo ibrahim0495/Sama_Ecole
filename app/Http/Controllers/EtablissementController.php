@@ -46,10 +46,11 @@ class EtablissementController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nom'=> 'required',
-            'telephone'=> 'required',
-            'email' => 'required',
-            'adresse'=> 'required'
+            'nom'=> 'required|min:2|max:100',
+            'telephone'=> 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:etablissements,telephone',
+            'email' => 'required|email',
+            'adresse'=> 'required|min:2|max:30',
+            'acronyme'=>'|min:2|max:9'
         ]);
 
         $etablissement= Etablissement::create([
@@ -71,7 +72,15 @@ class EtablissementController extends Controller
      */
     public function show($id)
     {
-        //
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
+        $etablissement= Etablissement::where('etablissement_id',$id)
+                                    ->get();
+
+        return view('pages.directeur.update_Etablissement', compact('etablissement','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -94,6 +103,15 @@ class EtablissementController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate($request, [
+            'nom'=> 'required|min:2|max:100',
+            'telephone'=> 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:etablissements,telephone',
+            'email' => 'required|email',
+            'adresse'=> 'required|min:2|max:30',
+            'acronyme'=>'|min:2|max:9'
+        ]);
+
         $etablissement = Etablissement::where('etablissement_id', '=', $id)->first();
         $newData = [];
         $error = false;
@@ -109,6 +127,28 @@ class EtablissementController extends Controller
 
         }
 
+        if (isset($request->adresse)) {
+            //Gestion de erreurs
+            if (Str::length($request->adresse) <= 4) {
+                $error = true;
+                session()->flash('message', "Vérifier l'adresse");
+            } else {
+                $newData['adresse'] = $request->adresse;
+            }
+
+        }
+
+        if (isset($request->acronyme)) {
+            //Gestion de erreurs
+            if (Str::length($request->acronyme) <= 2) {
+                $error = true;
+                session()->flash('message', "Vérifier l'acronyme");
+            } else {
+                $newData['acronyme'] = $request->acronyme;
+            }
+
+        }
+
         //Apres tu fais les autres gestion d'erreurs
 
         if (isset($request->telephone)) {
@@ -117,10 +157,6 @@ class EtablissementController extends Controller
 
         if (isset($request->email)) {
             $newData['email'] = $request->email;
-        }
-
-        if (isset($request->adresse)) {
-            $newData['adresse'] = $request->adresse;
         }
 
 

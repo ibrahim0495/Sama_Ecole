@@ -34,14 +34,23 @@
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
                             <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la classe">
+                            @error('nom')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Montant inscription</label>
                             <input type="number" class="form-control" name="montant_inscription" placeholder="Saisir montant de l'inscription">
+                            @error('montant_inscription')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Montant mensuel</label>
                             <input type="number" class="form-control" name="montant_mensuel" placeholder="Saisir le montant de la mensualité">
+                            @error('montant_mensuel')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Surveillant associé</label>
@@ -50,6 +59,9 @@
                                 <option value="{{$surv->login}}">{{$surv->prenom}} {{$surv->nom}}</option>
                                 @endforeach
                             </select>
+                            @error('surveillant')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>

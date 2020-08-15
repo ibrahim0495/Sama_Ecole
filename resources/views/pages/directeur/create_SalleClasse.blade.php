@@ -34,10 +34,16 @@
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
                             <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir le nom de la salle">
+                            @error('nom')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Capacité</label>
                             <input type="text" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle">
+                            @error('capacite')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>

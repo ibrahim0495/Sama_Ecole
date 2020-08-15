@@ -44,6 +44,9 @@
                                 <input type="text" class="form-control" placeholder="Saisir le nom" name="nom">
                             </div>
                         </div>
+                        @error('nom')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Adresse --}}
@@ -57,6 +60,9 @@
                                 </div>
                             </div>
                         </div>
+                        @error('adresse')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Email --}}
@@ -70,6 +76,9 @@
                             <input class="form-control" placeholder="Email address" type="email" name="email">
                         </div>
                         </div>
+                        @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Téléphone --}}
@@ -86,6 +95,41 @@
                                 </div>
                             </div>
                         </div>
+                        @error('telephone')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- logo --}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="InputTéléphone">Logo</label>
+                            <div class="input-group input-group-merge">
+                                <input class="form-control" placeholder="" type="text" name="logo">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        @error('logo')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Acronyme --}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="InputTéléphone">Acronyme</label>
+                            <div class="input-group input-group-merge">
+                                <input class="form-control" placeholder="Saisir l'acronyme" type="text" name="acronyme">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        @error('acronyme')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
