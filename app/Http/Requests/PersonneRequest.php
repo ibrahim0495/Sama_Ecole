@@ -24,10 +24,10 @@ class PersonneRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom' => 'required',
+            'nom' => 'required|min:2',
             'prenom' => 'required|min:2',
             'adresse' => 'required',
-            'telephone' => 'required|numeric|min:9|unique:personnes,telephone',
+            'telephone' => 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:personnes,telephone',
             'email' => 'required|email|unique:personnes,email',
             'status'=>''
         ];
