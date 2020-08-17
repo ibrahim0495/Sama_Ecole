@@ -46,7 +46,7 @@ class MatiereController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nom'=> 'required|min:4',
+            'nom'=> 'required|min:2',
             'langue'=> 'required'
         ]);
         $matiere = Matiere::create([

@@ -40,6 +40,7 @@ class ClasseController extends Controller
         $surveillant= DB::table('surveillants')
                         ->join('personnes','personnes.login','=','surveillants.login')
                         ->select('surveillants.login','personnes.prenom','personnes.nom')
+                        ->orderBy('personnes.nom', 'asc')
                         ->get();
 
         return view('pages.directeur.create_Classe', compact('surveillant'));
@@ -56,15 +57,9 @@ class ClasseController extends Controller
         $this->validate($request, [
             'nom'=> 'required|unique:classes|min:2',
             'montant_inscription'=> 'required|numeric',
-            'montant_mensuel'=> 'required|numeric',
+            'montant_mensuel'=> 'required|numeric|lt:'.$request->montant_inscription,
             'loginSurveillant'=> 'required'
         ]);
-        if($request->montant_mensuel > $request->montant_inscription){
-            $request->session()->flash('notification.type','alert-danger');
-
-            $request->session()->flash('notification.message', " Le montant de l'inscription doit etre supérieur à celui de la mensualité !");
-            return redirect()->back()->withInput();
-        }
 
         $classe = Classe::create([
             'nom'=> $request->nom,
