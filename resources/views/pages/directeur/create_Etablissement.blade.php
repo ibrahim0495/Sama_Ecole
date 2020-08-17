@@ -24,7 +24,7 @@
         </div>
         <!-- Card body -->
         <div class="card-body">
-            <form method="POST" action="{{ route('etablissement.store') }}">
+            <form method="POST" action="{{ route('etablissement.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -103,12 +103,10 @@
                     {{-- logo --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputTéléphone">Logo</label>
-                            <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="" type="text" name="logo">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                </div>
+                            <label class="form-control-label" for="InputLogo">Logo</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="logo">
+                                <label class="custom-file-label" for="customFile">Choisir une photo</label>
                             </div>
                         </div>
                         @error('logo')

@@ -42,7 +42,7 @@ class LoginController extends Controller
     {
         $this->validate($request, [
         'password' => 'required',
-        'email' => 'required'
+        'email' => 'required|email'
         ]);
         $personne = Personne::where('email',$request->email)->where('motDePasse', $request->password)->first();
         if(($personne != null) && ($personne->profil=='directeur')){

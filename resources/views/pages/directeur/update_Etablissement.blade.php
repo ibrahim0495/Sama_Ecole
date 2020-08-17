@@ -28,7 +28,7 @@
         <div class="card-body">
                 <form
                     action="{{ route('etablissement.update', $eta->etablissement_id ) }}" method="POST"
-                    class="inline-block" onsubmit="return confirm('Voulez vous modifier cet établissement?')">
+                    class="inline-block" onsubmit="return confirm('Voulez vous modifier cet établissement?')" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{method_field('PUT')}}
                     <div class="row">
@@ -99,12 +99,10 @@
                     {{-- logo --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputTéléphone">Logo</label>
-                            <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="" type="text" name="logo">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                </div>
+                            <label class="form-control-label" for="InputLogo">Logo</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="logo" value="{{$eta->logo}}">
+                                <label class="custom-file-label" for="customFile">Choisir une photo</label>
                             </div>
                         </div>
                         @error('logo')

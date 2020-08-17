@@ -52,14 +52,21 @@ class EtablissementController extends Controller
             'adresse'=> 'required|min:2|max:30',
             'acronyme'=>'|min:2|max:9'
         ]);
+        ($files = $request->file('logo'));
+        $destinationPath = public_path('logo/'); // upload path
+        $logo = date('dmYHis') . "." . $files->getClientOriginalExtension();
 
         $etablissement= Etablissement::create([
             'nom'=> $request->nom,
             'telephone'=> $request->telephone,
             'email'=> $request->email,
-            'adresse'=> $request->adresse
+            'adresse'=> $request->adresse,
+            'logo'=> $logo,
+            'acronyme'=> $request->acronyme
         ]);
 
+        $files->move($destinationPath, $logo);
+        $insert['image'] = "$logo";
         session()->flash('Etablissement enregistré avec succès');
         return redirect()->route('etablissement.index');
     }
@@ -149,6 +156,14 @@ class EtablissementController extends Controller
 
         }
 
+        if ($request->file('logo')) {
+            if($files = $request->file('logo')){
+                $destinationPath = public_path('logo/'); // upload path
+                $logo = date('dmYHis') . "." . $files->getClientOriginalExtension();
+
+                $newData['logo'] = $logo;
+            }
+        }
         //Apres tu fais les autres gestion d'erreurs
 
         if (isset($request->telephone)) {
@@ -165,13 +180,13 @@ class EtablissementController extends Controller
             $affected = DB::table('etablissements')
               ->where('etablissement_id', $id)
               ->update($newData);
+
+            $files->move($destinationPath, $logo);
+            $insert['image'] = "$logo";
+
             session()->flash('message', "La modification s'est effectuée avec succes!");
             return redirect()->route('etablissement.index');
         }
-
-
-
-
 
     }
 
