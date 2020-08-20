@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_directeur', ['title' => ' |Classe'])
+@extends('pages.directeur.master_directeur', ['title' => ' |AnneeScolaire'])
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')
@@ -6,12 +6,12 @@
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Année Scolaire</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Directeur</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
             <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Directeur/Enregistrer une année scolaire</li>
+            <li class="breadcrumb-item active" aria-current="page">Année scolaire</li>
         </ol>
     </nav>
 @endsection
@@ -27,14 +27,16 @@
         <div class="card-body">
             <form action="{{ route('annee-scolaire.store') }}" method="post">
                 {{ csrf_field() }}
-                {{method_field('PUT')}}
                 <div class="row">
                     <div class="col-md-3"></div>
-                    {{-- Nom Classe --}}
+                    {{-- Nom Annee --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
                             <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir l'année accadémique (exemple: 2019-2020)">
+                            @error('nom')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>

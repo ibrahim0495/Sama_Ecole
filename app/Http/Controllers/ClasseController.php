@@ -40,6 +40,7 @@ class ClasseController extends Controller
         $surveillant= DB::table('surveillants')
                         ->join('personnes','personnes.login','=','surveillants.login')
                         ->select('surveillants.login','personnes.prenom','personnes.nom')
+                        ->orderBy('personnes.nom', 'asc')
                         ->get();
 
         return view('pages.directeur.create_Classe', compact('surveillant'));
@@ -54,11 +55,12 @@ class ClasseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nom'=> 'required',
-            'montant_inscription'=> 'required',
-            'montant_mensuel'=> 'required',
+            'nom'=> 'required|unique:classes|min:2',
+            'montant_inscription'=> 'required|numeric',
+            'montant_mensuel'=> 'required|numeric|lt:'.$request->montant_inscription,
             'loginSurveillant'=> 'required'
         ]);
+
         $classe = Classe::create([
             'nom'=> $request->nom,
             'montant_inscription'=> $request->montant_inscription,
@@ -66,7 +68,8 @@ class ClasseController extends Controller
             'login_surveillant'=> $request->loginSurveillant
         ]);
 
-        session()->flash('Classe enregistrée avec succès');
+        $request->session()->flash('notification.type','alert-success');
+        $request->session()->flash('notification.message', " Enregistrement effectuée avec succés!");
         return redirect()->route('classe.index');
     }
 
@@ -78,6 +81,19 @@ class ClasseController extends Controller
      */
     public function show($id)
     {
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
+        $classe= DB::table('classes')
+                    ->join('surveillants','surveillants.login','=','classes.login_surveillant')
+                    ->join('personnes','personnes.login','=','surveillants.login')
+                    ->where('classe_id',$id)
+                    ->select('classes.*','personnes.prenom','personnes.nom as nom_per')
+                    ->get();
+
+        return view("pages.directeur.update_Classe",compact('classe','nomClasse','anneeScolaire'));
 
     }
 
@@ -89,7 +105,8 @@ class ClasseController extends Controller
      */
     public function edit($id)
     {
-        //
+
+
     }
 
     /**
@@ -101,6 +118,19 @@ class ClasseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nom'=> 'required|min:2',
+            'montant_inscription'=> 'required|numeric',
+            'montant_mensuel'=> 'required|numeric',
+            'loginSurveillant'=> 'required'
+        ]);
+        if($request->montant_mensuel > $request->montant_inscription){
+            $request->session()->flash('notification.type','alert-danger');
+
+            $request->session()->flash('notification.message', " Le montant de l'inscription doit etre supérieur à celui de la mensualité !");
+            return redirect()->back()->withInput();
+        }
+
         $classe = Classe::where('classe_id', '=', $id)->first();
         $newData = [];
         $error = false;
@@ -128,7 +158,8 @@ class ClasseController extends Controller
             $affected = DB::table('classes')
               ->where('classe_id', $id)
               ->update($newData);
-            session()->flash('message', "La modification s'est effectuée avec succes!");
+              $request->session()->flash('notification.type','alert-success');
+              $request->session()->flash('notification.message', " Modification effectuée avec succés!");
             return redirect()->route('classe.index');
         }
     }

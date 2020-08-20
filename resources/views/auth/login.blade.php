@@ -148,6 +148,9 @@
                     </div>
                     <input class="form-control" placeholder="Email" type="email" name="email" required>
                   </div>
+                    @error('email')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
@@ -156,6 +159,9 @@
                     </div>
                     <input class="form-control" placeholder="Mot de passe" type="password" name="password" required>
                   </div>
+                    @error('password')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckLogin" type="checkbox">

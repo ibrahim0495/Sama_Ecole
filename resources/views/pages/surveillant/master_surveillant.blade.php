@@ -1,6 +1,3 @@
-<!--
-
--->
 <!DOCTYPE html>
 <html>
 
@@ -64,7 +61,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-            </div> 
+            </div>
         @endif
             {{--  Contenu de la page ici  --}}
             @yield('contenu_page')
@@ -82,8 +79,6 @@
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
-
-    <script src="{{ asset('assets/vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>
 
     @yield('extra-js')
 

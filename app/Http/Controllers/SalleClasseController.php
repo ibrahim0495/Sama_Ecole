@@ -44,8 +44,7 @@ class SalleClasseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nom'=> 'required',
-            'capacite'=> 'required'
+            'nom'=> 'required|unique:salles,nom_salle|min:2'
         ]);
 
         $salle= Salle::create([
@@ -53,7 +52,8 @@ class SalleClasseController extends Controller
             'capacite'=> $request->capacite
         ]);
 
-        session()->flash('Salle enregistrée avec succès');
+        $request->session()->flash('notification.type','alert-success');
+        $request->session()->flash('notification.message', " Enregistrement effectuée avec succés!");
         return redirect()->route('salle_classe.index');
     }
 
@@ -65,7 +65,14 @@ class SalleClasseController extends Controller
      */
     public function show($id)
     {
-        //
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
+        $salle= Salle::where('nom_salle', $id)
+                    ->get();
+        return view('pages.directeur.update_SalleClasse', compact('salle','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -88,6 +95,10 @@ class SalleClasseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nom'=> 'required|min:2'
+        ]);
+
         $salle = Salle::where('nom_salle', '=', $id)->first();
         $newData = [];
         $error = false;
@@ -102,7 +113,8 @@ class SalleClasseController extends Controller
             $affected = DB::table('salles')
               ->where('nom_salle', $id)
               ->update($newData);
-            session()->flash('message', "La modification s'est effectuée avec succes!");
+            $request->session()->flash('notification.type','alert-success');
+            $request->session()->flash('notification.message', " Modification effectuée avec succés!");
             return redirect()->route('salle_classe.index');
         }
     }

@@ -46,19 +46,27 @@ class EtablissementController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nom'=> 'required',
-            'telephone'=> 'required',
-            'email' => 'required',
-            'adresse'=> 'required'
+            'nom'=> 'required|min:2|max:100',
+            'telephone'=> 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:etablissements,telephone',
+            'email' => 'required|email',
+            'adresse'=> 'required|min:2|max:30',
+            'acronyme'=>'|min:2|max:9'
         ]);
+        ($files = $request->file('logo'));
+        $destinationPath = public_path('logo/'); // upload path
+        $logo = date('dmYHis') . "." . $files->getClientOriginalExtension();
 
         $etablissement= Etablissement::create([
             'nom'=> $request->nom,
             'telephone'=> $request->telephone,
             'email'=> $request->email,
-            'adresse'=> $request->adresse
+            'adresse'=> $request->adresse,
+            'logo'=> $logo,
+            'acronyme'=> $request->acronyme
         ]);
 
+        $files->move($destinationPath, $logo);
+        $insert['image'] = "$logo";
         session()->flash('Etablissement enregistré avec succès');
         return redirect()->route('etablissement.index');
     }
@@ -71,7 +79,15 @@ class EtablissementController extends Controller
      */
     public function show($id)
     {
-        //
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->get();
+
+        $etablissement= Etablissement::where('etablissement_id',$id)
+                                    ->get();
+
+        return view('pages.directeur.update_Etablissement', compact('etablissement','nomClasse','anneeScolaire'));
     }
 
     /**
@@ -94,6 +110,15 @@ class EtablissementController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate($request, [
+            'nom'=> 'required|min:2|max:100',
+            'telephone'=> 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:etablissements,telephone',
+            'email' => 'required|email',
+            'adresse'=> 'required|min:2|max:30',
+            'acronyme'=>'|min:2|max:9'
+        ]);
+
         $etablissement = Etablissement::where('etablissement_id', '=', $id)->first();
         $newData = [];
         $error = false;
@@ -109,6 +134,36 @@ class EtablissementController extends Controller
 
         }
 
+        if (isset($request->adresse)) {
+            //Gestion de erreurs
+            if (Str::length($request->adresse) <= 4) {
+                $error = true;
+                session()->flash('message', "Vérifier l'adresse");
+            } else {
+                $newData['adresse'] = $request->adresse;
+            }
+
+        }
+
+        if (isset($request->acronyme)) {
+            //Gestion de erreurs
+            if (Str::length($request->acronyme) <= 2) {
+                $error = true;
+                session()->flash('message', "Vérifier l'acronyme");
+            } else {
+                $newData['acronyme'] = $request->acronyme;
+            }
+
+        }
+
+        if ($request->file('logo')) {
+            if($files = $request->file('logo')){
+                $destinationPath = public_path('logo/'); // upload path
+                $logo = date('dmYHis') . "." . $files->getClientOriginalExtension();
+
+                $newData['logo'] = $logo;
+            }
+        }
         //Apres tu fais les autres gestion d'erreurs
 
         if (isset($request->telephone)) {
@@ -119,23 +174,19 @@ class EtablissementController extends Controller
             $newData['email'] = $request->email;
         }
 
-        if (isset($request->adresse)) {
-            $newData['adresse'] = $request->adresse;
-        }
-
 
         if (!$error && $etablissement) {
             //$etablissement->update($newData);
             $affected = DB::table('etablissements')
               ->where('etablissement_id', $id)
               ->update($newData);
+
+            $files->move($destinationPath, $logo);
+            $insert['image'] = "$logo";
+
             session()->flash('message', "La modification s'est effectuée avec succes!");
             return redirect()->route('etablissement.index');
         }
-
-
-
-
 
     }
 

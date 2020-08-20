@@ -6,12 +6,12 @@
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Etablissement</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Directeur</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
             <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Directeur/Enregistrer établissement</li>
+            <li class="breadcrumb-item active" aria-current="page">Enregistrer établissement</li>
         </ol>
     </nav>
 @endsection
@@ -24,7 +24,7 @@
         </div>
         <!-- Card body -->
         <div class="card-body">
-            <form method="POST" action="{{ route('etablissement.store') }}">
+            <form method="POST" action="{{ route('etablissement.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -44,6 +44,9 @@
                                 <input type="text" class="form-control" placeholder="Saisir le nom" name="nom">
                             </div>
                         </div>
+                        @error('nom')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Adresse --}}
@@ -57,6 +60,9 @@
                                 </div>
                             </div>
                         </div>
+                        @error('adresse')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Email --}}
@@ -70,6 +76,9 @@
                             <input class="form-control" placeholder="Email address" type="email" name="email">
                         </div>
                         </div>
+                        @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Téléphone --}}
@@ -86,6 +95,39 @@
                                 </div>
                             </div>
                         </div>
+                        @error('telephone')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- logo --}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="InputLogo">Logo</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="logo">
+                                <label class="custom-file-label" for="customFile">Choisir une photo</label>
+                            </div>
+                        </div>
+                        @error('logo')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Acronyme --}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="InputTéléphone">Acronyme</label>
+                            <div class="input-group input-group-merge">
+                                <input class="form-control" placeholder="Saisir l'acronyme" type="text" name="acronyme">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        @error('acronyme')
+                                <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 

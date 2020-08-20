@@ -25,9 +25,8 @@
             <!-- Card header -->
             <div class="card-header">
                 <h3 class="mb-0">Matière</h3>
-                <p class="text-sm mb-0">
-                    Liste des Matières
-                </p>
+                <br>
+            <a class="btn btn-primary" href="{{ route('matiere.create') }}">Ajouter nouvelle Matière</a>
             </div>
             <div class="table-responsive py-4">
                 <table class="table table-flush" id="datatable-basic">
@@ -53,7 +52,7 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="#" data-toggle="modal" data-target="#UpdateMatiere{{$mat->matiere_id}}" data-original-title="Modifier matiere">
+                                    href="{{ route('matiere.show', $mat->matiere_id) }}" >
                                     <i class="fa fa-edit fa-lg fa-fw"></i>
                                 </a>
 
@@ -62,36 +61,6 @@
                                         {{ method_field('DELETE')}}
                                         <button type="submit" class="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
                                 </form>
-
-                                <div class="modal fade" id="UpdateMatiere{{$mat->matiere_id}}" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="UpdateMatiere{{$mat->matiere_id}}">Modifier Matière</h5><br>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form action="{{ route('matiere.update', $mat->matiere_id)}}" method="POST" class="inline-block" onsubmit="return confirm('Voulez vous modifier ce modèle?')">
-                                                <div class="modal-body">
-                                                    {{ csrf_field() }}
-                                                    {{method_field('PUT')}}
-                                                    <div class="form-group">
-                                                        <label>Nom</label>
-                                                        <input type="text" class="form-control" name="nom" value="{{$mat->nom_matiere}}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Langue</label>
-                                                        <input type="text" class="form-control" name="langue" value="{{$mat->langue}}">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" name="" value="Modifier">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
                         @endforeach

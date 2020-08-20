@@ -76,7 +76,7 @@
 
                         {{--  Salle Classe  --}}
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-salleClasse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-salleClasse">
+                            <a class="nav-link" href="#navbar-salleClasse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-salleClasse">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Salle Classe</span>
                             </a>
@@ -185,7 +185,7 @@
 
                                     {{--Pop-up montrant un formulaire pour le choix de la classe et de l'annee scolaire--}}
 
-                         <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">

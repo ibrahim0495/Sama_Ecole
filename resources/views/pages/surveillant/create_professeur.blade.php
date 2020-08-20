@@ -1,5 +1,10 @@
 @extends('pages.surveillant.master_surveillant', ['title' => 'Enregistrement Professeur'])
 
+@section('extra-css')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
+@endsection
+
 @section('breadcrumb')
     <h6 class="h2 text-white d-inline-block mb-0">Accueil</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
@@ -24,4 +29,10 @@
         </form>
     </div>
 </div>
+@endsection
+
+@section('extra-js')
+    <script src="{{ asset('assets/vendor/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
+    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

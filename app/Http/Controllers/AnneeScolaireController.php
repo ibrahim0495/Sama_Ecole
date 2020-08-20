@@ -42,14 +42,15 @@ class AnneeScolaireController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nom'=> 'required',
+            'nom'=> 'required|min:9|unique:anneeScolaires,nom_anneesco',
         ]);
 
         $anneeScolaire= DB::table('anneeScolaires')
                         ->insert([
                             'nom_anneesco'=> $request->nom
                         ]);
-        session()->flash('Annee scolaire enregistrée avec succès');
+                        $request->session()->flash('notification.type','alert-success');
+                        $request->session()->flash('notification.message', " Enregistrement effectuée avec succés!");
         return redirect()->route('annee-scolaire.index');
     }
 
@@ -61,7 +62,12 @@ class AnneeScolaireController extends Controller
      */
     public function show($id)
     {
-        //
+        $nomClasse= Classe::orderBy('nom')->get();
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->select()
+                        ->where('anneeScolaire_id',$id)
+                        ->get();
+        return view('pages.directeur.update_annee', compact('anneeScolaire','nomClasse'));
     }
 
     /**
@@ -84,6 +90,10 @@ class AnneeScolaireController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nom'=> 'required|min:9|unique:anneeScolaires,nom_anneesco',
+        ]);
+
         $anneeScolaire = DB::table('anneeScolaires')
                             -> where('anneeScolaire_id', '=', $id)
                             ->first();
@@ -104,7 +114,8 @@ class AnneeScolaireController extends Controller
                 $affected = DB::table('anneeScolaires')
                   ->where('anneeScolaire_id', $id)
                   ->update($newData);
-                session()->flash('message', "La modification s'est effectuée avec succes!");
+                  $request->session()->flash('notification.type','alert-success');
+                  $request->session()->flash('notification.message', " Modification effectuée avec succés!");
                 return redirect()->route('annee-scolaire.index');
             }
 

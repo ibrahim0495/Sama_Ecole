@@ -14,9 +14,11 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-            <input type="text" class="form-control" placeholder="Saisir le(s) prénom(s)" value="{{ old('prenom') ?? ''}}" name="prenom">
+                <input
+                    type="text" class="form-control" placeholder="Saisir le(s) prénom(s)"
+                    value="{{ old('prenom') ?? ''}}" name="prenom">
             </div>
-            {!! $errors->first('prenom', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('prenom', '<div class="text-danger">:message</div>')!!}
         </div>
     </div>
 
@@ -30,7 +32,7 @@
                 </div>
                 <input type="text" class="form-control" placeholder="Saisir le nom" value="{{ old('nom') ?? ''}}" name="nom">
             </div>
-            {!! $errors->first('nom', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('nom', '<div class="text-danger">:message</div>')!!}
 
         </div>
     </div>
@@ -48,7 +50,7 @@
                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                 </div>
             </div>
-            {!! $errors->first('telephone', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('telephone', '<div class="text-danger">:message</div>')!!}
         </div>
     </div>
 
@@ -62,7 +64,7 @@
                 </div>
                 <input class="form-control" placeholder="Email address" type="email" value="{{ old('email') ?? ''}}" name="email">
             </div>
-            {!! $errors->first('email', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('email', '<div class="text-danger">:message</div>')!!}
         </div>
     </div>
 
@@ -76,7 +78,7 @@
                     <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                 </div>
             </div>
-            {!! $errors->first('adresse', '<p class="text-danger">:message</p>')!!}
+            {!! $errors->first('adresse', '<div class="text-danger">:message</div>')!!}
         </div>
     </div>
 
@@ -84,16 +86,16 @@
     <div class="col-md-6">
         <div class="form-group">
             <label class="form-control-label" for="example2cols2Input">Langue</label>
-            <select name="langue" class="form-control" id="example2cols2Select">
-                <option value="français">Français</option>
-                <option value="anglais">Anglais</option>
-                <option value="arabe">Arabe</option>
+            <select name="langue" class="form-control" id="example2cols2Select" data-toggle="select">
+                <option value="Anglais">Anglais</option>
+                <option value="Arabe">Arabe</option>
+                <option value="Français">Français</option>
             </select>
         </div>
     </div>
 </div>
 
-<button type="submit" class="btn btn-outline-primary btn-lg btn-block">
+<button type="submit" class="btn btn-lg btn-block btn-primary">
     Enregistrer
 </button>
 
