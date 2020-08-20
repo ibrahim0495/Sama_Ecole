@@ -56,9 +56,40 @@
                     
                     <br>
 
-                    <button type="submit" class="btn btn-outline-success btn-lg btn-block">
-                        Valider
-                    </button>
+                    <a href class="btn btn-outline-success btn-lg btn-block" data-target="#classe" data-toggle="modal">
+                        Modifier
+                    </a>
+
+                    <div class="modal fade" id="classe" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-gradient-blue ql-color-white">
+                                    <h5 class="modal-title" id="eleve1">Classes</h5><br>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="modal-body">
+                                <form action="{{route('directeur.surveillant.storeClasses')}}" method="POST">
+                                    <div class="form-group">
+                                        <label for="">Choisir ses classes</label>
+                                    <select name="classes" class="form-control" multiple>
+                                        @foreach ($classes as $classe)
+                                    <option value="{{$classe->nom}}"> {{$classe->nom}} </option>
+                                        @endforeach
+                                       
+                                    </select>
+                                    </div>
+
+                                </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-outline-primary" value="Valider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
     </div> 

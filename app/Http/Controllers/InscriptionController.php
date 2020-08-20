@@ -35,7 +35,7 @@ class InscriptionController extends Controller
     {
         $nom_page = "inscription_create";
         $liste_classe = Classe::orderBy('nom', 'desc')->get();
-        $liste_annee_sco = DB::table('anneescolaires')->get();
+        $liste_annee_sco = DB::table('anneeScolaires')->get();
         return view('pages.comptable.inscription', compact('nom_page', 'liste_classe', 'liste_annee_sco'));
     }
 

@@ -250,7 +250,11 @@ class SurveillantController extends Controller
 
         $surveillantActif = Personne::where('profil','=','Surveillant')->where('login','=',$login)->first();
 
-        return view('pages.directeur.show_surveillant ',compact('surveillantActif'));
+        //Ce liste de classes necessite aussi l'etablissement_id
+        $classes = Classe::get();
+
+        $classes_surveillant = Classe::where('login_surveillant', $login)->get();
+        return view('pages.directeur.show_surveillant ',compact('surveillantActif', 'classes', 'classes_surveillant'));
     }
 
     public function update_surveillant(String $surveillantActif, PersonneRequest $request)

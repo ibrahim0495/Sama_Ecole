@@ -26,7 +26,6 @@
             <div class="card-header">
                 <h3 class="mb-0">Surveillant</h3>
                 <br>
-<<<<<<< HEAD
                 <div class="row">
                     <div class="col-md-10">
                     <a class="btn btn-primary" href="{{ route('directeur.surveillant.create') }}">Ajouter nouveau Surveillant</a>
@@ -51,61 +50,6 @@
                     </div>
                 </div>
             
-=======
-            <a class="btn btn-primary" href="{{ route('surveillant.create') }}">Ajouter nouveau Surveillant</a>
-            </div>
-            <div class="table-responsive py-4">
-                <table class="table table-flush" id="datatable-basic">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Telephone</th>
-                            <th>Adresse</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Telephone</th>
-                            <th>Adresse</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($surveillantsActifs as $surveillantActif)
-                        <tr>
-                            <td>{{$surveillantActif->prenom}}</td>
-                            <td>{{$surveillantActif->nom}}</td>
-                            <td>{{$surveillantActif->telephone}}</td>
-                            <td>{{$surveillantActif->adresse}}</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-success float-left"
-                                    href="{{route('directeur.surveillant.show', $surveillantActif->login)}}"
-                                    data-original-title="Voir le surveillant">
-                                    <i class="fa fa-eye fa-lg fa-fw"></i>
-                                </a>
-
-                                <form action="{{ route('directeur.surveillant.destroy', $surveillantActif->login) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez-vous supprimer le surveillant {{$surveillantActif->prenom}} {{$surveillantActif->nom}} ?'">
-                                    {{csrf_field() }}
-                                    <button type="submit" class ="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
-                                </form>
-
-
-
-                            </td>
-
-                        </tr>
-                        @endforeach
-
-
-                    </tbody>
-                </table>
-            </div>
->>>>>>> b16efcb1ca8143162e3e00de1e41780bd21d35c3
         </div>
     </div>
 </div>
