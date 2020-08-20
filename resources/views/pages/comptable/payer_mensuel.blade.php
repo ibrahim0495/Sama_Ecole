@@ -10,7 +10,7 @@
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('comptable.index') }}">Accueil</a></li>
             <li class="breadcrumb-item"><a href="{{ route('payement.create') }}">Payement</a></li>
             <li class="breadcrumb-item active" aria-current="page">Mensualité</li>
         </ol>
@@ -20,19 +20,19 @@
 @section('contenu_page')
     <div class="row">
         <div class="col">
-          <!-- Fullcalendar -->
-          <div class="card card-calendar">
+        <!-- Fullcalendar -->
+        <div class="card card-calendar">
             <!-- Card header -->
             <div class="card-header">
-              <!-- Title -->
-              <h5 class="h3 mb-0">Calendar</h5>
+            <!-- Title -->
+            <h5 class="h3 mb-0">Calendar</h5>
             </div>
             <!-- Card body -->
             <div class="card-body p-0">
-              <div class="calendar" data-toggle="calendar" id="calendar"></div>
+            <div class="calendar" data-toggle="calendar" id="calendar"></div>
             </div>
-          </div>
-          <!-- Modal - Add new event -->
+        </div>
+        <!-- Modal - Add new event -->
           <!--* Modal header *-->
           <!--* Modal body *-->
           <!--* Modal footer *-->

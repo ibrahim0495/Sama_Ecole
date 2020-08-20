@@ -8,6 +8,7 @@ use App\models\Classe;
 use App\models\Eleve;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PDF;
 
 class EleveController extends Controller
 {
@@ -78,6 +79,14 @@ class EleveController extends Controller
             return view('pages.surveillant.show_eleve', compact('profils','nom_page', 'liste_eleve', 'nom_classe', 'nom_annee_sco'));
         }
 
+    }
+
+    public function generer_carte_scolaire($loginEleve)
+    {
+        $show = 'Bonjour';
+        /* $pdf = PDF::loadView('pdf', compact('show'));
+
+        return $pdf->download('disney.pdf'); */
     }
 
     /**

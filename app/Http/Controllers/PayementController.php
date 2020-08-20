@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Eleve;
+use App\models\Mois;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PayementController extends Controller
 {
@@ -35,8 +38,28 @@ class PayementController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'matricule' => 'required|exists:eleves,code'
+        ]);
         $nom_page = "calendier_payement";
-        return view('pages.comptable.payer_mensuel', compact('nom_page'));
+        $etablissement = "Les Praticiens";
+
+        $info_eleve = DB::table('eleves')
+            ->join('personnes', 'login', '=', 'eleves.loginEleve')
+            ->join('eleveanneescos', 'eleveanneescos.code', '=', 'eleves.code')
+            ->join('classes', 'classes.classe_id', '=', 'eleves.classe_id')
+            ->where('eleves.code', '=', $request->matricule)
+            ->get();
+
+        $info_annee_sco = DB::table('eleveanneescos')
+            ->join('anneescolaires', 'anneescolaires.anneeScolaire_id', '=', 'eleveanneescos.anneeScolaire_id')
+            ->where('eleveanneescos.code', '=', $request->matricule)
+            ->get();
+
+        $mois = Mois::orderBy('mois_id','asc')->select('nom_mois')->get();
+        dd($info_eleve);
+        return view('pages.comptable.info_eleve',
+        compact('nom_page', 'info_eleve','info_annee_sco' , 'etablissement', 'mois'));
     }
 
     /**

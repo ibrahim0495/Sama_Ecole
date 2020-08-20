@@ -35,6 +35,7 @@ Route::get('/', function () {
 
 //Eleve
 Route::resource('eleve', 'EleveController');
+Route::get('generer_carte_scolaire/{loginEleve}', 'EleveController@generer_carte_scolaire')->name('generer-carte');
 
 
 ///////////////////////////////////////
@@ -59,7 +60,7 @@ Route::get('directeur/Comptable/listeInactif', 'ComptableController@lister_compt
 Route::get('directeur/comptable/create', 'ComptableController@create')->name('directeur.comptable.create');
 Route::get('directeur/comptable/show/{comptable}',  'ComptableController@show_comptable')->name('directeur.comptable.show');
 
-    
+
 //Absence
 Route::resource('etablissement', 'EtablissementController');
 
