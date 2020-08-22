@@ -57,7 +57,7 @@ class PayementController extends Controller
             ->get();
 
         $mois = Mois::orderBy('mois_id','asc')->select('nom_mois')->get();
-        dd($info_eleve);
+        //dd($info_eleve);
         return view('pages.comptable.info_eleve',
         compact('nom_page', 'info_eleve','info_annee_sco' , 'etablissement', 'mois'));
     }
