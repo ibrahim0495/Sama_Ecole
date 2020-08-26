@@ -18,7 +18,7 @@ class FkProfMatieresTable extends Migration
             $table->foreign('matiere_id')->references('matiere_id')->on('matieres')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('login_professeur')->references('login')->on('professeurs')
+            $table->foreign('login_professeur')->references('login')->on('personnes')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

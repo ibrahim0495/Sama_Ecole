@@ -15,7 +15,7 @@ class ForeignKeySurveillantTable extends Migration
     {
         Schema::table('classes', function (Blueprint $table) {
             
-            $table->foreign('login_surveillant')->references('login')->on('surveillants')
+            $table->foreign('login_surveillant')->references('login')->on('personnes')
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });

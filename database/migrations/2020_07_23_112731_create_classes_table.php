@@ -19,6 +19,7 @@ class CreateClassesTable extends Migration
             $table->string('nom');
             $table->integer('montant_inscription');
             $table->integer('montant_mensuel');
+            $table->boolean('isDeleted')->default(0);
             $table->timestamps();
         });
     }

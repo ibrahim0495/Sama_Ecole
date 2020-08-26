@@ -13,10 +13,11 @@ class CreateEleveAnneeScosTable extends Migration
      */
     public function up()
     {
-        Schema::create('eleveAnneeScos', function (Blueprint $table) {
+        Schema::create('eleveAnneeClasse', function (Blueprint $table) {
             $table->string('loginEleve');
             $table->string('code');
             $table->unsignedBigInteger('anneeScolaire_id');
+            $table->unsignedBigInteger('classe_id');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateEleveAnneeScosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eleveAnneeScos');
+        Schema::dropIfExists('eleveAnneeClasse');
     }
 }

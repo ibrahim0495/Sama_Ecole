@@ -73,12 +73,7 @@ class SurveillantController extends Controller
                 'email' => $request->email
             ]);
 
-            if($personne){
-                Surveillant::create([
-                    'login' => $login
-                ]);
-            }
-
+           
             $request->session()->flash('notification.type','alert-success');
 
             $request->session()->flash('notification.message', " L'enregistrement a été bien effectué");
@@ -251,8 +246,7 @@ class SurveillantController extends Controller
         $surveillantActif = Personne::where('profil','=','Surveillant')->where('login','=',$login)->first();
 
         //Ce liste de classes necessite aussi l'etablissement_id
-        $classes = Classe::get();
-
+        $classes = Classe::all();
         $classes_surveillant = Classe::where('login_surveillant', $login)->get();
         return view('pages.directeur.show_surveillant ',compact('surveillantActif', 'classes', 'classes_surveillant'));
     }

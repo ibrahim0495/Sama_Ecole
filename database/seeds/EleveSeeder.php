@@ -47,7 +47,6 @@ class EleveSeeder extends Seeder
 			DB::table('eleves')->insert([
                 'loginEleve' => 'joe'.$i,
                 'code' => rand(145000, 145100),
-                'classe_id' => rand(1,13),
                 'dateNaissance' => $date,
                 'lieuNaissance' => 'Dakar',
                 'sexe' => 'M',

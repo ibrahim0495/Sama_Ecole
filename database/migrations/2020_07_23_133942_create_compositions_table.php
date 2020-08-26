@@ -18,6 +18,8 @@ class CreateCompositionsTable extends Migration
             $table->unsignedBigInteger('matiere_id');
             $table->float('note');
             $table->integer('semestre');
+            $table->boolean('isDeleted')->default(0);
+
             $table->timestamps();
         });
     }

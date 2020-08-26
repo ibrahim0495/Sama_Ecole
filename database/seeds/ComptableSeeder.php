@@ -39,16 +39,5 @@ class ComptableSeeder extends Seeder
 			]);
 		}
 
-        DB::table('comptables')->delete();
-
-		for($i = 10; $i <= 13; ++$i)
-		{
-            $date = $this->randDate();
-			DB::table('comptables')->insert([
-                'login' => 'abdou'.$i,
-                'created_at' => $date,
-				'updated_at' => $date
-			]);
-		}
     }
 }

@@ -40,16 +40,6 @@ class DirecteurSeeder extends Seeder
 			]);
         }
         
-        DB::table('directeurs')->delete();
-
-		for($i = 1; $i <= 3; ++$i)
-		{
-            $date = $this->randDate();
-			DB::table('directeurs')->insert([
-                'login' => 'ouzy'.$i,
-                'created_at' => $date,
-				'updated_at' => $date
-			]);
-		}
+        
     }
 }

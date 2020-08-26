@@ -25,6 +25,7 @@ class CreatePersonnesTable extends Migration
             $table->string('profil');
             $table->string('langue');
             $table->string('email')->unique()->nullable();
+            $table->boolean('isDeleted')->default(0);
             $table->timestamps();
         });
     }

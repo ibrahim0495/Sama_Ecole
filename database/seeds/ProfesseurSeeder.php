@@ -39,16 +39,6 @@ class ProfesseurSeeder extends Seeder
 			]);
 		}
 
-        DB::table('professeurs')->delete();
-
-		for($i = 14; $i <= 23; ++$i)
-		{
-            $date = $this->randDate();
-			DB::table('professeurs')->insert([
-                'login' => 'ali'.$i,
-                'created_at' => $date,
-				'updated_at' => $date
-			]);
-		}
+      
     }
 }

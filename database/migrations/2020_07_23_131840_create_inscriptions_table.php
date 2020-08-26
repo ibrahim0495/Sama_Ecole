@@ -21,6 +21,7 @@ class CreateInscriptionsTable extends Migration
             $table->integer('montant');
             $table->integer('reliquat');
             $table->string('type_paiement')->nullable();
+            $table->boolean('isDeleted')->default(0);
             $table->timestamps();
         });
     }

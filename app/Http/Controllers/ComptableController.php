@@ -69,11 +69,7 @@ class ComptableController extends Controller
                 'email' => $request->email
             ]);
 
-            if($personne){
-                Comptable::create([
-                    'login' => $login
-                ]);
-            }
+
             
             $request->session()->flash('notification.type','alert-success');
 

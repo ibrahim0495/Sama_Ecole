@@ -20,6 +20,8 @@ class CreateRetardsTable extends Migration
             $table->integer('duree_retard');
             $table->string('motif');
             $table->boolean('justificatif')->nullable();
+            $table->boolean('isDeleted')->default(0);
+
             $table->timestamps();
         });
     }

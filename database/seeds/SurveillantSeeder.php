@@ -39,16 +39,6 @@ class SurveillantSeeder extends Seeder
 			]);
 		}
 
-        DB::table('surveillants')->delete();
-
-		for($i = 4; $i <= 9; ++$i)
-		{
-            $date = $this->randDate();
-			DB::table('surveillants')->insert([
-                'login' => 'ibrahim'.$i,
-                'created_at' => $date,
-				'updated_at' => $date
-			]);
-		}
+      
     }
 }
