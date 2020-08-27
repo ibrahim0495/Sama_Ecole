@@ -1170,8 +1170,6 @@
                 "md",
                 "parser"
             ],
-<<<<<<< HEAD
-=======
             "funding": [
                 {
                     "url": "https://enjoy.gitstore.app/repositories/thephpleague/commonmark",
@@ -1198,7 +1196,6 @@
                     "type": "tidelift"
                 }
             ],
->>>>>>> 36a23afe75ebe8aefedc3e99e7c985992093f86e
             "time": "2020-08-18T01:19:12+00:00"
         },
         {
@@ -1284,15 +1281,12 @@
                 "sftp",
                 "storage"
             ],
-<<<<<<< HEAD
-=======
             "funding": [
                 {
                     "url": "https://offset.earth/frankdejonge",
                     "type": "other"
                 }
             ],
->>>>>>> 36a23afe75ebe8aefedc3e99e7c985992093f86e
             "time": "2020-08-18T10:57:55+00:00"
         },
         {
@@ -2280,15 +2274,12 @@
                 "identifier",
                 "uuid"
             ],
-<<<<<<< HEAD
-=======
             "funding": [
                 {
                     "url": "https://github.com/ramsey",
                     "type": "github"
                 }
             ],
->>>>>>> 36a23afe75ebe8aefedc3e99e7c985992093f86e
             "time": "2020-08-18T17:17:46+00:00"
         },
         {

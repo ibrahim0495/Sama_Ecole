@@ -15,7 +15,7 @@ class ForeignKeyEleveAnneeScosTable extends Migration
     {
         Schema::table('eleveAnneeClasse', function (Blueprint $table) {
 
-            $table->foreign(['loginEleve','code'])->references(['loginEleve','code'])->on('eleves')
+            $table->foreign('loginEleve')->references('loginEleve')->on('eleves')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
