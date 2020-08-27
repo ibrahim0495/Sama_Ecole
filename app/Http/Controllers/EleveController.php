@@ -33,9 +33,11 @@ class EleveController extends Controller
         //Puisque la fonction lister classe c'est à dire les élèves d'une classe
         //Il faut qu'on le crée une seule fois
         $nom_page = "eleve_create";
-        $profils = "Surveillant";
-        $liste_classe = Classe::orderBy('nom', 'desc')->get();
-        $liste_annee_sco = DB::table('anneescolaires')->get();
+        $profils = "Comptable";
+        $liste_classe = Classe::where('isDeleted', 0)->orderBy('nom', 'desc')->get();
+        $liste_annee_sco = DB::table('anneeScolaires')
+                        ->where('isDeleted', '=', '0')
+                        ->where('enCours', '=', '1')->get();
         return view('layouts.show_classe', compact('nom_page','profils', 'liste_classe', 'liste_annee_sco'));
 
     }
@@ -60,9 +62,9 @@ class EleveController extends Controller
         $anneeScolaire_id = Str::beforeLast($request->anneeScolaire_id, '::');
         $liste_eleve = DB::table('eleves')
             ->join('personnes', 'personnes.login', '=', 'eleves.loginEleve')
-            ->join('eleveanneescos', 'eleveanneescos.loginEleve', '=', 'eleves.loginEleve')
-            ->where('eleveanneescos.anneeScolaire_id', '=', $anneeScolaire_id)
-            ->where('eleves.classe_id', '=', $classe_id)
+            ->join('eleveanneeclasse', 'eleveanneeclasse.loginEleve', '=', 'eleves.loginEleve')
+            ->where('eleveanneeclasse.anneeScolaire_id', '=', $anneeScolaire_id)
+            ->where('eleveanneeclasse.classe_id', '=', $classe_id)
             ->orderBy('nom', 'asc')
             ->get();
         //La variable $profils va récupérer le profils de l'utilisateur connecter

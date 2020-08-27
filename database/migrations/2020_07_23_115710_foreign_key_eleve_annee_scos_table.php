@@ -15,16 +15,13 @@ class ForeignKeyEleveAnneeScosTable extends Migration
     {
         Schema::table('eleveAnneeClasse', function (Blueprint $table) {
 
-            $table->foreign('loginEleve')->references('loginEleve')->on('eleves')
+            $table->foreign('code')->references('code')->on('eleves')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
             $table->foreign('classe_id')->references('classe_id')->on('classes')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-
-            
-                
         });
     }
 
@@ -36,7 +33,7 @@ class ForeignKeyEleveAnneeScosTable extends Migration
     public function down()
     {
         Schema::table('eleveAnneeClasse', function (Blueprint $table) {
-            $table->dropForeign(['loginEleve','code']);
+            $table->dropForeign(['code']);
         });
     }
 }

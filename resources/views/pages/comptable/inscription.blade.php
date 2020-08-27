@@ -138,7 +138,7 @@
                             <input
                                 class="form-control datepicker @error('dateNaissance') is-invalid @enderror"
                                 name="dateNaissance" placeholder="Saisir la date de naissance" type="text"
-                                value="{{ old('dateNaissance') }}">
+                                value="{{ old('dateNaissance') ?? date('m/d/Y') }}">
                                 @error('dateNaissance')
                                     <div class="text-danger">{{ $message}}</div>
                                 @enderror

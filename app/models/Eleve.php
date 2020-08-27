@@ -8,6 +8,6 @@ class Eleve extends Model
 {
     protected $fillable =
     [
-        'loginEleve', 'code', 'classe_id', 'dateNaissance', 'lieuNaissance', 'sexe','login_parent'
+        'loginEleve', 'code', 'dateNaissance', 'lieuNaissance', 'sexe','login_parent'
     ];
 }

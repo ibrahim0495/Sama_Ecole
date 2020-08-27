@@ -102,9 +102,8 @@
                                                                 <h2>Lieu de naissance : {{$item->lieuNaissance }}</h2>
                                                                 <h2>Adresse : {{$item->adresse }}</h2>
                                                                 <h2>Sexe : {{$item->sexe }}</h2>
+                                                                <h2>Login : {{ $item->loginEleve }}
 
-                                                                <h2 class="left bottom">Login </h2>
-                                                                <h2> {{$item->loginEleve }}</h2>
                                                                 {{-- <span class="left bottom">tel: 731 366 ***</span> --}}
                                                                 <h2 class="right bottom">Matricule: {{ $item->code }}</h2>
                                                             </div>
