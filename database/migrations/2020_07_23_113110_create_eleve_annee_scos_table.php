@@ -14,7 +14,7 @@ class CreateEleveAnneeScosTable extends Migration
     public function up()
     {
         Schema::create('eleveAnneeClasse', function (Blueprint $table) {
-            $table->string('code');
+            $table->string('loginEleve');
             $table->unsignedBigInteger('anneeScolaire_id');
             $table->unsignedBigInteger('classe_id');
             $table->timestamps();
