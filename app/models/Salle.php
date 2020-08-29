@@ -8,6 +8,6 @@ class Salle extends Model
 {
     protected $fillable =
     [
-        'nom_salle','capacite'
+        'nom_salle','capacite','isDeleted'
     ];
 }

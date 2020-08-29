@@ -85,7 +85,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="text" name="telephone" value="{{$eta->telephone}}">
+                                <input class="form-control" placeholder="Numéro de téléphone" type="number" name="telephone" value="{{$eta->telephone}}">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>

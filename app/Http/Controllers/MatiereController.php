@@ -22,7 +22,9 @@ class MatiereController extends Controller
                         ->select()
                         ->get();
 
-        $matiere = Matiere::orderBy('nom_matiere', 'desc')->get();
+        $matiere = Matiere::orderBy('nom_matiere', 'desc')
+                            ->where('isDeleted',1)
+                            ->get();
 
         return view('pages.directeur.show_matiere', compact('matiere','nomClasse','anneeScolaire'));
     }
@@ -51,7 +53,8 @@ class MatiereController extends Controller
         ]);
         $matiere = Matiere::create([
             'nom_matiere'=> $request->nom,
-            'langue'=> $request->langue
+            'langue'=> $request->langue,
+            'isDeleted'=> 1
         ]);
 
         $request->session()->flash('notification.type','alert-success');
@@ -67,12 +70,16 @@ class MatiereController extends Controller
      */
     public function show($id)
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                        ->where('isDeleted',1)
+                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
 
         $matiere = Matiere::where('matiere_id', $id)
+                            ->where('isDeleted',1)
                             ->get();
 
         return view('pages.directeur.update_Matiere', compact('matiere','nomClasse','anneeScolaire'));
@@ -136,9 +143,11 @@ class MatiereController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('matieres')
-                ->where('matiere_id',$id)
-                -> delete();
+        $newData = [];
+        $newData['isDeleted'] = 0;
+        $affected = DB::table('matieres')
+              ->where('matiere_id', $id)
+              ->update($newData);
 
         session()->flash('message', "La suppression s'est effectuee avec succes");
         return redirect()->route('matiere.index');

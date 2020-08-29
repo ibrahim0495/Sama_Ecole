@@ -16,12 +16,17 @@ class SalleClasseController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                        ->where('isDeleted',1)
+                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
 
-        $salle= Salle::orderBy('nom_salle', 'desc')->get();
+        $salle= Salle::orderBy('nom_salle', 'desc')
+                            ->where('isDeleted',1)
+                            ->get();
         return view('pages.directeur.show_salle', compact('salle','nomClasse','anneeScolaire'));
     }
 
@@ -49,7 +54,8 @@ class SalleClasseController extends Controller
 
         $salle= Salle::create([
             'nom_salle'=> $request->nom,
-            'capacite'=> $request->capacite
+            'capacite'=> $request->capacite,
+            'isDeleted'=> 1
         ]);
 
         $request->session()->flash('notification.type','alert-success');
@@ -71,6 +77,7 @@ class SalleClasseController extends Controller
                         ->get();
 
         $salle= Salle::where('nom_salle', $id)
+                    ->where('isDeleted',1)
                     ->get();
         return view('pages.directeur.update_SalleClasse', compact('salle','nomClasse','anneeScolaire'));
     }
@@ -127,9 +134,11 @@ class SalleClasseController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('salles')
-                ->where('nom_salle',$id)
-                -> delete();
+        $newData = [];
+        $newData['isDeleted'] = 0;
+        $affected = DB::table('salles')
+              ->where('nom_salle', $id)
+              ->update($newData);
 
         session()->flash('message', "La suppression s'est effectuee avec succes");
         return redirect()->route('salle_classe.index');

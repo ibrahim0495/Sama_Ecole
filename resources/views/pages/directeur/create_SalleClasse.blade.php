@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Capacité</label>
                             <div class="input-group input-group-merge">
-                                <input type="text" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle">
+                                <input type="number" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>

@@ -15,8 +15,11 @@ class DirecteurController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                            ->where('isDeleted',1)
+                            ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
         return view('pages.directeur.home', compact('anneeScolaire','nomClasse'));
@@ -104,17 +107,26 @@ class DirecteurController extends Controller
 
         $list_eleve= DB::table('personnes')
                         ->join('eleves','personnes.login','=','eleves.loginEleve')
-                        ->join('classes','classes.classe_id','=','eleves.classe_id')
+                        ->join('classes','classes.classe_id','=','eleveAnneeClasse.classe_id')
                         ->join('inscriptions','inscriptions.loginEleve','=','eleves.loginEleve')
                         ->join('anneeScolaires','anneeScolaires.anneeScolaire_id','=','inscriptions.anneeScolaire_id')
+                        ->join('eleveAnneeClasse','eleveAnneeClasse.loginEleve','=','eleves.loginEleve')
+                        ->join('eleveAnneeClasse','eleveAnneeClasse.classe_id','=','classes.classe_id')
+                        ->join('eleveAnneeClasse','eleveAnneeClasse.anneeScolaire_id','=','anneeScolaires.anneeScolaire_id')
                         ->where('personnes.profil','eleve')
                         ->where('classes.nom', $request->classe)
                         ->where('anneeScolaires.nom_anneesco', $request->annee)
+                        ->where('personnes.isDeleted',1)
+                        ->where('classes.isDeleted',1)
+                        ->where('inscriptions.isDeleted',1)
                         ->select('personnes.*','eleves.*')
                         ->get();
 
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                            ->where('isDeleted',1)
+                            ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                                        ->where('isDeleted',1)
                                         ->select()
                                         ->get();
         $nom_page = "info_eleve";
@@ -127,11 +139,15 @@ class DirecteurController extends Controller
         $eleve = DB::table('personnes')
                                 ->join('eleves','eleves.loginEleve','=','personnes.login')
                                 ->where('login','=',$login)
+                                ->where('isDeleted',1)
                                 ->select('personnes.*','eleves.*')
                                 ->get();
 
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                        ->where('isDeleted',1)
+                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
 

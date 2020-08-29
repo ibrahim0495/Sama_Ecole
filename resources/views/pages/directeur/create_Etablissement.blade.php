@@ -25,7 +25,7 @@
         <!-- Card body -->
         <div class="card-body">
             <form method="POST" action="{{ route('etablissement.store') }}" enctype="multipart/form-data">
-                @csrf
+                {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-header">
@@ -89,7 +89,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="text" name="telephone">
+                                <input class="form-control" placeholder="Numéro de téléphone" type="number" name="telephone">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>

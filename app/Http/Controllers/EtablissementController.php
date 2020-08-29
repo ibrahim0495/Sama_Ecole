@@ -17,12 +17,17 @@ class EtablissementController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                        ->where('isDeleted',1)
+                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
 
-        $etablissement= Etablissement::orderBy('nom', 'desc')->get();
+        $etablissement= Etablissement::orderBy('nom', 'desc')
+                                        ->where('isDeleted',1)
+                                        ->get();
 
         return view('pages.directeur.show_etablissement', compact('etablissement','nomClasse','anneeScolaire'));
     }
@@ -62,7 +67,8 @@ class EtablissementController extends Controller
             'email'=> $request->email,
             'adresse'=> $request->adresse,
             'logo'=> $logo,
-            'acronyme'=> $request->acronyme
+            'acronyme'=> $request->acronyme,
+            'isDeleted'=> 1
         ]);
 
         $files->move($destinationPath, $logo);
@@ -79,12 +85,16 @@ class EtablissementController extends Controller
      */
     public function show($id)
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                        ->where('isDeleted',1)
+                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
 
         $etablissement= Etablissement::where('etablissement_id',$id)
+                                    ->where('isDeleted',1)
                                     ->get();
 
         return view('pages.directeur.update_Etablissement', compact('etablissement','nomClasse','anneeScolaire'));
@@ -198,9 +208,11 @@ class EtablissementController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('etablissements')
-                ->where('etablissement_id',$id)
-                -> delete();
+        $newData = [];
+        $newData['isDeleted'] = 0;
+        $affected = DB::table('etablissements')
+              ->where('etablissement_id', $id)
+              ->update($newData);
 
         session()->flash('message', "La suppression s'est effectuee avec succes");
         return redirect()->route('etablissement.index');

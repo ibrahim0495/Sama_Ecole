@@ -71,7 +71,7 @@
                                     <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
                                 </div>
                                 <input
-                                    type="text" class="form-control" name="montant_inscription"
+                                    type="number" class="form-control" name="montant_inscription"
                                     placeholder="Saisir montant de l'inscription"
                                     value="{{ old('montant_inscription') }}">
                                 <div class="input-group-append">
@@ -92,7 +92,7 @@
                                     <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
                                 </div>
                                 <input
-                                    type="text" class="form-control" name="montant_mensuel"
+                                    type="number" class="form-control" name="montant_mensuel"
                                     placeholder="Saisir le montant de la mensualité"
                                     value="{{ old('montant_mensuel') }}">
                                 <div class="input-group-append">

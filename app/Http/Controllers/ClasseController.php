@@ -16,14 +16,18 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                        ->where('isDeleted',1)
+                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
 
         $classe= DB::table('classes')
-                    ->join('surveillants','surveillants.login','=','classes.login_surveillant')
-                    ->join('personnes','personnes.login','=','surveillants.login')
+                    ->join('personnes','personnes.login','=','classes.login_surveillant')
+                    ->where('classes.isDeleted',1)
+                    ->where('personnes.isDeleted',1)
                     ->select('classes.*','personnes.prenom','personnes.nom as nom_per')
                     ->get();
 
@@ -37,10 +41,11 @@ class ClasseController extends Controller
      */
     public function create()
     {
-        $surveillant= DB::table('surveillants')
-                        ->join('personnes','personnes.login','=','surveillants.login')
-                        ->select('surveillants.login','personnes.prenom','personnes.nom')
-                        ->orderBy('personnes.nom', 'asc')
+        $surveillant= DB::table('personnes')
+                        ->where('profil','surveillant')
+                        ->where('isDeleted',1)
+                        ->select('login','prenom','nom')
+                        ->orderBy('nom', 'asc')
                         ->get();
 
         return view('pages.directeur.create_Classe', compact('surveillant'));
@@ -65,7 +70,8 @@ class ClasseController extends Controller
             'nom'=> $request->nom,
             'montant_inscription'=> $request->montant_inscription,
             'montant_mensuel'=> $request->montant_mensuel,
-            'login_surveillant'=> $request->loginSurveillant
+            'login_surveillant'=> $request->loginSurveillant,
+            'isDeleted'=> 1
         ]);
 
         $request->session()->flash('notification.type','alert-success');
@@ -81,15 +87,19 @@ class ClasseController extends Controller
      */
     public function show($id)
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                            ->where('isDeleted',1)
+                            ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
 
         $classe= DB::table('classes')
-                    ->join('surveillants','surveillants.login','=','classes.login_surveillant')
-                    ->join('personnes','personnes.login','=','surveillants.login')
+                    ->join('personnes','personnes.login','=','classes.login_surveillant')
+                    ->where('profil',"surveillant")
                     ->where('classe_id',$id)
+                    ->where('classes.isDeleted',1)
                     ->select('classes.*','personnes.prenom','personnes.nom as nom_per')
                     ->get();
 
@@ -172,9 +182,11 @@ class ClasseController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('classes')
-                ->where('classe_id',$id)
-                -> delete();
+        $newData = [];
+        $newData['isDeleted'] = 0;
+        $affected = DB::table('classes')
+              ->where('classe_id', $id)
+              ->update($newData);
 
         session()->flash('message', "La suppression s'est effectuee avec succes");
         return redirect()->route('classe.index');

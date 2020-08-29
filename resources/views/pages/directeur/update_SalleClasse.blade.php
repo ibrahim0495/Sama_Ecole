@@ -31,7 +31,7 @@
                 {{method_field('PUT')}}
                 <div class="row">
                     <div class="col-md-12"></div>
-                    {{-- Nom Classe --}}
+                    {{-- Nom Salle --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
@@ -41,10 +41,11 @@
                                 <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    {{-- Nom Salle --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Capacité</label>
-                            <input type="text" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle" value="{{$sal->capacite}}">
+                            <input type="number" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle" value="{{$sal->capacite}}">
                         </div>
                         @error('capacite')
                                 <div class="text-danger">{{ $message }}</div>
