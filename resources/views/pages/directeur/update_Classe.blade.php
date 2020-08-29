@@ -2,7 +2,8 @@
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')
-
+    <link rel="stylesheet" href="{{ asset('assets/vendor/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
 @endsection
 
 @section('breadcrumb')
@@ -62,14 +63,20 @@
                     @enderror
                 </div>
                 </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label>Surveillant</label>
-                    <input type="text" class="form-control" name="surveillant" value="{{$cl->prenom}} {{$cl->nom_per}}" disabled>
-                    @error('surveillant')
-                                <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label class="form-control-label">Surveillant associé</label>
+                        <select
+                            class="form-control"
+                            name="loginSurveillant" data-toggle="select">
+                            @foreach ($surveillant as $surv)
+                                <option value="{{$surv->login}}">{{$surv->prenom}} {{$surv->nom}}</option>
+                            @endforeach
+                        </select>
+                        @error('surveillant')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
             <div class="col-md-6">
                 <a class="btn btn-outline-danger btn-lg btn-block" href="{{route('classe.index')}}">
@@ -92,5 +99,7 @@
 
 {{--  Pour les fichier js dont ce page a besoin ici  --}}
 @section('extra-js')
-
+    <script src="{{ asset('assets/vendor/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
+    <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

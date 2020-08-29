@@ -95,6 +95,13 @@ class ClasseController extends Controller
                         ->select()
                         ->get();
 
+        $surveillant= DB::table('personnes')
+                        ->where('profil','surveillant')
+                        ->where('isDeleted',1)
+                        ->select('login','prenom','nom')
+                        ->orderBy('nom', 'asc')
+                        ->get();
+
         $classe= DB::table('classes')
                     ->join('personnes','personnes.login','=','classes.login_surveillant')
                     ->where('profil',"surveillant")
@@ -103,7 +110,7 @@ class ClasseController extends Controller
                     ->select('classes.*','personnes.prenom','personnes.nom as nom_per')
                     ->get();
 
-        return view("pages.directeur.update_Classe",compact('classe','nomClasse','anneeScolaire'));
+        return view("pages.directeur.update_Classe",compact('classe','nomClasse','anneeScolaire','surveillant'));
 
     }
 
@@ -162,6 +169,9 @@ class ClasseController extends Controller
         }
         if (isset($request->montant_mensuel)) {
             $newData['montant_mensuel'] = $request->montant_mensuel;
+        }
+        if (isset($request->loginSurveillant)) {
+            $newData['login_surveillant'] = $request->loginSurveillant;
         }
 
         if (!$error && $classe) {
