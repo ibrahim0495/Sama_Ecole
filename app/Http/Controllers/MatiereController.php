@@ -70,19 +70,12 @@ class MatiereController extends Controller
      */
     public function show($id)
     {
-        $nomClasse= Classe::orderBy('nom')
-                        ->where('isDeleted',1)
-                        ->get();
-        $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',1)
-                        ->select()
-                        ->get();
 
         $matiere = Matiere::where('matiere_id', $id)
-                            ->where('isDeleted',1)
+                            ->where('isDeleted',0)
                             ->get();
 
-        return view('pages.directeur.update_Matiere', compact('matiere','nomClasse','anneeScolaire'));
+        return view('pages.directeur.update_Matiere', compact('matiere'));
     }
 
     /**
@@ -144,7 +137,7 @@ class MatiereController extends Controller
     public function destroy($id)
     {
         $newData = [];
-        $newData['isDeleted'] = 0;
+        $newData['isDeleted'] = 1;
         $affected = DB::table('matieres')
               ->where('matiere_id', $id)
               ->update($newData);

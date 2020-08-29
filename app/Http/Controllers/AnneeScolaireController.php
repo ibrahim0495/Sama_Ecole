@@ -16,14 +16,11 @@ class AnneeScolaireController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')
-                        ->where('isDeleted',1)
-                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',1)
+                        ->where('isDeleted',0)
                         ->select()
                         ->get();
-        return view('pages.directeur.show_annee_scolaire', compact('anneeScolaire','nomClasse'));
+        return view('pages.directeur.show_annee_scolaire', compact('anneeScolaire'));
     }
 
     /**
@@ -48,10 +45,20 @@ class AnneeScolaireController extends Controller
             'nom'=> 'required|min:9|unique:anneeScolaires,nom_anneesco',
         ]);
 
+        $splitAnnee = explode('-', $request->nom, 2);
+        $first_annee = (int)$splitAnnee[0];
+        $last_annee= (int)$splitAnnee[1];
+        if(($first_annee==$last_annee) || ($first_annee>$last_annee)){
+            $request->session()->flash('notification.type','alert-danger');
+
+            $request->session()->flash('notification.message', "veuillez vérifier l'année saisie !");
+            return redirect()->back()->withInput();
+        }
+
+
         $anneeScolaire= DB::table('anneeScolaires')
                         ->insert([
                             'nom_anneesco'=> $request->nom,
-                            'isDeleted'=> 1
                         ]);
                         $request->session()->flash('notification.type','alert-success');
                         $request->session()->flash('notification.message', " Enregistrement effectuée avec succés!");
@@ -66,15 +73,12 @@ class AnneeScolaireController extends Controller
      */
     public function show($id)
     {
-        $nomClasse= Classe::orderBy('nom')
-                            ->where('isDeleted',1)
-                            ->get();
         $anneeScolaire= DB::table('anneeScolaires')
                         ->select()
                         ->where('anneeScolaire_id',$id)
-                        ->where('isDeleted',1)
+                        ->where('isDeleted',0)
                         ->get();
-        return view('pages.directeur.update_annee', compact('anneeScolaire','nomClasse'));
+        return view('pages.directeur.update_annee', compact('anneeScolaire'));
     }
 
     /**
@@ -100,10 +104,18 @@ class AnneeScolaireController extends Controller
         $this->validate($request, [
             'nom'=> 'required|min:9|unique:anneeScolaires,nom_anneesco',
         ]);
+        $splitAnnee = explode('-', $request->nom, 2);
+        $first_annee = (int)$splitAnnee[0];
+        $last_annee= (int)$splitAnnee[1];
+        if(($first_annee==$last_annee) || ($first_annee>$last_annee)){
+            $request->session()->flash('notification.type','alert-danger');
+
+            $request->session()->flash('notification.message', "veuillez vérifier l'année saisie !");
+            return redirect()->back()->withInput();
+        }
 
         $anneeScolaire = DB::table('anneeScolaires')
                             -> where('anneeScolaire_id', '=', $id)
-                            ->where('isDeleted',1)
                             ->first();
         $newData = [];
         $error = false;
@@ -140,7 +152,7 @@ class AnneeScolaireController extends Controller
     public function destroy($id)
     {
         $newData = [];
-        $newData['isDeleted'] = 0;
+        $newData['isDeleted'] = 1;
         $affected = DB::table('anneeScolaires')
               ->where('anneeScolaire_id', $id)
               ->update($newData);

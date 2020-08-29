@@ -28,7 +28,7 @@
             <form action="{{ route('salle_classe.store') }}" method="post">
                 {{ csrf_field() }}
                 <div class="row">
-                    {{-- Nom Classe --}}
+                    {{-- Nom SalleClasse --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Capacité</label>
                             <div class="input-group input-group-merge">
-                                <input type="text" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle"
+                                <input type="text" name="capacite" value="{{ old('capacite') }}" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle"
                                     onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                                 if(event.which < 45 || event.which > 57) return false;">
                                 <div class="input-group-append">
