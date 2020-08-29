@@ -39,16 +39,6 @@ class ParentSeeder extends Seeder
 			]);
 		}
 
-        DB::table('parents')->delete();
-
-		for($i = 24; $i <= 31; ++$i)
-		{
-            $date = $this->randDate();
-			DB::table('parents')->insert([
-                'login' => 'richard'.$i,
-                'created_at' => $date,
-				'updated_at' => $date
-			]);
-		}
+        
     }
 }

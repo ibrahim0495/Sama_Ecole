@@ -26,59 +26,30 @@
             <div class="card-header">
                 <h3 class="mb-0">Surveillant</h3>
                 <br>
-            <a class="btn btn-primary" href="{{ route('surveillant.create') }}">Ajouter nouveau Surveillant</a>
-            </div>
-            <div class="table-responsive py-4">
-                <table class="table table-flush" id="datatable-basic">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Telephone</th>
-                            <th>Adresse</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Telephone</th>
-                            <th>Adresse</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($surveillantsActifs as $surveillantActif)
-                        <tr>
-                            <td>{{$surveillantActif->prenom}}</td>
-                            <td>{{$surveillantActif->nom}}</td>
-                            <td>{{$surveillantActif->telephone}}</td>
-                            <td>{{$surveillantActif->adresse}}</td>
-                            <td class="clearfix">
-                                <a
-                                    class="btn btn-sm btn-success float-left"
-                                    href="{{route('directeur.surveillant.show', $surveillantActif->login)}}"
-                                    data-original-title="Voir le surveillant">
-                                    <i class="fa fa-eye fa-lg fa-fw"></i>
-                                </a>
-
-                                <form action="{{ route('directeur.surveillant.destroy', $surveillantActif->login) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez-vous supprimer le surveillant {{$surveillantActif->prenom}} {{$surveillantActif->nom}} ?'">
-                                    {{csrf_field() }}
-                                    <button type="submit" class ="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
-                                </form>
-
-
-
-                            </td>
-
-                        </tr>
-                        @endforeach
-
-
-                    </tbody>
-                </table>
-            </div>
+                <div class="row">
+                    <div class="col-md-10">
+                    <a class="btn btn-primary" href="{{ route('directeur.surveillant.create') }}">Ajouter nouveau Surveillant</a>
+                    </div>
+                    <div class="col-auto btn-group">
+                        <button type="button" class="btn btn-sm btn-vimeo h-75" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{$status}}
+                        </button>
+                        <button type="button" class="btn btn-lg btn-vimeo btn-sm dropdown-toggle h-75" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{{ route('directeur.surveillant.liste') }}">Tout</a>
+                            <a class="dropdown-item" href="{{route('directeur.surveillant.listeActif') }}">Actif(s)</a>
+                            <a class="dropdown-item" href="{{ route('directeur.surveillant.listeInactif') }}">Inactif(s)</a>
+                        </div>
+    
+                        
+                    </div>
+                    <div class="table-responsive py-4"> 
+                        @include('layouts.table_users', ['personnes' => $surveillants, 'user' => 'surveillant', 'admin' => 'directeur'])
+                    </div>
+                </div>
+            
         </div>
     </div>
 </div>

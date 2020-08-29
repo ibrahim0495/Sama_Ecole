@@ -21,6 +21,7 @@ class CreateEtablissementsTable extends Migration
             $table->string('adresse');
             $table->string('logo')->nullable();
             $table->string('acronyme')->nullable();
+            $table->boolean('isDeleted')->default(0);
             $table->timestamps();
         });
     }

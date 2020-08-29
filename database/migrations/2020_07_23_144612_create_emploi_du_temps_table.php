@@ -20,6 +20,7 @@ class CreateEmploiDuTempsTable extends Migration
             $table->date('jour');
             $table->time('heureDeb');
             $table->time('heureFin');
+            $table->boolean('isDeleted')->default(0);
             $table->timestamps();
         });
     }

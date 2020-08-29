@@ -13,8 +13,8 @@ class PrimaryKeyEleveAnneeScosTable extends Migration
      */
     public function up()
     {
-        Schema::table('eleveAnneeScos', function (Blueprint $table) {
-            $table->primary(['loginEleve','code', 'anneeScolaire_id']);
+        Schema::table('eleveAnneeClasse', function (Blueprint $table) {
+            $table->primary(['code', 'anneeScolaire_id','classe_id']);
         });
     }
 
@@ -25,8 +25,8 @@ class PrimaryKeyEleveAnneeScosTable extends Migration
      */
     public function down()
     {
-        Schema::table('eleveAnneeScos', function (Blueprint $table) {
-            $table->dropPrimary(['loginEleve','code', 'anneeScolaire_id']);
+        Schema::table('eleveAnneeClasse', function (Blueprint $table) {
+            $table->dropPrimary(['code', 'anneeScolaire_id', 'classe_id']);
         });
     }
 }

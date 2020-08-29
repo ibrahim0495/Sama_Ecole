@@ -30,7 +30,7 @@ class Personne extends Model
         $length = 3;
         $characters = '0123456789';
         $charactersLength = strlen($characters);
-        $prenom1 = substr(Str::ucfirst($prenom),0,3);
+        $prenom1 = substr(Str::lower($prenom),0,3);
         $nom1 = substr(Str::lower($nom),0,2);
         $login = $prenom1."".$nom1;
         $date = substr(date('Y'), 2, 4);

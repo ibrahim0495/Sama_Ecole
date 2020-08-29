@@ -95,11 +95,6 @@ class ProfesseurController extends Controller
                 'email' => $request->email
             ]);
 
-            if($personne){
-                Professeur::create([
-                    'login' => $login
-                ]);
-            }
             
             $request->session()->flash('notification.type','alert-success');
 

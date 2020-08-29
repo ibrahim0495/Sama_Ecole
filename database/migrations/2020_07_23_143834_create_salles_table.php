@@ -16,6 +16,8 @@ class CreateSallesTable extends Migration
         Schema::create('salles', function (Blueprint $table) {
             $table->string('nom_salle')->primary();
             $table->integer('capacite');
+            $table->string('isDeleted')->default(0);
+
             $table->timestamps();
         });
     }

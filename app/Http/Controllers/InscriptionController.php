@@ -34,8 +34,10 @@ class InscriptionController extends Controller
     public function create()
     {
         $nom_page = "inscription_create";
-        $liste_classe = Classe::orderBy('nom', 'desc')->get();
-        $liste_annee_sco = DB::table('anneescolaires')->get();
+        $liste_classe = Classe::where('isDeleted', 0)->orderBy('nom', 'desc')->get();
+        $liste_annee_sco = DB::table('anneeScolaires')
+                            ->where('isDeleted', '=', '0')
+                            ->where('enCours', '=', '1')->get();
         return view('pages.comptable.inscription', compact('nom_page', 'liste_classe', 'liste_annee_sco'));
     }
 
@@ -77,14 +79,13 @@ class InscriptionController extends Controller
         //Vérification si l'élève s'est déjà inscrit
         $info_eleve = DB::table('personnes')
                         ->join('eleves', 'personnes.login', '=', 'eleves.loginEleve')
-                        ->join('eleveanneescos', 'eleveanneescos.loginEleve', '=', 'eleves.loginEleve')
+                        ->join('eleveanneeclasse', 'eleveanneeclasse.loginEleve', '=', 'eleves.loginEleve')
                         ->where('prenom', '=', $prenom)
                         ->where('nom', '=', $nom)
-                        ->where('dateNaissance', '=', date('Y/m/d' , strtotime($request->dateNaissance)))
+                        ->where('dateNaissance', '=', $dateNaissance)
                         ->where('lieuNaissance', '=', $lieuNaissance)
                         ->where('adresse', '=', $adresse)
                         ->where('sexe', '=', $request->sexe)
-                        ->where('telephone', '=', $telephone)
                         ->where('classe_id', '=', $classe_id)
                         ->where('anneeScolaire_id', '=', $request->anneeScolaire_id)
                         ->count();
@@ -126,39 +127,34 @@ class InscriptionController extends Controller
                     'langue' => 'FR'
                 ]);
                 if ($new_parent) {
-                    $new_parent_parents = DB::table('parents')->insert([
-                        'login' => $login_parent
+                    //2- Enregistrement de l'élève
+                    $new_eleve = Personne::create([
+                        'login' => $login_eleve,
+                        'etablissement_id' => 1,
+                        'prenom' => $prenom,
+                        'nom' => $nom,
+                        'telephone' => $telephone,
+                        'adresse' => $adresse,
+                        'motDePasse' => bcrypt('eleve'),
+                        'profil' => 'Eleve',
+                        'langue' => 'FR'
                     ]);
-                    if ($new_parent_parents) {
-                        //2- Enregistrement de l'élève
-                        $new_eleve = Personne::create([
-                            'login' => $login_eleve,
-                            'etablissement_id' => 1,
-                            'prenom' => $prenom,
-                            'nom' => $nom,
-                            'telephone' => $telephone,
-                            'adresse' => $adresse,
-                            'motDePasse' => bcrypt('eleve'),
-                            'profil' => 'Eleve',
-                            'langue' => 'FR'
-                        ]);
                         if ($new_eleve) {
                             $new_eleve_eleve = Eleve::create([
                                 'loginEleve' => $login_eleve,
                                 'code' => $matricule_eleve,
-                                'classe_id' => $classe_id,
                                 'dateNaissance' => $dateNaissance,
                                 'lieuNaissance' => $lieuNaissance,
                                 'sexe' => $request->sexe,
                                 'login_parent' => $login_parent
                             ]);
                             if ($new_eleve_eleve) {
-                                $eleveAnneSco = DB::table('eleveanneescos')->insert([
+                                $eleveAnneScoClasse = DB::table('eleveanneeclasse')->insert([
                                     'loginEleve' => $login_eleve,
-                                    'code' => $matricule_eleve,
+                                    'classe_id' => $classe_id,
                                     'anneeScolaire_id' =>$request->anneeScolaire_id
                                 ]);
-                                if ($eleveAnneSco) {
+                                if ($eleveAnneScoClasse) {
                                     $reliquat = $montant_inscription - $request->montant;
                                     $inscription = Inscription::create([
                                         'loginEleve' => $login_eleve,
@@ -171,10 +167,8 @@ class InscriptionController extends Controller
                                 if ($inscription) {
                                     return redirect()
                                     ->route('comptable.index');
-                                    //->with('error_info_eleve', 'Il semble que cet élève s\'est déjà incrit');
                                 }
                             }
-                        }
                     }
                 } else {
                 }
@@ -221,16 +215,15 @@ class InscriptionController extends Controller
                         $new_eleve_eleves = Eleve::create([
                             'loginEleve' => $login_eleve,
                             'code' => $matricule_eleve,
-                            'classe_id' => $classe_id,
                             'dateNaissance' => $dateNaissance,
                             'lieuNaissance' => $lieuNaissance,
                             'sexe' => $request->sexe,
                             'login_parent' => $login_old_parent
                         ]);
                         if ($new_eleve_eleves) {
-                            $eleveAnneScos = DB::table('eleveanneescos')->insert([
+                            $eleveAnneScos = DB::table('eleveanneeclasse')->insert([
                                 'loginEleve' => $login_eleve,
-                                'code' => $matricule_eleve,
+                                'classe_id' => $classe_id,
                                 'anneeScolaire_id' =>$request->anneeScolaire_id
                             ]);
                             if ($eleveAnneScos) {

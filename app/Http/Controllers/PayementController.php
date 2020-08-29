@@ -46,18 +46,17 @@ class PayementController extends Controller
 
         $info_eleve = DB::table('eleves')
             ->join('personnes', 'login', '=', 'eleves.loginEleve')
-            ->join('eleveanneescos', 'eleveanneescos.code', '=', 'eleves.code')
             ->join('classes', 'classes.classe_id', '=', 'eleves.classe_id')
             ->where('eleves.code', '=', $request->matricule)
             ->get();
 
-        $info_annee_sco = DB::table('eleveanneescos')
+        $info_annee_sco = DB::table('eleveanneeclasse')
             ->join('anneescolaires', 'anneescolaires.anneeScolaire_id', '=', 'eleveanneescos.anneeScolaire_id')
             ->where('eleveanneescos.code', '=', $request->matricule)
             ->get();
 
         $mois = Mois::orderBy('mois_id','asc')->select('nom_mois')->get();
-        dd($info_eleve);
+        //dd($info_eleve);
         return view('pages.comptable.info_eleve',
         compact('nom_page', 'info_eleve','info_annee_sco' , 'etablissement', 'mois'));
     }

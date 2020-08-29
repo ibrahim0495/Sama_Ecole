@@ -17,7 +17,7 @@ class FkElevesTable extends Migration
             $table->foreign('loginEleve')->references('login')->on('personnes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreign('login_parent')->references('login')->on('parents')
+            $table->foreign('login_parent')->references('login')->on('personnes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

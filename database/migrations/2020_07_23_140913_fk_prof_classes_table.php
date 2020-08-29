@@ -15,7 +15,7 @@ class FkProfClassesTable extends Migration
     {
         Schema::table('profClasses', function (Blueprint $table) {
             
-            $table->foreign('login_professeur')->references('login')->on('professeurs')
+            $table->foreign('login_professeur')->references('login')->on('personnes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
