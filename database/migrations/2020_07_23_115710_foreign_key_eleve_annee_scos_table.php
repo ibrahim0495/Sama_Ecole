@@ -15,7 +15,7 @@ class ForeignKeyEleveAnneeScosTable extends Migration
     {
         Schema::table('eleveAnneeClasse', function (Blueprint $table) {
 
-            $table->foreign('code')->references('code')->on('eleves')
+            $table->foreign('loginEleve')->references('loginEleve')->on('eleves')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
@@ -33,7 +33,7 @@ class ForeignKeyEleveAnneeScosTable extends Migration
     public function down()
     {
         Schema::table('eleveAnneeClasse', function (Blueprint $table) {
-            $table->dropForeign(['code']);
+            $table->dropForeign(['loginEleve']);
         });
     }
 }
