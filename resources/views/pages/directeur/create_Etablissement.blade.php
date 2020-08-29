@@ -89,7 +89,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="number" name="telephone">
+                                <input class="form-control" placeholder="Numéro de téléphone" type="text" name="telephone"
+                                onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                            if(event.which < 45 || event.which > 57) return false;" maxlength="9">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>

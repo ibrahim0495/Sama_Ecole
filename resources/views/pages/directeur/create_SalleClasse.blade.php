@@ -50,7 +50,9 @@
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Capacité</label>
                             <div class="input-group input-group-merge">
-                                <input type="number" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle">
+                                <input type="text" name="capacite" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle"
+                                    onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                                if(event.which < 45 || event.which > 57) return false;">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>

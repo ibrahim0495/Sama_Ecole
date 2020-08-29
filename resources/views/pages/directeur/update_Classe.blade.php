@@ -43,7 +43,9 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label>Montant inscription</label>
-                    <input type="number" class="form-control" name="montant_inscription" value="{{$cl->montant_inscription}}">
+                    <input type="number" class="form-control" name="montant_inscription" value="{{$cl->montant_inscription}}"
+                        onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                        if(event.which < 45 || event.which > 57) return false;">
                     @error('montant_inscription')
                                 <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -52,7 +54,9 @@
                 <div class="col-md-6">
                 <div class="form-group">
                     <label>Montant mensuel</label>
-                    <input type="number" class="form-control" name="montant_mensuel" value="{{$cl->montant_mensuel}}">
+                    <input type="text" class="form-control" name="montant_mensuel" value="{{$cl->montant_mensuel}}"
+                        onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                        if(event.which < 45 || event.which > 57) return false;">
                     @error('montant_mensuel')
                                 <div class="text-danger">{{ $message }}</div>
                     @enderror
