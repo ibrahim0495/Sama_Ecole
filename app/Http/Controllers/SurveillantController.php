@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonneRequest;
+use App\Http\Requests\PersonneUpdateRequest;
 use App\models\Personne;
 use App\models\Surveillant;
 use Illuminate\Http\Request;
@@ -251,7 +252,7 @@ class SurveillantController extends Controller
         return view('pages.directeur.show_surveillant ',compact('surveillantActif', 'classes', 'classes_surveillant'));
     }
 
-    public function update_surveillant(String $surveillantActif, PersonneRequest $request)
+    public function update_surveillant(String $surveillantActif, PersonneUpdateRequest $request)
     {
         if($request->status == 'on'){
             $status = 1;
@@ -276,7 +277,16 @@ class SurveillantController extends Controller
     }
 
     public function store_classes(Request $request){
-        return $request;
+        $classes = $request->classes;
+        $login = $request->loginSurveillant;
+
+        //$delete = Classe::where('login', $login)->delete();
+
+        /*foreach($classes as $classe){
+            Classe::where('login', $login)->delete();
+        }*/
+        return "J'atends de voir! Je pense cette modification devrait se faire au niveau du module classe";
+        
 
 
     }

@@ -77,18 +77,19 @@
                                 <div class="modal-body">
                                 <form action="{{route('directeur.surveillant.storeClasses')}}" method="POST">
                                     <div class="form-group">
+                                        <input type="hidden" name="loginSurveillant" value="{{$surveillantActif->login}}">
                                         <label for="">Choisir ses classes</label>
-                                    <select name="classes" class="form-control" multiple>
+                                    <select name="classes[]" class="form-control" multiple>
                                         @foreach ($classes as $classe)
-                                            @foreach($classes_surveillant as $classe_surveillant)
-                                                @if ($classe->nom == $classe_surveillant->nom)
-                                                    <option value="{{$classe->nom}}" selected="selected"> {{$classe->nom}} </option>
-                                                @else
-                                                    <option value="{{$classe->nom}}"> {{$classe->nom}} </option>
-                                                @endif
-                                            @endforeach
+                                            <option
+                                                    @foreach($classes_surveillant as $classe_surveillant)
+                                                        @if ($classe->nom == $classe_surveillant->nom)
+                                                            {{"selected = 'selected'"}};
+                                                        @endif
+                                                    @endforeach
+                                             > {{$classe->nom}} </option>
                                         @endforeach
-                                       
+                            
                                     </select>
                                     </div>
 

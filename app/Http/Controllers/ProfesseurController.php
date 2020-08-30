@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonneRequest;
+use App\Http\Requests\PersonneUpdateRequest;
 use App\models\Personne;
 use App\models\Professeur;
 use Illuminate\Http\Request;
@@ -144,7 +145,7 @@ class ProfesseurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PersonneRequest $request, string $login)
+    public function update(PersonneUpdateRequest $request, string $login)
     {
         if($request->status == 'on'){
             $status = 1;
