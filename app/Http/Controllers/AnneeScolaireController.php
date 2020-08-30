@@ -50,8 +50,7 @@ class AnneeScolaireController extends Controller
 
         $anneeScolaire= DB::table('anneeScolaires')
                         ->insert([
-                            'nom_anneesco'=> $request->nom,
-                            'isDeleted'=> 1
+                            'nom_anneesco'=> $request->nom
                         ]);
                         $request->session()->flash('notification.type','alert-success');
                         $request->session()->flash('notification.message', " Enregistrement effectuée avec succés!");

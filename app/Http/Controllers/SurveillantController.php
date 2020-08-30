@@ -49,10 +49,6 @@ class SurveillantController extends Controller
 
         $login =  $personne->generateLogin($nom,$prenom); // le login est generer automatique d'apres son prenom nom;
 
-        $password = $personne->generateRandomString(); //ceci genere le mot de passe par defaut
-
-        $image = "avatarWin10.png";  // elle est l'avatar photo profils par defaut
-
         $etablissement_id = 1; //etablissement doit etre generer automatiquement d'apres le directeur connecter;
 
         $surveillant = Personne::where('login', $login)->first();
@@ -65,15 +61,13 @@ class SurveillantController extends Controller
                 'nom' => $nom,
                 'telephone' => $request->telephone,
                 'adresse' => $request->adresse,
-                'motDePasse' => $password,
-                'nomImgPers' => $image,
-                'etatPers' => 1,
+                'motDePasse' => bcrypt('Surveillant'),
                 'profil' => 'Surveillant',
                 'langue' => $request->langue,
                 'email' => $request->email
             ]);
 
-           
+
             $request->session()->flash('notification.type','alert-success');
 
             $request->session()->flash('notification.message', " L'enregistrement a été bien effectué");
@@ -191,7 +185,7 @@ class SurveillantController extends Controller
     {
         $delete = Personne::where('login', $login)->delete();
         if($delete){
-            session()->flash('notification.type','alert-success'); 
+            session()->flash('notification.type','alert-success');
 
             session()->flash('notification.message', " Le surveillant a été supprimé avec succés !");
             return redirect(route('directeur.surveillant.liste'));
@@ -201,7 +195,7 @@ class SurveillantController extends Controller
             session()->flash('notification.message', " Le surveillant n'a pas pu etre supprimé !");
             return redirect(route('directeur.surveillant.liste'));
         }
-       
+
 
     }
 
@@ -215,7 +209,7 @@ class SurveillantController extends Controller
 
         //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
         $surveillants = Personne::where('profil','=','Surveillant')->get();
-        
+
         $status = 'Tout';
         return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
 

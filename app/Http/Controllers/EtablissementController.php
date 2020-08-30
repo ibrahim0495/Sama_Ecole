@@ -22,12 +22,11 @@ class EtablissementController extends Controller
                         ->get();
         $anneeScolaire= DB::table('anneeScolaires')
                         ->where('isDeleted',1)
-                        ->select()
                         ->get();
 
         $etablissement= Etablissement::orderBy('nom', 'desc')
-                                        ->where('isDeleted',1)
-                                        ->get();
+                        ->where('isDeleted',0)
+                        ->get();
 
         return view('pages.directeur.show_etablissement', compact('etablissement','nomClasse','anneeScolaire'));
     }
@@ -52,27 +51,27 @@ class EtablissementController extends Controller
     {
         $this->validate($request, [
             'nom'=> 'required|min:2|max:100',
-            'telephone'=> 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:etablissements,telephone',
+            'telephone'=> 'digits:9|required|starts_with:30,33,70,75,76,77,78|numeric|unique:etablissements,telephone',
             'email' => 'required|email',
             'adresse'=> 'required|min:2|max:30',
-            'acronyme'=>'|min:2|max:9'
+            'acronyme'=>'nullable|min:2|max:9'
         ]);
         ($files = $request->file('logo'));
-        $destinationPath = public_path('logo/'); // upload path
-        $logo = date('dmYHis') . "." . $files->getClientOriginalExtension();
-
+        $logo = NULL;
+        if ($files !== null) {
+            $destinationPath = public_path('logo/'); // upload path
+            $logo = date('dmYHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $logo);
+            $insert['image'] = "$logo";
+        }
         $etablissement= Etablissement::create([
             'nom'=> $request->nom,
             'telephone'=> $request->telephone,
             'email'=> $request->email,
             'adresse'=> $request->adresse,
             'logo'=> $logo,
-            'acronyme'=> $request->acronyme,
-            'isDeleted'=> 1
+            'acronyme'=> $request->acronyme
         ]);
-
-        $files->move($destinationPath, $logo);
-        $insert['image'] = "$logo";
         session()->flash('Etablissement enregistré avec succès');
         return redirect()->route('etablissement.index');
     }

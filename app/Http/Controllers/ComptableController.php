@@ -44,11 +44,7 @@ class ComptableController extends Controller
         $personne = new Personne();
 
         $login =  $personne->generateLogin($nom,$prenom); // le login est generer automatique d'apres son prenom nom;
-        
-        $password = $personne->generateRandomString(); //ceci genere le mot de passe par defaut
 
-        $image = "avatarWin10.png";  // elle est l'avatar photo profils par defaut
-        
         $etablissement_id = 1; //etablissement doit etre generer automatiquement d'apres le directeur connecter;
 
         $comptable = Personne::where('login', $login)->first();
@@ -61,16 +57,14 @@ class ComptableController extends Controller
                 'nom' => $nom,
                 'telephone' => $request->telephone,
                 'adresse' => $request->adresse,
-                'motDePasse' => $password,
-                'nomImgPers' => $image,
-                'etatPers' => 1,
+                'motDePasse' => bcrypt('Comptable'),
                 'profil' => 'Comptable',
                 'langue' => $request->langue,
                 'email' => $request->email
             ]);
 
 
-            
+
             $request->session()->flash('notification.type','alert-success');
 
             $request->session()->flash('notification.message', " L'enregistrement a été bien effectué");
@@ -146,7 +140,7 @@ class ComptableController extends Controller
     {
         $delete = Personne::where('login', $login)->delete();
         if($delete){
-            session()->flash('notification.type','alert-success'); 
+            session()->flash('notification.type','alert-success');
 
             session()->flash('notification.message', " Le Comptable a été supprimé avec succés !");
             return redirect(route('directeur.comptable.liste'));
@@ -156,7 +150,7 @@ class ComptableController extends Controller
             session()->flash('notification.message', " Le Comptable n'a pas pu etre supprimé !");
             return redirect(route('directeur.comptable.liste'));
         }
-       
+
     }
 
     public function lister_comptables(){

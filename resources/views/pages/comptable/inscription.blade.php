@@ -3,6 +3,9 @@
 @section('extra-css')
     <link rel="stylesheet" href="{{ asset('assets/vendor/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
+
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endsection
 
 @section('breadcrumb')
@@ -135,13 +138,19 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="exampleDatepicker">Date de naissance</label>
-                            <input
-                                class="form-control datepicker @error('dateNaissance') is-invalid @enderror"
-                                name="dateNaissance" placeholder="Saisir la date de naissance" type="text"
-                                value="{{ old('dateNaissance') ?? date('m/d/Y') }}">
-                                @error('dateNaissance')
-                                    <div class="text-danger">{{ $message}}</div>
-                                @enderror
+                            <div class="input-group input-group-merge">
+                                <input
+                                    class="form-control @error('dateNaissance') is-invalid @enderror"
+                                    name="dateNaissance" placeholder="Saisir la date de naissance" type="text"
+                                    id="datepicker" {{-- value="{{ old('dateNaissance') ?? date('m/d/Y') }}" --}}
+                                    disabled>
+                                    @error('dateNaissance')
+                                        <div class="text-danger">{{ $message}}</div>
+                                    @enderror
+                                <div class="input-group-append">
+                                    <span class="input-group-text"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -155,7 +164,7 @@
                                     name="lieuNaissance" placeholder="Lieu de naissance"
                                     type="text" value="{{ old('lieuNaissance') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-map-marker text-red"></i></span>
                                 </div>
                             </div>
                             @error('lieuNaissance')
@@ -401,4 +410,19 @@
     <script src="{{ asset('assets/vendor/select2/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                maxDate: "-5Y",
+                changeMonth: true,
+                changeYear: true,
+                showOn: "button",
+                buttonImage: "/images/calendar-icon.svg",
+                buttonImageOnly: true,
+                monthNamesShort: [ "Jan", "Feb", "Mar", "Avr", "Mai", "Jun", "Juil", "Aug", "Sep", "Oct", "Nov", "Dec" ]
+            });
+        } );
+        </script>
 @endsection
