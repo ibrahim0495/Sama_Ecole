@@ -16,13 +16,6 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')
-                        ->where('isDeleted',1)
-                        ->get();
-        $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',1)
-                        ->select()
-                        ->get();
 
         $classe= DB::table('classes')
                     ->join('personnes','personnes.login','=','classes.login_surveillant')
@@ -31,7 +24,7 @@ class ClasseController extends Controller
                     ->select('classes.*','personnes.prenom','personnes.nom as nom_per')
                     ->get();
 
-        return view('pages.directeur.show_classe',compact('classe','nomClasse','anneeScolaire'));
+        return view('pages.directeur.show_classe',compact('classe'));
     }
 
     /**
@@ -192,7 +185,7 @@ class ClasseController extends Controller
     public function destroy($id)
     {
         $newData = [];
-        $newData['isDeleted'] = 0;
+        $newData['isDeleted'] = 1;
         $affected = DB::table('classes')
               ->where('classe_id', $id)
               ->update($newData);

@@ -96,6 +96,17 @@ class DirecteurController extends Controller
         return view('pages.directeur.create_Surveillant');
     }
 
+    public function list_eleve_annee(){
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',0)
+                        ->select()
+                        ->get();
+        $nomClasse= DB::table('classes')
+                        ->where('isDeleted',0)
+                        ->get();
+
+        return view('pages.directeur.show_annees_classes', compact('anneeScolaire','nomClasse'));
+    }
     public function list_eleve(Request $request)
     {
         $this->validate($request, [

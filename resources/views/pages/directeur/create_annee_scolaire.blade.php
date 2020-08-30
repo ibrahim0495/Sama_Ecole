@@ -33,7 +33,7 @@
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
-                            <input type="text" name="nom" class="form-control" id="example2cols2Input" placeholder="Saisir l'année accadémique (exemple: 2019-2020)">
+                            <input type="text" name="nom" value="{{ old('nom') }}" class="form-control" id="example2cols2Input" placeholder="Saisir l'année accadémique (exemple: 2019-2020)">
                             @error('nom')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

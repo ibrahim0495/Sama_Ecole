@@ -17,18 +17,11 @@ class EtablissementController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')
-                        ->where('isDeleted',1)
-                        ->get();
-        $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',1)
-                        ->get();
-
         $etablissement= Etablissement::orderBy('nom', 'desc')
-                        ->where('isDeleted',0)
-                        ->get();
+                                        ->where('isDeleted',0)
+                                        ->get();
 
-        return view('pages.directeur.show_etablissement', compact('etablissement','nomClasse','anneeScolaire'));
+        return view('pages.directeur.show_etablissement', compact('etablissement'));
     }
 
     /**
@@ -84,19 +77,12 @@ class EtablissementController extends Controller
      */
     public function show($id)
     {
-        $nomClasse= Classe::orderBy('nom')
-                        ->where('isDeleted',1)
-                        ->get();
-        $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',1)
-                        ->select()
-                        ->get();
 
         $etablissement= Etablissement::where('etablissement_id',$id)
-                                    ->where('isDeleted',1)
+                                    ->where('isDeleted',0)
                                     ->get();
 
-        return view('pages.directeur.update_Etablissement', compact('etablissement','nomClasse','anneeScolaire'));
+        return view('pages.directeur.update_Etablissement', compact('etablissement'));
     }
 
     /**
@@ -208,7 +194,7 @@ class EtablissementController extends Controller
     public function destroy($id)
     {
         $newData = [];
-        $newData['isDeleted'] = 0;
+        $newData['isDeleted'] = 1;
         $affected = DB::table('etablissements')
               ->where('etablissement_id', $id)
               ->update($newData);
