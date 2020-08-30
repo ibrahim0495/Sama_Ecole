@@ -87,9 +87,9 @@
         <div class="form-group">
             <label class="form-control-label" for="example2cols2Input">Langue</label>
             <select name="langue" class="form-control" id="example2cols2Select" data-toggle="select">
-                <option value="Anglais">Anglais</option>
-                <option value="Arabe">Arabe</option>
-                <option value="Français">Français</option>
+                <option value="ENG">Anglais</option>
+                <option value="AR">Arabe</option>
+                <option value="FR">Français</option>
             </select>
         </div>
     </div>

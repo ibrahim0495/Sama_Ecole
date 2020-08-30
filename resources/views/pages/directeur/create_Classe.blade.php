@@ -73,7 +73,9 @@
                                 <input
                                     type="text" class="form-control" name="montant_inscription"
                                     placeholder="Saisir montant de l'inscription"
-                                    value="{{ old('montant_inscription') }}">
+                                    value="{{ old('montant_inscription') }}"
+                                    onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                            if(event.which < 45 || event.which > 57) return false;">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><small class="font-weight-bold">Franc CFA</small></span>
                                 </div>
@@ -94,7 +96,9 @@
                                 <input
                                     type="text" class="form-control" name="montant_mensuel"
                                     placeholder="Saisir le montant de la mensualité"
-                                    value="{{ old('montant_mensuel') }}">
+                                    value="{{ old('montant_mensuel') }}"
+                                    onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                            if(event.which < 45 || event.which > 57) return false;">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><small class="font-weight-bold">Franc CFA</small></span>
                                 </div>

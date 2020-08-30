@@ -17,12 +17,16 @@ class EtablissementController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                        ->where('isDeleted',1)
+                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
-                        ->select()
+                        ->where('isDeleted',1)
                         ->get();
 
-        $etablissement= Etablissement::orderBy('nom', 'desc')->get();
+        $etablissement= Etablissement::orderBy('nom', 'desc')
+                        ->where('isDeleted',0)
+                        ->get();
 
         return view('pages.directeur.show_etablissement', compact('etablissement','nomClasse','anneeScolaire'));
     }
@@ -47,15 +51,19 @@ class EtablissementController extends Controller
     {
         $this->validate($request, [
             'nom'=> 'required|min:2|max:100',
-            'telephone'=> 'required|starts_with:30,33,70,75,76,77,78|numeric|digits:9|unique:etablissements,telephone',
+            'telephone'=> 'digits:9|required|starts_with:30,33,70,75,76,77,78|numeric|unique:etablissements,telephone',
             'email' => 'required|email',
             'adresse'=> 'required|min:2|max:30',
-            'acronyme'=>'|min:2|max:9'
+            'acronyme'=>'nullable|min:2|max:9'
         ]);
         ($files = $request->file('logo'));
-        $destinationPath = public_path('logo/'); // upload path
-        $logo = date('dmYHis') . "." . $files->getClientOriginalExtension();
-
+        $logo = NULL;
+        if ($files !== null) {
+            $destinationPath = public_path('logo/'); // upload path
+            $logo = date('dmYHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $logo);
+            $insert['image'] = "$logo";
+        }
         $etablissement= Etablissement::create([
             'nom'=> $request->nom,
             'telephone'=> $request->telephone,
@@ -64,9 +72,6 @@ class EtablissementController extends Controller
             'logo'=> $logo,
             'acronyme'=> $request->acronyme
         ]);
-
-        $files->move($destinationPath, $logo);
-        $insert['image'] = "$logo";
         session()->flash('Etablissement enregistré avec succès');
         return redirect()->route('etablissement.index');
     }
@@ -79,12 +84,16 @@ class EtablissementController extends Controller
      */
     public function show($id)
     {
-        $nomClasse= Classe::orderBy('nom')->get();
+        $nomClasse= Classe::orderBy('nom')
+                        ->where('isDeleted',1)
+                        ->get();
         $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',1)
                         ->select()
                         ->get();
 
         $etablissement= Etablissement::where('etablissement_id',$id)
+                                    ->where('isDeleted',1)
                                     ->get();
 
         return view('pages.directeur.update_Etablissement', compact('etablissement','nomClasse','anneeScolaire'));
@@ -198,9 +207,11 @@ class EtablissementController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('etablissements')
-                ->where('etablissement_id',$id)
-                -> delete();
+        $newData = [];
+        $newData['isDeleted'] = 0;
+        $affected = DB::table('etablissements')
+              ->where('etablissement_id', $id)
+              ->update($newData);
 
         session()->flash('message', "La suppression s'est effectuee avec succes");
         return redirect()->route('etablissement.index');

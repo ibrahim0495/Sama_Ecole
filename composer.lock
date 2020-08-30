@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "4d7d9096da0c37dc9d8aa24c25903137",
@@ -1170,6 +1170,11 @@
                 "md",
                 "parser"
             ],
+<<<<<<< HEAD
+            "time": "2020-08-18T01:19:12+00:00"
+||||||| merged common ancestors
+            "time": "2020-07-19T22:47:30+00:00"
+=======
             "funding": [
                 {
                     "url": "https://enjoy.gitstore.app/repositories/thephpleague/commonmark",
@@ -1197,6 +1202,7 @@
                 }
             ],
             "time": "2020-08-18T01:19:12+00:00"
+>>>>>>> d5605b52e2a0926ac758a0051f57987b28af1039
         },
         {
             "name": "league/flysystem",
@@ -1281,6 +1287,17 @@
                 "sftp",
                 "storage"
             ],
+<<<<<<< HEAD
+            "time": "2020-08-18T10:57:55+00:00"
+||||||| merged common ancestors
+            "funding": [
+                {
+                    "url": "https://offset.earth/frankdejonge",
+                    "type": "other"
+                }
+            ],
+            "time": "2020-08-12T14:23:41+00:00"
+=======
             "funding": [
                 {
                     "url": "https://offset.earth/frankdejonge",
@@ -1288,6 +1305,7 @@
                 }
             ],
             "time": "2020-08-18T10:57:55+00:00"
+>>>>>>> d5605b52e2a0926ac758a0051f57987b28af1039
         },
         {
             "name": "league/mime-type-detection",
@@ -2274,6 +2292,11 @@
                 "identifier",
                 "uuid"
             ],
+<<<<<<< HEAD
+            "time": "2020-08-18T17:17:46+00:00"
+||||||| merged common ancestors
+            "time": "2020-07-28T16:51:01+00:00"
+=======
             "funding": [
                 {
                     "url": "https://github.com/ramsey",
@@ -2281,6 +2304,7 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+>>>>>>> d5605b52e2a0926ac758a0051f57987b28af1039
         },
         {
             "name": "sabberworm/php-css-parser",

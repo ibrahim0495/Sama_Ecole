@@ -24,6 +24,7 @@ class ParentEleveController extends Controller
                     ->join('personnes','personnes.login','=','eleves.loginEleve')
                     ->select('personnes.prenom','personnes.nom','personnes.adresse','personnes.telephone','eleves.loginEleve')
                     ->where('login_parent','lamine@gmail.com')
+                    ->where('personnes.isDeleted',1)
                     ->get();
 
 
@@ -98,7 +99,9 @@ class ParentEleveController extends Controller
 
     public function voir_note(Request $request)
     {
-        $eleve = Personne::where('login', '=', $request->login)->first();
+        $eleve = Personne::where('login', '=', $request->login)
+                            ->where('isDeleted',1)
+                            ->first();
 
         if($eleve){
             $noteDevoir=DB::table('eleves')
