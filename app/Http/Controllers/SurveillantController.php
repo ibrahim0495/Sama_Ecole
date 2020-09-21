@@ -47,7 +47,7 @@ class SurveillantController extends Controller
         $nom = $request->nom;
         $personne = new Personne();
 
-        $login =  $personne->generateLogin($nom,$prenom); // le login est generer automatique d'apres son prenom nom;
+        $login =  $personne->generateLogin($prenom,$nom); // le login est generer automatique d'apres son prenom nom;
 
         $etablissement_id = 1; //etablissement doit etre generer automatiquement d'apres le directeur connecter;
 
