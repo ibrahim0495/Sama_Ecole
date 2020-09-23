@@ -274,12 +274,20 @@ class SurveillantController extends Controller
         $classes = $request->classes;
         $login = $request->loginSurveillant;
 
-        //$delete = Classe::where('login', $login)->delete();
+        if($classes){
+            foreach($classes as $classe){
+                $update = Classe::where('nom', $classe)->update(['login_surveillant'=> $login]);
 
-        /*foreach($classes as $classe){
-            Classe::where('login', $login)->delete();
-        }*/
-        return "J'atends de voir! Je pense cette modification devrait se faire au niveau du module classe";
+            }
+            if($update){
+                $request->session()->flash('notification.type','alert-success');
+
+                $request->session()->flash('notification.message', " Le surveillant #$login a été bien modifié");
+        
+            }
+        }
+
+        return redirect(route('directeur.surveillant.liste'));
         
 
 
