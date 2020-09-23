@@ -51,10 +51,14 @@
                                                 {{ $m->nom_mois }}
                                             </td>
                                             <td>
-                                                {{ $mensualite }}
+                                                {{ $mensualite}}
                                             </td>
                                             <td>
-                                                {{ $m->nom_mois }}
+                                                @if ($m->reliquat === NULL)
+                                                    {{ $mensualite}}
+                                                @else
+                                                    {{ $m->reliquat }}
+                                                @endif
                                             </td>
                                             <td>
                                                 <span class="badge badge-dot mr-4">
@@ -63,9 +67,45 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <a href="#" class="button btn-sm btn-success">Payer</a>
+                                                @if ($m->reliquat === NULL)
+                                                    <button 
+                                                        type="button" data-toggle="modal" data-target="#payement"
+                                                        class="button btn-sm btn-primary">Payer</button>
+                                                @elseif ($m->reliquat > 0 )
+                                                    <a href="#" class="button btn-sm btn-warning">Completer</a>
+                                                @else
+                                                    <a href="#" class="button btn-sm btn-success">En règle</a>
+                                                @endif
+                                                
                                             </td>
                                         </tr>
+                                        {{-- Modal ici --}}
+                                        <div class="modal fade" id="payement" tabindex="-1" role="dialog" aria-labelledby="new-event-label" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-secondary" role="document">
+                                                <div class="modal-content">
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <form id="newModalForm" class="new-event--form" method="POST" action="{{ route('payement-mensuel') }}">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">Payement mois {{ $m->nom_mois }} </label>
+                                                                <input 
+                                                                    type="text" id="montant" name="montant" placeholder="Saisir le montant reçu ici"
+                                                                    class="form-control form-control-alternative"
+                                                                    onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                                                        if(event.which < 45 || event.which > 57) return false;" maxlength="9"/>
+                                                            </div>
+
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary">Payer</button>
+                                                                <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Fermer</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                              </div>
+                                            </div>
+                                          </div>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -76,4 +116,16 @@
             </div>
         </div>
     </div>
+
+    {{-- Validation Modal --}}
+    @if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#payement').modal('show');
+        });
+    </script>
+  @endif
+@endsection
+
+@section('extra-js')
 @endsection

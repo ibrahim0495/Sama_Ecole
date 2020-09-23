@@ -1,5 +1,5 @@
 <div class="col-xl-4 order-xl-2">
-    @foreach ($info_eleve as $item)
+    @foreach ( $info_eleve as $item)
         <div class="card card-profile">
             <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
             <div class="row justify-content-center">
@@ -53,7 +53,7 @@
                         {{ $item->sexe }}
                     </h5>
                     <div>
-                        <i class="ni education_hat mr-2"></i>{{ $etablissement }}
+                        <i class="ni education_hat mr-2"></i>{{ session('etablissement') }}
                     </div>
                 </div>
             </div>

@@ -17,8 +17,8 @@ class CreateMensualitesTable extends Migration
             $table->id('mensualite_id');
             $table->unsignedBigInteger('mois_id');
             $table->unsignedBigInteger('anneeScolaire_id');
-            $table->integer('montant');
-            $table->integer('reliquat');
+            $table->integer('montant')->nullable();
+            $table->integer('reliquat')->nullable();
             $table->string('type_paiement')->nullable();
             $table->boolean('isDeleted')->default(0);
             $table->timestamps();
