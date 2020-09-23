@@ -16,18 +16,11 @@ class SalleClasseController extends Controller
      */
     public function index()
     {
-        $nomClasse= Classe::orderBy('nom')
-                        ->where('isDeleted',1)
-                        ->get();
-        $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',1)
-                        ->select()
-                        ->get();
 
         $salle= Salle::orderBy('nom_salle', 'desc')
-                            ->where('isDeleted',1)
+                            ->where('isDeleted',0)
                             ->get();
-        return view('pages.directeur.show_salle', compact('salle','nomClasse','anneeScolaire'));
+        return view('pages.directeur.show_salle', compact('salle'));
     }
 
     /**
@@ -54,8 +47,7 @@ class SalleClasseController extends Controller
 
         $salle= Salle::create([
             'nom_salle'=> $request->nom,
-            'capacite'=> $request->capacite,
-            'isDeleted'=> 1
+            'capacite'=> $request->capacite
         ]);
 
         $request->session()->flash('notification.type','alert-success');
@@ -71,15 +63,10 @@ class SalleClasseController extends Controller
      */
     public function show($id)
     {
-        $nomClasse= Classe::orderBy('nom')->get();
-        $anneeScolaire= DB::table('anneeScolaires')
-                        ->select()
-                        ->get();
-
         $salle= Salle::where('nom_salle', $id)
-                    ->where('isDeleted',1)
+                    ->where('isDeleted',0)
                     ->get();
-        return view('pages.directeur.update_SalleClasse', compact('salle','nomClasse','anneeScolaire'));
+        return view('pages.directeur.update_SalleClasse', compact('salle'));
     }
 
     /**
@@ -135,7 +122,7 @@ class SalleClasseController extends Controller
     public function destroy($id)
     {
         $newData = [];
-        $newData['isDeleted'] = 0;
+        $newData['isDeleted'] = 1;
         $affected = DB::table('salles')
               ->where('nom_salle', $id)
               ->update($newData);

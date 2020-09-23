@@ -22,15 +22,13 @@
         <div class="col-xl-8 order-xl-1">
             <div class="card">
                 <div class="card-header">
-                    @foreach ($info_annee_sco as $item)
-                        <button
-                            class="btn btn-icon btn-primary" type="button" data-toggle="collapse"
-                            data-target="#collapseAnneeScolaire"
-                            aria-expanded="false"
-                            aria-controls="collapseAnneeScolaire">
-                            <span class="btn-inner--text">{{ $item->nom_anneesco }}</span>
-                        </button>
-                    @endforeach
+                    <button
+                        class="btn btn-icon btn-primary" type="button" data-toggle="collapse"
+                        data-target="#collapseAnneeScolaire"
+                        aria-expanded="false"
+                        aria-controls="collapseAnneeScolaire">
+                        <span class="btn-inner--text">Mensualité {{ $nom_annee_sco }}</span>
+                    </button>
                 </div>
 
                 <div class="card-body">
@@ -40,10 +38,10 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Mois</th>
-                                        <th scope="col">Inscription</th>
-                                        <th scope="col">Menualité</th>
+                                        <th scope="col">Mensualité</th>
                                         <th scope="col">Reliquat</th>
                                         <th scope="col">Statut</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
@@ -53,10 +51,7 @@
                                                 {{ $m->nom_mois }}
                                             </td>
                                             <td>
-                                                {{ $m->nom_mois }}
-                                            </td>
-                                            <td>
-                                                {{ $m->nom_mois }}
+                                                {{ $mensualite }}
                                             </td>
                                             <td>
                                                 {{ $m->nom_mois }}
@@ -66,6 +61,9 @@
                                                     <i class="bg-warning"></i>
                                                     <span class="status">pending</span>
                                                 </span>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="button btn-sm btn-success">Payer</a>
                                             </td>
                                         </tr>
                                     @endforeach

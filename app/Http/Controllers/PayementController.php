@@ -41,24 +41,50 @@ class PayementController extends Controller
         $this->validate($request, [
             'matricule' => 'required|exists:eleves,code'
         ]);
+
+        $anneeScolaire = [];
+        $anneeScolaire = DB::table('anneeScolaires')
+                            ->where('isDeleted', '=', '0')
+                            ->where('enCours', '=', '1')->first();
+
+        $anneeScolaire_id = $anneeScolaire->anneeScolaire_id;
+        $nom_annee_sco = $anneeScolaire->nom_anneesco;
         $nom_page = "calendier_payement";
         $etablissement = "Les Praticiens";
 
+        //Tous les infos de l'eleve (classe, annee_sco, login)
         $info_eleve = DB::table('eleves')
             ->join('personnes', 'login', '=', 'eleves.loginEleve')
-            ->join('classes', 'classes.classe_id', '=', 'eleves.classe_id')
-            ->where('eleves.code', '=', $request->matricule)
+            ->join('eleveAnneeClasse', 'eleveAnneeClasse.loginEleve', '=', 'eleves.loginEleve')
+            ->join('anneeScolaires', 'anneeScolaires.anneeScolaire_id', '=', 'eleveAnneeClasse.anneeScolaire_id')
+            ->join('classes', 'classes.classe_id', '=', 'eleveAnneeClasse.classe_id')
+            ->where([
+                ['eleves.code', '=', $request->matricule],
+                ['eleveAnneeClasse.anneeScolaire_id', '=', $anneeScolaire_id]
+                ])
+            ->get();
+        
+        //Liste des mois de l'annee
+        $mois = DB::table('mois')
+            ->join('mensualites', 'mensualites.mois_id', '=', 'mois.mois_id')
+            ->where('mois.isDeleted', '=', 0)
+            ->orderBy('mois.mois_id','asc')
             ->get();
 
-        $info_annee_sco = DB::table('eleveanneeclasse')
-            ->join('anneescolaires', 'anneescolaires.anneeScolaire_id', '=', 'eleveanneescos.anneeScolaire_id')
-            ->where('eleveanneescos.code', '=', $request->matricule)
-            ->get();
+        //dd($mois);
 
-        $mois = Mois::orderBy('mois_id','asc')->select('nom_mois')->get();
         //dd($info_eleve);
+        //Infos sur la mensualité et l'inscription
+        foreach ($info_eleve as $key ) {
+            $classe_id = $key->classe_id;
+            $inscription = $key->montant_inscription;
+            $mensualite = $key->montant_mensuel;
+        }
         return view('pages.comptable.info_eleve',
-        compact('nom_page', 'info_eleve','info_annee_sco' , 'etablissement', 'mois'));
+        compact(
+            'nom_page', 'info_eleve', 'anneeScolaire_id', 'nom_annee_sco' , 'etablissement', 'mois',
+            'mensualite',
+        ));
     }
 
     /**

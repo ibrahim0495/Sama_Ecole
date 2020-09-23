@@ -35,7 +35,7 @@
                             <label class="form-control-label" for="example2cols2Input">Nom</label>
                             <div class="input-group input-group-merge">
                                 <input
-                                    type="text" name="nom" class="form-control" id="example2cols2Input"
+                                    type="text" name="nom" value="{{ old('nom') }}" class="form-control" id="example2cols2Input"
                                     placeholder="Saisir le nom de la classe" value="{{ old('nom') }}">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>

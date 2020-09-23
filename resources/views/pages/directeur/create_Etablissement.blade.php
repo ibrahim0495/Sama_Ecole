@@ -41,7 +41,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Saisir le nom" name="nom">
+                                <input type="text" class="form-control" placeholder="Saisir le nom" name="nom" value="{{ old('nom') }}">
                             </div>
                         </div>
                         @error('nom')
@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <label class="form-control-label" for="InputAdresse">Adresse</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Adresse" type="text" name="adresse">
+                                <input class="form-control" placeholder="Adresse" type="text" name="adresse" value="{{ old('adresse') }}">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                                 </div>
@@ -73,7 +73,7 @@
                             <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
-                            <input class="form-control" placeholder="Email address" type="email" name="email">
+                            <input class="form-control" placeholder="Email address" type="email" name="email" value="{{ old('email') }}">
                         </div>
                         </div>
                         @error('email')
@@ -89,7 +89,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="text" name="telephone"
+                                <input class="form-control" placeholder="Numéro de téléphone" type="text" name="telephone" value="{{ old('telephone') }}"
                                 onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                             if(event.which < 45 || event.which > 57) return false;" maxlength="9">
                                 <div class="input-group-append">
@@ -107,7 +107,7 @@
                         <div class="form-group">
                             <label class="form-control-label" for="InputLogo">Logo</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="logo">
+                                <input type="file" class="custom-file-input" id="customFile" name="logo" value="{{ old('logo') }}">
                                 <label class="custom-file-label" for="customFile">Choisir une photo</label>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                         <div class="form-group">
                             <label class="form-control-label" for="InputTéléphone">Acronyme</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Saisir l'acronyme" type="text" name="acronyme">
+                                <input class="form-control" placeholder="Saisir l'acronyme" type="text" name="acronyme" value="{{ old('acronyme') }}">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>

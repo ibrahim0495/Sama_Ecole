@@ -7,6 +7,7 @@ use App\models\Classe;
 use App\models\Eleve;
 use App\models\EleveAnneeSco;
 use App\models\Inscription;
+use App\models\Mois;
 use App\models\Personne;
 use App\models\Paarent;
 use Illuminate\Http\Request;
@@ -79,7 +80,7 @@ class InscriptionController extends Controller
         //Vérification si l'élève s'est déjà inscrit
         $info_eleve = DB::table('personnes')
                         ->join('eleves', 'personnes.login', '=', 'eleves.loginEleve')
-                        ->join('eleveanneeclasse', 'eleveanneeclasse.loginEleve', '=', 'eleves.loginEleve')
+                        ->join('eleveAnneeClasse', 'eleveAnneeClasse.loginEleve', '=', 'eleves.loginEleve')
                         ->where('prenom', '=', $prenom)
                         ->where('nom', '=', $nom)
                         ->where('dateNaissance', '=', $dateNaissance)
@@ -149,7 +150,7 @@ class InscriptionController extends Controller
                                 'login_parent' => $login_parent
                             ]);
                             if ($new_eleve_eleve) {
-                                $eleveAnneScoClasse = DB::table('eleveanneeclasse')->insert([
+                                $eleveAnneScoClasse = DB::table('eleveAnneeClasse')->insert([
                                     'loginEleve' => $login_eleve,
                                     'classe_id' => $classe_id,
                                     'anneeScolaire_id' =>$request->anneeScolaire_id
@@ -221,7 +222,7 @@ class InscriptionController extends Controller
                             'login_parent' => $login_old_parent
                         ]);
                         if ($new_eleve_eleves) {
-                            $eleveAnneScos = DB::table('eleveanneeclasse')->insert([
+                            $eleveAnneScos = DB::table('eleveAnneeClasse')->insert([
                                 'loginEleve' => $login_eleve,
                                 'classe_id' => $classe_id,
                                 'anneeScolaire_id' =>$request->anneeScolaire_id
