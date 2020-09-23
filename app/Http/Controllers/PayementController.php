@@ -6,6 +6,7 @@ use App\models\Eleve;
 use App\models\Mois;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class PayementController extends Controller
 {
@@ -14,9 +15,10 @@ class PayementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $info_eleve = $request->info_eleve;
+        return view('pages.comptable.info_eleve', compact('info_eleve'));
     }
 
     /**
@@ -67,10 +69,13 @@ class PayementController extends Controller
         //Liste des mois de l'annee
         $mois = DB::table('mois')
             ->join('mensualites', 'mensualites.mois_id', '=', 'mois.mois_id')
-            ->where('mois.isDeleted', '=', 0)
+            ->where([
+                ['mois.isDeleted', '=', 0],
+                ['mensualites.code', '=', $request->matricule],
+                ['mensualites.anneeScolaire_id', '=', $anneeScolaire_id]
+            ])
             ->orderBy('mois.mois_id','asc')
             ->get();
-
         //dd($mois);
 
         //dd($info_eleve);
@@ -85,6 +90,31 @@ class PayementController extends Controller
             'nom_page', 'info_eleve', 'anneeScolaire_id', 'nom_annee_sco' , 'etablissement', 'mois',
             'mensualite',
         ));
+        /* return redirect()->route( 'payement.index' )
+        ->with( 
+            [ 
+                'nom_page' => $nom_page,  'info_eleve' => $info_eleve, 'anneeScolaire_id' => $anneeScolaire_id,
+                'nom_annee_sco' => $nom_annee_sco,  'etablissement' => $etablissement, 'mois' => $mois,
+                'mensualite' => $mensualite
+            ] 
+        ); */
+        /* return redirect()->route('comptable.index', 
+        [ $nom_page, $info_eleve, $anneeScolaire_id, $nom_annee_sco, $etablissement, $mois, $mensualite]);
+         *//*return Redirect::
+            route('comptable.index')
+            ->with('data' => $nom_page);
+                 ['nom_page' => $nom_page, 'info_eleve' => $info_eleve, 'anneeScolaire_id' => $anneeScolaire_id,
+                'nom_annee_sco' => $nom_annee_sco , 'etablissement' => $etablissement, 'mois' => $mois,
+                'mensualite' => $mensualite */
+        
+        /*  */
+    }
+
+    public function payement_mensuel(Request $request)
+    {
+        $this->validate($request, [
+            'montant' => 'required|integer'
+        ]);
     }
 
     /**

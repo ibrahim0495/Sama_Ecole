@@ -16,7 +16,7 @@ class Mois extends Model
             'Octobre', 'Novembre', 'Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai',
             'Juin', 'Juillet'
         ];
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < count($liste_mois); $i++) { 
             Mois::create([
                 'nom_mois' => $liste_mois[$i]
             ]);

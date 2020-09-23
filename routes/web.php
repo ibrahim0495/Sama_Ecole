@@ -92,7 +92,8 @@ Route::resource('reinscription', 'ReinscriptionController');
 
 //Payement
 Route::resource('payement', 'PayementController');
-
+Route::post('payement-mensuel', 'PayementController@payement_mensuel')->name('payement-mensuel');
+Route::post('payement-eleve', 'PayementController@create')->name('payement-eleve');
 
 //Surveillant fonctionnalites
 

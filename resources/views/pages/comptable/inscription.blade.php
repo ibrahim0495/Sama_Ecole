@@ -144,13 +144,13 @@
                                     name="dateNaissance" placeholder="Saisir la date de naissance" type="text"
                                     id="datepicker" {{-- value="{{ old('dateNaissance') ?? date('m/d/Y') }}" --}}
                                     />
-                                    @error('dateNaissance')
-                                        <div class="text-danger">{{ $message}}</div>
-                                    @enderror
                             </div>
                             <div class="input-group-append">
                                 <span class="input-group-text"></span>
                             </div>
+                            @error('dateNaissance')
+                                <div class="text-danger">{{ $message}}</div>
+                            @enderror
                         </div>
                     </div>
 
