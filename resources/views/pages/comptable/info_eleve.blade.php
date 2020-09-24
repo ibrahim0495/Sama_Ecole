@@ -21,6 +21,16 @@
         @include('layouts._partials.show_eleve')
         <div class="col-xl-8 order-xl-1">
             <div class="card">
+                {{-- Message de payement réussi --}}
+                @if (session('success_payement'))
+                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                        <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                        <span class="alert-text"><strong>Erreur!</strong> {{ session('success_payement') }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="card-header">
                     <button
                         class="btn btn-icon btn-primary" type="button" data-toggle="collapse"
@@ -55,7 +65,7 @@
                                             </td>
                                             <td>
                                                 @if ($m->reliquat === NULL)
-                                                    {{ $mensualite}}
+                                                    {{ $mensualite }}
                                                 @else
                                                     {{ $m->reliquat }}
                                                 @endif
@@ -68,45 +78,28 @@
                                             </td>
                                             <td>
                                                 @if ($m->reliquat === NULL)
-                                                    <button 
-                                                        type="button" data-toggle="modal" data-target="#payement"
-                                                        class="button btn-sm btn-primary">Payer</button>
+                                                    <a 
+                                                        href="{{ 
+                                                        route('effectuer-payement', 
+                                                        ['mensualite_id' => $m->mensualite_id, 'mois_id' => $m->mois_id,
+                                                        'loginEleve' => $loginEleve, 'code' => $code, 
+                                                        'anneeScolaire' => $m->anneeScolaire_id, 'montant' => $mensualite]) 
+                                                        }}" type="button" class="button btn-sm btn-primary">Payer</a>
                                                 @elseif ($m->reliquat > 0 )
-                                                    <a href="#" class="button btn-sm btn-warning">Completer</a>
+                                                    <a 
+                                                    href="{{ 
+                                                        route('effectuer-payement', 
+                                                        ['mensualite_id' => $m->mensualite_id, 'mois_id' => $m->mois_id,
+                                                        'loginEleve' => $loginEleve, 'code' => $code, 
+                                                        'anneeScolaire' => $m->anneeScolaire_id, 'montant' => $m->reliquat]) 
+                                                        }}" type="button" class="button btn-sm btn-warning">Completer</a>
                                                 @else
                                                     <a href="#" class="button btn-sm btn-success">En règle</a>
                                                 @endif
                                                 
                                             </td>
                                         </tr>
-                                        {{-- Modal ici --}}
-                                        <div class="modal fade" id="payement" tabindex="-1" role="dialog" aria-labelledby="new-event-label" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-secondary" role="document">
-                                                <div class="modal-content">
-                                                    <!-- Modal body -->
-                                                    <div class="modal-body">
-                                                        <form id="newModalForm" class="new-event--form" method="POST" action="{{ route('payement-mensuel') }}">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <label class="form-control-label">Payement mois {{ $m->nom_mois }} </label>
-                                                                <input 
-                                                                    type="text" id="montant" name="montant" placeholder="Saisir le montant reçu ici"
-                                                                    class="form-control form-control-alternative"
-                                                                    onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
-                                                                        if(event.which < 45 || event.which > 57) return false;" maxlength="9"/>
-                                                            </div>
-
-                                                            <!-- Modal footer -->
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-primary">Payer</button>
-                                                                <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Fermer</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                    @endforeach
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
