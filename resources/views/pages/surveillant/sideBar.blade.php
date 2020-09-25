@@ -66,13 +66,13 @@
                             <div class="collapse" id="navbar-absences">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{  route('absence.create') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> E </span>
                                         <span class="sidenav-normal">Enregistrer</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{  route('absence.index') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> L </span>
                                         <span class="sidenav-normal"> Lister</span>
                                         </a>
@@ -90,13 +90,13 @@
                             <div class="collapse" id="navbar-retard">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{  route('retard.create') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> E </span>
                                         <span class="sidenav-normal">Enregistrer</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{  route('retard.index') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> L </span>
                                         <span class="sidenav-normal"> Lister</span>
                                         </a>

@@ -62,6 +62,11 @@ Route::get('directeur/comptable/show/{comptable}',  'ComptableController@show_co
 
 
 //Absence
+Route::resource('absence', 'AbsenceController');
+
+//Retard
+Route::resource('retard', 'RetardController');
+
 Route::resource('etablissement', 'EtablissementController');
 
 //Année Scolaire

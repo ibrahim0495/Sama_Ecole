@@ -219,7 +219,7 @@ class SurveillantController extends Controller
     public function lister_surveillants_actifs(){
         //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
 
-        $surveillants = Personne::where('profil', 'Surveillant')->where('etatPers', 1)->get();
+        $surveillants = Personne::where('profil', 'Surveillant')->where('etatPers', 1)->where('isDeleted',0)->get();
         $status = 'Actif(s)';
 
         return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
@@ -283,12 +283,12 @@ class SurveillantController extends Controller
                 $request->session()->flash('notification.type','alert-success');
 
                 $request->session()->flash('notification.message', " Le surveillant #$login a été bien modifié");
-        
+
             }
         }
 
         return redirect(route('directeur.surveillant.liste'));
-        
+
 
 
     }

@@ -19,7 +19,7 @@ class CreateAbsencesTable extends Migration
             $table->string('code');
             $table->integer('duree_abs');
             $table->string('motif');
-            $table->boolean('justificatif');
+            $table->boolean('justificatif')->default(false);
             $table->boolean('isDeleted')->default(0);
             $table->timestamps();
         });

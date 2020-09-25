@@ -18,7 +18,7 @@ class CreateRetardsTable extends Migration
             $table->string('loginEleve');
             $table->string('code');
             $table->integer('duree_retard');
-            $table->string('motif');
+            $table->string('motif')->nullable();
             $table->boolean('justificatif')->nullable();
             $table->boolean('isDeleted')->default(0);
 
