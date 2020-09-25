@@ -114,7 +114,7 @@
                             <div class="collapse" id="navbar-edt">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('surveillant.edt.create-edt') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> C </span>
                                         <span class="sidenav-normal">Créer</span>
                                         </a>

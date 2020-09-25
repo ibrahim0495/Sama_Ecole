@@ -127,6 +127,9 @@ Route::resource('directeur', 'DirecteurController');
 
 //Emploi du temps
 Route::resource('edt', 'EmploiDuTempsController');
+Route::get('surveillant/edt/create-edt',  'EmploiDuTempsController@create_edt')->name('surveillant.edt.create-edt');
+Route::post('surveillant/edt/store-edt',  'EmploiDuTempsController@store_edt')->name('surveillant.edt.store-edt');
+
 
 //Matière
 Route::resource('matiere', 'MatiereController');

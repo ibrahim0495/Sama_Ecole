@@ -2,18 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Classe;
+use App\models\EmploiDuTemps;
 use Illuminate\Http\Request;
 
 class EmploiDuTempsController extends Controller
 {
+    //Gestion Emploi du temps by @Ouzy012
+    public function create_edt()
+    {
+        $liste_classe = Classe::orderBy('nom', 'asc')->get();
+        return view('pages.surveillant.create_edt', compact('liste_classe'));
+    }
+
+    public function store_edt(Request $request)
+    {
+        $this->validate($request, [
+            'classe_id' => 'required|exists:classes,classe_id'
+        ]);
+
+        return redirect()->route('edt.index', $request->classe_id);
+        
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $classe_id = $request->classe_id;
+        $liste_heure = EmploiDuTemps::liste_heure();
+        $liste_jour = EmploiDuTemps::liste_jour();
+        $index = 1;
+        //dd($liste_heure);
+        
+        return view('pages.surveillant.index_edt', compact('classe_id', 'liste_heure', 'liste_jour', 'index'));
     }
 
     /**
