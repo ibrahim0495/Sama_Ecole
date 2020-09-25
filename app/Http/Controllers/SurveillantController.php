@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 
 class SurveillantController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
