@@ -105,7 +105,7 @@
                 {{-- Matricule --}}
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="form-control-label" for="InputPrénom">Matricule</label>
+                        <label class="form-control-label" for="InputPrénom">Code</label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-code"></i></span>

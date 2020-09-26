@@ -110,6 +110,8 @@ Route::get('surveillant/professeur/liste', 'ProfesseurController@lister_professe
 Route::get('surveillant/professeur/listeActif', 'ProfesseurController@lister_professeurs_actifs')->name('surveillant.professeur.listeActif');
 Route::get('surveillant/professeur/listeInactif', 'ProfesseurController@lister_professeurs_inactifs')->name('surveillant.professeur.listeInactif');
 Route::get('surveillant/professeur/show/{professeur}',  'ProfesseurController@show_professeur')->name('surveillant.professeur.show');
+Route::get('surveillant/liste_eleve_annee', 'SurveillantController@list_eleve_annee')->name('surveillant.liste_eleve_annee');
+Route::post('surveillant/liste_eleve', 'SurveillantController@list_eleve')->name('surveillant.liste_eleve');
 Route::resource('surveillant', 'SurveillantController');
 
 //Professeur

@@ -138,7 +138,7 @@
                             <div class="collapse" id="navbar-notes">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('surveillant.liste_eleve_annee') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> V </span>
                                         <span class="sidenav-normal"> Voir </span>
                                         </a>

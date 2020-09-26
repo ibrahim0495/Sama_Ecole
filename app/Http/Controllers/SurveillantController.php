@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class SurveillantController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -292,6 +292,48 @@ class SurveillantController extends Controller
 
 
 
+    }
+    public function list_eleve_annee(){
+        $anneeScolaire= DB::table('anneeScolaires')
+                        ->where('isDeleted',0)
+                        ->select()
+                        ->get();
+        $nomClasse= DB::table('classes')
+                        ->where('isDeleted',0)
+                        ->get();
+
+        return view('pages.surveillant.show_annee_classe', compact('anneeScolaire','nomClasse'));
+    }
+
+    public function list_eleve(Request $request){
+
+        $noteDevoir= DB::table('personnes')
+                            ->join('eleves','eleves.loginEleve','=','personnes.login')
+                            ->join('devoirs','eleves.loginEleve','=','devoirs.loginEleve')
+                            ->join('eleveAnneeClasse','devoirs.loginEleve','=','eleveAnneeClasse.loginEleve')
+                            ->join('anneeScolaires','anneeScolaires.anneeScolaire_id','=','eleveAnneeClasse.anneeScolaire_id')
+                            ->join('classes','classes.classe_id','=','eleveAnneeClasse.classe_id')
+                            ->join('matieres','matieres.matiere_id','=','devoirs.matiere_id')
+                            ->where('classes.nom',$request->classe)
+                            ->where('anneeScolaires.nom_anneesco',$request->annee)
+                            ->select('personnes.prenom','personnes.nom','matieres.nom_matiere','devoirs.*')
+                            ->get();
+
+        $noteCompo= DB::table('personnes')
+                            ->join('eleves','eleves.loginEleve','=','personnes.login')
+                            ->join('compositions','eleves.loginEleve','=','compositions.loginEleve')
+                            ->join('eleveAnneeClasse','compositions.loginEleve','=','eleveAnneeClasse.loginEleve')
+                            ->join('anneeScolaires','anneeScolaires.anneeScolaire_id','=','eleveAnneeClasse.anneeScolaire_id')
+                            ->join('classes','classes.classe_id','=','eleveAnneeClasse.classe_id')
+                            ->join('matieres','matieres.matiere_id','=','compositions.matiere_id')
+                            ->where('classes.nom',$request->classe)
+                            ->where('anneeScolaires.nom_anneesco',$request->annee)
+                            ->select('personnes.prenom','personnes.nom','matieres.nom_matiere','compositions.*')
+                            ->get();
+        $classe= $request->classe;
+        $annee= $request->annee;
+
+        return view('pages.surveillant.show_notes_eleves',compact('noteDevoir','noteCompo','classe','annee'));
     }
 
 }
