@@ -37,7 +37,7 @@ class EleveController extends Controller
         $liste_classe = Classe::where('isDeleted', 0)->orderBy('nom', 'desc')->get();
         $liste_annee_sco = DB::table('anneeScolaires')
                         ->where('isDeleted', '=', '0')
-                        ->where('enCours', '=', '1')->get();
+                        ->where('enCours', '=', '0')->get();
         return view('layouts.show_classe', compact('nom_page','profils', 'liste_classe', 'liste_annee_sco'));
 
     }
@@ -62,9 +62,9 @@ class EleveController extends Controller
         $anneeScolaire_id = Str::beforeLast($request->anneeScolaire_id, '::');
         $liste_eleve = DB::table('eleves')
             ->join('personnes', 'personnes.login', '=', 'eleves.loginEleve')
-            ->join('eleveanneeclasse', 'eleveanneeclasse.loginEleve', '=', 'eleves.loginEleve')
-            ->where('eleveanneeclasse.anneeScolaire_id', '=', $anneeScolaire_id)
-            ->where('eleveanneeclasse.classe_id', '=', $classe_id)
+            ->join('eleveAnneeClasse', 'eleveAnneeClasse.loginEleve', '=', 'eleves.loginEleve')
+            ->where('eleveAnneeClasse.anneeScolaire_id', '=', $anneeScolaire_id)
+            ->where('eleveAnneeClasse.classe_id', '=', $classe_id)
             ->orderBy('nom', 'asc')
             ->get();
         //La variable $profils va récupérer le profils de l'utilisateur connecter

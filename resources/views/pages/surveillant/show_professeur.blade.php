@@ -14,13 +14,13 @@
 <div class="card mb-12">
     <!-- Card header -->
     <div class="card-header">
-        <h3 class="mb-0">Modification du Surveillant : {{$professeur->login}}</h3>
+        <h3 class="mb-0">Modification du Professeur : {{$professeur->login}}</h3>
     </div>
     <!-- Card body -->
     <div class="card-body">
         <form method="POST" action="{{ route('professeur.update', $professeur->login) }}">
             @method('PUT')
-            @include('layouts.show_personnel', ['personne' => $professeur]);
+            @include('layouts.show_personnel', ['personne' => $professeur])
             <div class="col-md-4">
                 <a class="btn btn-outline-danger btn-lg btn-block" href="{{route('surveillant.professeur.liste')}}">
                     Annuler
