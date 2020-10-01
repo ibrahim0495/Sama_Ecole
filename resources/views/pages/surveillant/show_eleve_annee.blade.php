@@ -24,7 +24,7 @@
     <!-- Card body -->
     <div class="card-body">
 
-        <form action="{{ route('surveillant.liste_eleve')}}" method="POST" class="inline-block">
+        <form action="{{ route('surveillant.liste_eleve_classe')}}" method="POST" class="inline-block">
             <input type="hidden" name="profils" value="surveillant">
                 <div class="modal-body">
                     {{  csrf_field() }}

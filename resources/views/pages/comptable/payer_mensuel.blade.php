@@ -74,7 +74,7 @@
                   <input type="hidden" name="mensualite" value="{{ $montant }}">
                     <label class="form-control-label">Montant</label>
                     <input 
-                      type="text" name="montant" placeholder="Saisir le montant versé ici" 
+                      type="text" name="montant" placeholder="Saisir le montant à payer {{ $montant }} fcfa ici" 
                       class="form-control @error('montant') is-invalid @enderror" 
                       onKeypress="  if(event.keyCode <= 47 || event.keyCode > 57) event.returnValue = false;
                       if(event.which <= 47 || event.which > 57) return false;" maxlength="9">

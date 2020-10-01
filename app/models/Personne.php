@@ -3,6 +3,7 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Personne extends Model
@@ -56,6 +57,37 @@ class Personne extends Model
             $code .= $characters[rand(0, $charactersLength - 1)];
         }
         return $code .= $date;
+    }
+
+    public static function liste_des_eleves_classe_annesco($anneesco, $classe)
+    {   
+        $liste_classe = DB::table('personnes as p')
+            ->join('eleves', 'eleves.loginEleve', '=', 'p.login')
+            ->join('eleveAnneeClasse as eac', 'eac.loginEleve', '=', 'p.login')
+            ->where([
+                ['eac.anneeScolaire_id', $anneesco],
+                ['eac.classe_id', $classe],
+                ['p.etatPers', 1],
+                ['p.isDeleted', 0]
+            ])
+            ->orderBy('p.nom', 'desc')
+            ->get();
+
+        return $liste_classe;
+    }
+
+    public static function infos_parent($login_parent, $loginEleve)
+    {
+        $parent = DB::table('personnes')
+            ->join('eleves','eleves.login_parent', '=', 'personnes.login')
+            ->where([
+                ['eleves.login_parent', $login_parent],
+                ['eleves.loginEleve', $loginEleve],
+                ['personnes.isDeleted', 0]
+            ])
+            ->first();
+        
+        return $parent;
     }
 
 

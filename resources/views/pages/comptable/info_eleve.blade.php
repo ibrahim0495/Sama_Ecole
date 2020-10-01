@@ -25,7 +25,7 @@
                 @if (session('success_payement'))
                     <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
                         <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                        <span class="alert-text"><strong>Erreur!</strong> {{ session('success_payement') }}</span>
+                        <span class="alert-text"><strong>Succès!</strong> {{ session('success_payement') }}</span>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

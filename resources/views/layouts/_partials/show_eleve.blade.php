@@ -7,11 +7,11 @@
                     <div class="card-profile-image">
                         <a href="#">
                             @if ($item->nomImgPers == null && $item->sexe === 'Garçon')
-                                <img src="photos_profils/avatar_male.png" class="rounded-circle">
+                                <img src="{{ asset('photos_profils/avatar_male.png') }}" class="rounded-circle">
                             @elseif ($item->nomImgPers == null && $item->sexe === 'Fille')
-                                <img src="photos_profils/avatar_female.png" class="rounded-circle">
+                                <img src="{{ asset('photos_profils/avatar_female.png') }}" class="rounded-circle">
                             @else
-                                <img src="photos_profils/{{ $item->nomImgPers }}" class="rounded-circle">
+                                <img src="{{ asset('photos_profils/') }}{{ $item->nomImgPers }}" class="rounded-circle">
                             @endif
                         </a>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="col">
                         <div class="card-profile-stats d-flex justify-content-center">
                             <div>
-                                <span class="heading">{{ $item->loginEleve }}</span>
+                                <span class="heading text-lowercase">{{ $item->loginEleve }}</span>
                                 <span class="description">Login</span>
                             </div>
                             <div>
