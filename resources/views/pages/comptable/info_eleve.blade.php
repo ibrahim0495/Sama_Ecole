@@ -21,6 +21,16 @@
         @include('layouts._partials.show_eleve')
         <div class="col-xl-8 order-xl-1">
             <div class="card">
+                {{-- Message de payement réussi --}}
+                @if (session('success_payement'))
+                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                        <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                        <span class="alert-text"><strong>Succès!</strong> {{ session('success_payement') }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="card-header">
                     <button
                         class="btn btn-icon btn-primary" type="button" data-toggle="collapse"
@@ -51,10 +61,14 @@
                                                 {{ $m->nom_mois }}
                                             </td>
                                             <td>
-                                                {{ $mensualite }}
+                                                {{ $mensualite}}
                                             </td>
                                             <td>
-                                                {{ $m->nom_mois }}
+                                                @if ($m->reliquat === NULL)
+                                                    {{ $mensualite }}
+                                                @else
+                                                    {{ $m->reliquat }}
+                                                @endif
                                             </td>
                                             <td>
                                                 <span class="badge badge-dot mr-4">
@@ -63,10 +77,29 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <a href="#" class="button btn-sm btn-success">Payer</a>
+                                                @if ($m->reliquat === NULL)
+                                                    <a 
+                                                        href="{{ 
+                                                        route('effectuer-payement', 
+                                                        ['mensualite_id' => $m->mensualite_id, 'mois_id' => $m->mois_id,
+                                                        'loginEleve' => $loginEleve, 'code' => $code, 
+                                                        'anneeScolaire' => $m->anneeScolaire_id, 'montant' => $mensualite]) 
+                                                        }}" type="button" class="button btn-sm btn-primary">Payer</a>
+                                                @elseif ($m->reliquat > 0 )
+                                                    <a 
+                                                    href="{{ 
+                                                        route('effectuer-payement', 
+                                                        ['mensualite_id' => $m->mensualite_id, 'mois_id' => $m->mois_id,
+                                                        'loginEleve' => $loginEleve, 'code' => $code, 
+                                                        'anneeScolaire' => $m->anneeScolaire_id, 'montant' => $m->reliquat]) 
+                                                        }}" type="button" class="button btn-sm btn-warning">Completer</a>
+                                                @else
+                                                    <a href="#" class="button btn-sm btn-success">En règle</a>
+                                                @endif
+                                                
                                             </td>
                                         </tr>
-                                    @endforeach
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -76,4 +109,16 @@
             </div>
         </div>
     </div>
+
+    {{-- Validation Modal --}}
+    @if (count($errors) > 0)
+    <script type="text/javascript">
+        $( document ).ready(function() {
+             $('#payement').modal('show');
+        });
+    </script>
+  @endif
+@endsection
+
+@section('extra-js')
 @endsection

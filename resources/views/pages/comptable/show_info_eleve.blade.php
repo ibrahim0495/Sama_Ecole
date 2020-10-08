@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_directeur', ['title' => ' |Eleve'])
+@extends('pages.comptable.master_comptable', ['title' => ' |Eleve'])
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')
@@ -6,11 +6,11 @@
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Directeur</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Comptable</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('comptable.index') }}">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page">Info élève</li>
         </ol>
     </nav>
@@ -71,7 +71,7 @@
                             @endif
                         </h5>
                         @foreach ($infos_enfant as $item)
-                            <a href="{{ route('directeur.eleve.show', $item->loginEleve) }}"
+                            <a href="{{ route('eleve.show', $item->loginEleve) }}"
                                 data-original-title="Voir l'élève" class="btn-link">
                                 {{ $item->loginEleve }}
                             </a>

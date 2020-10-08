@@ -38,7 +38,7 @@
                                         class="form-control"
                                         name="classe" data-toggle="select">
                                         @foreach ($nomClasse as $cl)
-                                            <option>{{ $cl->nom }}</option>
+                                            <option value="{{ $cl->classe_id }}::{{ $cl->nom }}">{{ $cl->nom }}</option>
                                         @endforeach
                                     </select>
                                     @error('classe')
@@ -48,12 +48,12 @@
                             </div>
                             <div class="col-md-6 ">
                                 <div class="form-group">
-                                    <label class="form-control-label">Année Scolaire</label>
+                                    <label class="form-control-label">Année-Scolaire</label>
                                     <select
                                         class="form-control"
                                         name="annee" data-toggle="select">
                                         @foreach ($anneeScolaire as $annee)
-                                            <option>{{ $annee->nom_anneesco }}</option>
+                                            <option value="{{ $annee->anneeScolaire_id }}::{{ $annee->nom_anneesco }}">{{ $annee->nom_anneesco }}</option>
                                         @endforeach
                                     </select>
                                     @error('annee')

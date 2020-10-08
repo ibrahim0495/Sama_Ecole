@@ -62,6 +62,11 @@ Route::get('directeur/comptable/show/{comptable}',  'ComptableController@show_co
 
 
 //Absence
+Route::resource('absence', 'AbsenceController');
+
+//Retard
+Route::resource('retard', 'RetardController');
+
 Route::resource('etablissement', 'EtablissementController');
 
 //Année Scolaire
@@ -92,7 +97,10 @@ Route::resource('reinscription', 'ReinscriptionController');
 
 //Payement
 Route::resource('payement', 'PayementController');
-
+Route::post('payement-mensuel', 'PayementController@payement_mensuel')->name('payement-mensuel');
+Route::get(
+    'effectuer-payement/mensualite/{mensualite_id}/{mois_id}/{loginEleve}/{code}/{anneeScolaire}/{montant}',
+    'PayementController@effectuer_payement')->name('effectuer-payement');
 
 //Surveillant fonctionnalites
 
@@ -102,7 +110,12 @@ Route::get('surveillant/professeur/liste', 'ProfesseurController@lister_professe
 Route::get('surveillant/professeur/listeActif', 'ProfesseurController@lister_professeurs_actifs')->name('surveillant.professeur.listeActif');
 Route::get('surveillant/professeur/listeInactif', 'ProfesseurController@lister_professeurs_inactifs')->name('surveillant.professeur.listeInactif');
 Route::get('surveillant/professeur/show/{professeur}',  'ProfesseurController@show_professeur')->name('surveillant.professeur.show');
+Route::get('surveillant/liste_eleve_annee', 'SurveillantController@list_eleve_annee')->name('surveillant.liste_eleve_annee');
+Route::post('surveillant/liste_eleve', 'SurveillantController@list_eleve')->name('surveillant.liste_eleve');
+Route::get('surveillant/show_eleve_annee', 'SurveillantController@show_eleve_annee')->name('surveillant.show_eleve_annee');
+Route::post('surveillant/liste_eleve_classe', 'SurveillantController@liste_eleve_classe')->name('surveillant.liste_eleve_classe');
 Route::resource('surveillant', 'SurveillantController');
+
 
 //Professeur
 Route::get('professeurs/messages','ProfesseurController@messages')->name('professeur.messages');
@@ -123,7 +136,10 @@ Route::post('directeur/liste_eleve', 'DirecteurController@list_eleve')->name('di
 Route::resource('directeur', 'DirecteurController');
 
 //Emploi du temps
+Route::get('surveillant/edt/create-edt',  'EmploiDuTempsController@create_edt')->name('surveillant.edt.create-edt');
+Route::post('surveillant/edt/store-edt',  'EmploiDuTempsController@store_edt')->name('surveillant.edt.store-edt');
 Route::resource('edt', 'EmploiDuTempsController');
+
 
 //Matière
 Route::resource('matiere', 'MatiereController');

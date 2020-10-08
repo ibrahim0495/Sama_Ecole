@@ -1,5 +1,5 @@
 <div class="col-xl-4 order-xl-2">
-    @foreach ($info_eleve as $item)
+    @foreach ( $info_eleve as $item)
         <div class="card card-profile">
             <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
             <div class="row justify-content-center">
@@ -7,11 +7,11 @@
                     <div class="card-profile-image">
                         <a href="#">
                             @if ($item->nomImgPers == null && $item->sexe === 'Garçon')
-                                <img src="photos_profils/avatar_male.png" class="rounded-circle">
+                                <img src="{{ asset('photos_profils/avatar_male.png') }}" class="rounded-circle">
                             @elseif ($item->nomImgPers == null && $item->sexe === 'Fille')
-                                <img src="photos_profils/avatar_female.png" class="rounded-circle">
+                                <img src="{{ asset('photos_profils/avatar_female.png') }}" class="rounded-circle">
                             @else
-                                <img src="photos_profils/{{ $item->nomImgPers }}" class="rounded-circle">
+                                <img src="{{ asset('photos_profils/') }}{{ $item->nomImgPers }}" class="rounded-circle">
                             @endif
                         </a>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="col">
                         <div class="card-profile-stats d-flex justify-content-center">
                             <div>
-                                <span class="heading">{{ $item->loginEleve }}</span>
+                                <span class="heading text-lowercase">{{ $item->loginEleve }}</span>
                                 <span class="description">Login</span>
                             </div>
                             <div>
@@ -53,7 +53,7 @@
                         {{ $item->sexe }}
                     </h5>
                     <div>
-                        <i class="ni education_hat mr-2"></i>{{ $etablissement }}
+                        <i class="ni education_hat mr-2"></i>{{ session('etablissement') }}
                     </div>
                 </div>
             </div>

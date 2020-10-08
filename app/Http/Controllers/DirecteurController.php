@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\models\Classe;
+use App\models\Eleve;
+use App\models\Personne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DirecteurController extends Controller
 {
@@ -16,12 +19,12 @@ class DirecteurController extends Controller
     public function index()
     {
         $nomClasse= Classe::orderBy('nom')
-                            ->where('isDeleted',1)
-                            ->get();
+            ->where('isDeleted',1)
+            ->get();
         $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',1)
-                        ->select()
-                        ->get();
+            ->where('isDeleted',1)
+            ->select()
+            ->get();
         return view('pages.directeur.home', compact('anneeScolaire','nomClasse'));
     }
 
@@ -109,56 +112,45 @@ class DirecteurController extends Controller
     }
     public function list_eleve(Request $request)
     {
+        $nom_classe = Str::afterLast($request->classe, '::');
+        $classe_id = Str::beforeLast($request->classe, '::');
+
+        $nom_annee_sco = Str::afterLast($request->annee, '::');
+        $anneeScolaire_id= Str::beforeLast($request->annee, '::');
+
         $this->validate($request, [
             'classe'=> 'required',
             'annee'=> 'required'
         ]);
 
-        $class =$request->classe;
+        $liste_classe = Personne::liste_des_eleves_classe_annesco($anneeScolaire_id, $classe_id);
 
-        $list_eleve= DB::table('personnes')
-                        ->join('eleves','personnes.login','=','eleves.loginEleve')
-                        ->join('eleveAnneeClasse','eleveAnneeClasse.loginEleve','=','eleves.loginEleve')
-                        ->join('classes','classes.classe_id','=','eleveAnneeClasse.classe_id')
-                        ->join('eleveAnneeClasse','eleveAnneeClasse.anneeScolaire_id','=','anneeScolaires.anneeScolaire_id')
-                        ->where('personnes.profil','eleve')
-                        ->where('classes.nom', $request->classe)
-                        ->where('anneeScolaires.nom_anneesco', $request->annee)
-                        ->where('personnes.isDeleted',1)
-                        ->where('classes.isDeleted',1)
-                        ->select('personnes.*','eleves.*')
-                        ->get();
-
-        $nomClasse= Classe::orderBy('nom')
-                            ->where('isDeleted',1)
-                            ->get();
-        $anneeScolaire= DB::table('anneeScolaires')
-                                        ->where('isDeleted',1)
-                                        ->select()
-                                        ->get();
         $nom_page = "info_eleve";
-        return view('pages.directeur.show_info_eleve', compact('nom_page','list_eleve','class','nomClasse','anneeScolaire'));
+        return view(
+            'pages.directeur.show_info_eleve', 
+            compact('nom_page','liste_classe', 'nom_classe', 'nom_annee_sco'));
     }
 
     public function show_Det_eleve(String $login)
     {
 
-        $eleve = DB::table('personnes')
-                                ->join('eleves','eleves.loginEleve','=','personnes.login')
-                                ->where('login','=',$login)
-                                ->where('isDeleted',1)
-                                ->select('personnes.*','eleves.*')
-                                ->get();
+        $eleve = Eleve::info_eleve($login);
 
-        $nomClasse= Classe::orderBy('nom')
-                        ->where('isDeleted',1)
+        $nomClasse = Classe::orderBy('nom')
+                        ->where('isDeleted',0)
                         ->get();
-        $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',1)
-                        ->select()
+        $anneeScolaire = DB::table('anneeScolaires')
+                        ->where('isDeleted', 0)
                         ->get();
 
-        return view('pages.directeur.show_eleve ',compact('eleve','nomClasse','anneeScolaire'));
+        $parent = Personne::infos_parent($eleve->login_parent, $login);
+
+        $infos_enfant = Eleve::login_enfants_one_parent($parent->login);
+
+        $nombre_enfants = count($infos_enfant);
+
+        return view('pages.directeur.show_eleve ', 
+        compact('eleve','nomClasse','anneeScolaire', 'parent', 'nombre_enfants', 'infos_enfant'));
     }
 
 }

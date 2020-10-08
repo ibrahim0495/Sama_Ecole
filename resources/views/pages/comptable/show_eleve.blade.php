@@ -1,4 +1,4 @@
-@extends('pages.directeur.master_directeur', ['title' => ' |Eleve'])
+@extends('pages.comptable.master_comptable', ['title' => ' |Eleve'])
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')
@@ -6,11 +6,11 @@
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Directeur</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Comptable</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('comptable.index') }}">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page">Liste des élèves</li>
         </ol>
     </nav>
@@ -62,9 +62,15 @@
                             <td class="clearfix">
                                 <a
                                     class="btn btn-sm btn-success float-left"
-                                    href="{{ route('directeur.eleve.show', $list->login) }}"
+                                    href="{{ route('eleve.show', $list->login) }}"
                                     data-original-title="Voir l'élève">
                                     <i class="fa fa-eye fa-lg fa-fw"></i>
+                                </a>
+                                <a
+                                    class="btn btn-sm btn-primary float-right"
+                                    href="{{ route('payement.show', $list->code) }}"
+                                    data-original-title="Mensualité l'élève">
+                                    <i class="ni ni-money-coins ni-lg"></i>
                                 </a>
                             </td>
                         </tr>

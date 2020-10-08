@@ -7,6 +7,7 @@ use App\models\Classe;
 use App\models\Eleve;
 use App\models\EleveAnneeSco;
 use App\models\Inscription;
+use App\models\Mensualite;
 use App\models\Mois;
 use App\models\Personne;
 use App\models\Paarent;
@@ -35,7 +36,7 @@ class InscriptionController extends Controller
     public function create()
     {
         $nom_page = "inscription_create";
-        $liste_classe = Classe::where('isDeleted', 0)->orderBy('nom', 'desc')->get();
+        $liste_classe = Classe::where('isDeleted', 0)->orderBy('nom', 'asc')->get();
         $liste_annee_sco = DB::table('anneeScolaires')
                             ->where('isDeleted', '=', '0')
                             ->where('enCours', '=', '1')->get();
@@ -95,6 +96,12 @@ class InscriptionController extends Controller
             return redirect()
                     ->back()
                     ->with('error_info_eleve', 'Il semble que cet élève s\'est déjà incrit');
+        }
+
+        
+        $liste_mois = Mois::select('mois_id')->orderBy('mois_id','asc')->get();
+        foreach ($liste_mois as $key) {
+            $tab[] = $key->mois_id;
         }
 
         if ($request->type_parent == 'new') {
@@ -166,6 +173,14 @@ class InscriptionController extends Controller
                                     ]);
                                 }
                                 if ($inscription) {
+                                    for ($i=0; $i < count($tab); $i++) { 
+                                        $mensualite = Mensualite::create([
+                                            'mois_id' => $tab[$i],
+                                            'loginEleve' => $login_eleve,
+                                            'code' => $matricule_eleve,
+                                            'anneeScolaire_id' => $request->anneeScolaire_id
+                                        ]);
+                                    }
                                     return redirect()
                                     ->route('comptable.index');
                                 }
@@ -238,6 +253,14 @@ class InscriptionController extends Controller
                                 ]);
                             }
                             if ($inscriptions) {
+                                for ($i=0; $i < count($tab); $i++) { 
+                                        $mensualite = Mensualite::create([
+                                            'mois_id' => $tab[$i],
+                                            'loginEleve' => $login_eleve,
+                                            'code' => $matricule_eleve,
+                                            'anneeScolaire_id' => $request->anneeScolaire_id
+                                        ]);
+                                    }
                                 return redirect()
                                 ->route('comptable.index');
                                 //->with('error_info_eleve', 'Il semble que cet élève s\'est déjà incrit');

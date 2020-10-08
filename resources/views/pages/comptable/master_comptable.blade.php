@@ -49,7 +49,7 @@
                                 @yield('breadcrumb')
                             </div>
 
-                            @if ($nom_page == "calendier_payement")
+                            @if (session('nom_page') == "calendier_payement")
                                 <div class="col-lg-6 mt-3 mt-lg-0 text-lg-right">
                                     <a href="#" class="fullcalendar-btn-prev btn btn-sm btn-neutral">
                                         <i class="fas fa-angle-left"></i>

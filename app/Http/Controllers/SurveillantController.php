@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonneRequest;
 use App\Http\Requests\PersonneUpdateRequest;
+use App\models\AnneeScolaire;
 use App\models\Personne;
 use App\models\Surveillant;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use App\models\Classe;
+use App\models\Eleve;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
 class SurveillantController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -81,17 +84,6 @@ class SurveillantController extends Controller
             return redirect()->back()->withInput();
         }
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -218,7 +210,7 @@ class SurveillantController extends Controller
     public function lister_surveillants_actifs(){
         //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
 
-        $surveillants = Personne::where('profil', 'Surveillant')->where('etatPers', 1)->get();
+        $surveillants = Personne::where('profil', 'Surveillant')->where('etatPers', 1)->where('isDeleted',0)->get();
         $status = 'Actif(s)';
 
         return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
@@ -281,14 +273,107 @@ class SurveillantController extends Controller
                 $request->session()->flash('notification.type','alert-success');
 
                 $request->session()->flash('notification.message', " Le surveillant #$login a été bien modifié");
-        
+
             }
         }
 
         return redirect(route('directeur.surveillant.liste'));
-        
+
 
 
     }
+    public function list_eleve_annee(){
+        $anneeScolaire = AnneeScolaire::liste_annee_sco();
 
+        $nomClasse = Classe::where('isDeleted', 0)->get();
+
+        return view('pages.surveillant.show_annee_classe', compact('anneeScolaire','nomClasse'));
+    }
+
+    public function list_eleve(Request $request){
+
+        $noteDevoir= DB::table('personnes')
+                            ->join('eleves','eleves.loginEleve','=','personnes.login')
+                            ->join('devoirs','eleves.loginEleve','=','devoirs.loginEleve')
+                            ->join('eleveAnneeClasse','devoirs.loginEleve','=','eleveAnneeClasse.loginEleve')
+                            ->join('anneeScolaires','anneeScolaires.anneeScolaire_id','=','eleveAnneeClasse.anneeScolaire_id')
+                            ->join('classes','classes.classe_id','=','eleveAnneeClasse.classe_id')
+                            ->join('matieres','matieres.matiere_id','=','devoirs.matiere_id')
+                            ->where('classes.nom',$request->classe)
+                            ->where('anneeScolaires.nom_anneesco',$request->annee)
+                            ->select('personnes.prenom','personnes.nom','matieres.nom_matiere','devoirs.*')
+                            ->get();
+
+        $noteCompo= DB::table('personnes')
+                            ->join('eleves','eleves.loginEleve','=','personnes.login')
+                            ->join('compositions','eleves.loginEleve','=','compositions.loginEleve')
+                            ->join('eleveAnneeClasse','compositions.loginEleve','=','eleveAnneeClasse.loginEleve')
+                            ->join('anneeScolaires','anneeScolaires.anneeScolaire_id','=','eleveAnneeClasse.anneeScolaire_id')
+                            ->join('classes','classes.classe_id','=','eleveAnneeClasse.classe_id')
+                            ->join('matieres','matieres.matiere_id','=','compositions.matiere_id')
+                            ->where('classes.nom',$request->classe)
+                            ->where('anneeScolaires.nom_anneesco',$request->annee)
+                            ->select('personnes.prenom','personnes.nom','matieres.nom_matiere','compositions.*')
+                            ->get();
+        $classe= $request->classe;
+        $annee= $request->annee;
+
+        return view('pages.surveillant.show_notes_eleves',compact('noteDevoir','noteCompo','classe','annee'));
+    }
+
+    public function show_eleve_annee(){
+        $anneeScolaire = AnneeScolaire::liste_annee_sco();
+
+        $nomClasse = Classe::where('isDeleted', 0)->get();
+
+        return view('pages.surveillant.show_eleve_annee', compact('anneeScolaire','nomClasse'));
+    }
+
+    public function liste_eleve_classe(Request $request)
+    {
+        $nom_classe = Str::afterLast($request->classe, '::');
+        $classe_id = Str::beforeLast($request->classe, '::');
+
+        $nom_annee_sco = Str::afterLast($request->annee, '::');
+        $anneeScolaire_id= Str::beforeLast($request->annee, '::');
+
+        $this->validate($request, [
+            'annee' => 'required',
+            'classe' => 'required'
+        ]);
+
+        $liste_classe = Personne::liste_des_eleves_classe_annesco($anneeScolaire_id, $classe_id);
+
+        $nom_page = "info_eleve";
+        return view(
+            'pages.surveillant.show_eleve', 
+            compact('nom_page','liste_classe', 'nom_classe', 'nom_annee_sco'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $eleve = Eleve::info_eleve($id);
+
+        $nomClasse = Classe::orderBy('nom')
+                        ->where('isDeleted',0)
+                        ->get();
+        $anneeScolaire = DB::table('anneeScolaires')
+                        ->where('isDeleted', 0)
+                        ->get();
+
+        $parent = Personne::infos_parent($eleve->login_parent, $id);
+
+        $infos_enfant = Eleve::login_enfants_one_parent($parent->login);
+
+        $nombre_enfants = count($infos_enfant);
+
+        return view('pages.surveillant.show_info_eleve ', 
+        compact('eleve','nomClasse','anneeScolaire', 'parent', 'nombre_enfants', 'infos_enfant'));
+    }
 }

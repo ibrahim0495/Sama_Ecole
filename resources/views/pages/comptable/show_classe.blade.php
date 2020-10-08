@@ -1,11 +1,4 @@
-@if ($profils === "Comptable")
-    {{-- @extends('pages.comptable.master_comptable', ['title' => '| Nos classes']) --}}
-@elseif ($profils === "Surveillant")
-    @extends('pages.surveillant.master_surveillant', ['title' => '| Nos classes'])
-@else
-
-@endif
-
+@extends('pages.comptable.master_comptable', ['title' => '| Nos classes'])
 
 @section('extra-css')
     <link rel="stylesheet" href="{{ asset('assets/vendor/select2/dist/css/select2.min.css') }}">
@@ -13,17 +6,11 @@
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">{{ $profils }}</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Comptable</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            @if ($profils === "Surveillant")
-                <li class="breadcrumb-item"><a href="{{ route('surveillant.index') }}">Accueil</a></li>
-            @elseif ($profils === "Comptable")
-                <li class="breadcrumb-item"><a href="{{ route('comptable.index') }}">Accueil</a></li>
-            @else
-
-            @endif
+            <li class="breadcrumb-item"><a href="{{ route('comptable.index') }}">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page">Voir classe</li>
         </ol>
     </nav>

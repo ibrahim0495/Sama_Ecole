@@ -66,13 +66,13 @@
                             <div class="collapse" id="navbar-absences">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{  route('absence.create') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> E </span>
                                         <span class="sidenav-normal">Enregistrer</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{  route('absence.index') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> L </span>
                                         <span class="sidenav-normal"> Lister</span>
                                         </a>
@@ -90,13 +90,13 @@
                             <div class="collapse" id="navbar-retard">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{  route('retard.create') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> E </span>
                                         <span class="sidenav-normal">Enregistrer</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{  route('retard.index') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> L </span>
                                         <span class="sidenav-normal"> Lister</span>
                                         </a>
@@ -114,7 +114,7 @@
                             <div class="collapse" id="navbar-edt">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('surveillant.edt.create-edt') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> C </span>
                                         <span class="sidenav-normal">Créer</span>
                                         </a>
@@ -138,7 +138,7 @@
                             <div class="collapse" id="navbar-notes">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('surveillant.liste_eleve_annee') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> V </span>
                                         <span class="sidenav-normal"> Voir </span>
                                         </a>
@@ -172,9 +172,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('eleve.create') }}">
+                            <a class="nav-link" href="{{ route('surveillant.show_eleve_annee') }}">
                                 <i class="ni ni-hat-3 text-green"></i>
-                                <span class="nav-link-text">Nos classes</span>
+                                <span class="nav-link-text">Nos élèves</span>
                             </a>
                         </li>
                     </ul>
