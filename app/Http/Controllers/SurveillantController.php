@@ -48,7 +48,7 @@ class SurveillantController extends Controller
         $nom = $request->nom;
         $personne = new Personne();
 
-        $login =  $personne->generateLogin($prenom,$nom); // le login est generer automatique d'apres son prenom nom;
+        $login =  $personne->generateLogin($nom,$prenom); // le login est generer automatique d'apres son prenom nom;
 
         $etablissement_id = 1; //etablissement doit etre generer automatiquement d'apres le directeur connecter;
 
@@ -210,7 +210,6 @@ class SurveillantController extends Controller
 
         //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
         $surveillants = Personne::where('profil','=','Surveillant')->get();
-
         $status = 'Tout';
         return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
 
@@ -266,14 +265,13 @@ class SurveillantController extends Controller
 
         $request->session()->flash('notification.message', " Le surveillant #$surveillantActif a été bien modifié");
 
-        return redirect(route('directeur.surveillant.liste'));
+        return redirect()->route('directeur.surveillant.liste');
 
     }
 
     public function store_classes(Request $request){
         $classes = $request->classes;
         $login = $request->loginSurveillant;
-
         if($classes){
             foreach($classes as $classe){
                 $update = Classe::where('nom', $classe)->update(['login_surveillant'=> $login]);

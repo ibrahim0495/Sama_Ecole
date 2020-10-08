@@ -24,7 +24,7 @@
         <div class="card">
             <!-- Card header -->
             <div class="card-header">
-                <h3 class="mb-0">Surveillant</h3>
+            <h3 class="mb-0">Surveillant {{ $test ?? ''}}</h3>
                 <br>
                 <div class="row">
                     <div class="col-md-10">

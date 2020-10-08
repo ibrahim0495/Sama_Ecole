@@ -13,9 +13,10 @@ class CreateProfClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('profClasses', function (Blueprint $table) {
+        Schema::create('profClassesMatieres', function (Blueprint $table) {
             $table->string('login_professeur');
             $table->unsignedBigInteger('classe_id');
+            $table->unsignedBigInteger('matiere_id');
             $table->timestamps();
         });
     }
