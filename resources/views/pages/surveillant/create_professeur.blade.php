@@ -120,35 +120,11 @@
                 </select>
             </div>
         </div>
-
-        {{-- classes --}}
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="form-control-label" for="example2cols2Input">Affecter une ou des classes</label>
-                <select name="classes[]" class="form-control" id="example1cols1Select" data-toggle="select" multiple>
-                    @foreach($classes as $classe)
-                        <option value="{{$classe->classe_id}}">{{$classe->nom}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        {{-- matieres --}}
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="form-control-label" for="example2cols2Input">Affecter une ou des matieres</label>
-                <select name="matieres[]" class="form-control" id="example2cols2Select" data-toggle="select" multiple>
-                    @foreach($matieres as $matiere)
-                        <option value="{{$matiere->matiere_id}}">{{$matiere->nom_matiere}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
     </div>
 
-<button type="submit" class="btn btn-lg btn-block btn-primary">
-    Enregistrer
-</button>
+    <button type="submit" class="btn btn-lg btn-block btn-primary">
+        Enregistrer
+    </button>
 
 
         </form>

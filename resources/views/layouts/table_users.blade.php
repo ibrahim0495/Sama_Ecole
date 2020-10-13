@@ -5,6 +5,9 @@
                 <th>Nom</th>
                 <th>Téléphone</th>
                 <th>Adresse</th>
+                @if($user=='professeur')
+                <th>Affecter Classe</th>
+                @endif
                 <th>Actions</th>
             </tr>
         </thead>
@@ -14,6 +17,9 @@
                 <th>Nom</th>
                 <th>Téléphone</th>
                 <th>Adresse</th>
+                @if($user=='professeur')
+                <th>Affecter Classe</th>
+                @endif
                 <th>Actions</th>
             </tr>
         </tfoot>
@@ -24,6 +30,21 @@
                     <td>{{$personne->nom}}</td>
                     <td>{{$personne->telephone}}</td>
                     <td>{{$personne->adresse}}</td>
+
+                    @if($user=='professeur')
+                    <td>
+                        <form action="{{ route('surveillant.professeur.classeMatiere.create') }}" method="POST" class="inline-block">
+                            {{csrf_field() }}
+                            <input type="hidden" name="login" value="{{$personne->login}}">
+                            <button type="submit" class="btn btn-sm btn-darker float-left" 
+                            @if (!$personne->etatPers)
+                                disabled
+                            @endif
+                            ><i class="fa fa-folder fa-lg fa-fw"></i></button>
+                        </form>
+                    </td>
+                    @endif
+                    
                     <td class="clearfix">
                     @if ($personne->etatPers)
                         <a
@@ -47,6 +68,7 @@
                             @method('DELETE')
                             <button type="submit" class ="btn btn-sm btn-danger float-left"><i class="fa fa-trash fa-lg fa-fw"></i></button>
                         </form>
+                       
                     </td>
                     
                 </tr>
