@@ -33,10 +33,10 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>Matricule</th>
-                                <th>Login</th>
                                 <th>Prénom</th>
                                 <th>Nom</th>
-                                <th>Date de naiss.</th>
+                                <th>Date de Naiss.</th>
+                                <th>Lieu de Naiss</th>
                                 <th>Sexe</th>
                                 <th>Actions</th>
                             </tr>
@@ -44,40 +44,40 @@
                         <tfoot>
                             <tr>
                                 <th>Matricule</th>
-                                <th>Login</th>
                                 <th>Prénom</th>
                                 <th>Nom</th>
-                                <th>Date et lieu de naiss.</th>
+                                <th>Date de Naiss.</th>
+                                <th>Lieu de Naiss</th>
                                 <th>Sexe</th>
                                 <th>Actions</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($liste_eleve as $item)
+                            @foreach ($liste_classe as $item)
                                 <tr>
                                     <td>{{ $item->code }}</td>
-                                    <td>{{ $item->loginEleve }}</td>
                                     <td>{{ $item->prenom }}</td>
                                     <td>{{ $item->nom }}</td>
-                                    <td>{{ $item->dateNaissance }} {{ $item->lieuNaissance }}</td>
+                                    <td>{{ $item->dateNaissance }}</td>
+                                    <td>{{ $item->lieuNaissance }}</td>
                                     <td>{{ $item->sexe }}</td>
-                                    @if ($profils === 'Surveillant')
                                         <td class="clearfix">
                                             <a
-                                                class="btn btn-sm btn-success float-left"
+                                                class="btn btn-sm btn-success"
                                                 data-toggle="modal"
                                                 data-target="#generateCardId{{ $item->loginEleve }}"
-                                                data-original-title="Générer carte d'identité-scolaire">
+                                                data-original-title="Générer carte d'identité-scolaire"
+                                                title="Générer carte">
                                                 <i class="fa fa-eye fa-lg fa-fw"></i>
                                             </a>
                                             <a
-                                                class="btn btn-sm btn-success"
-                                                href="#" data-toggle="tooltip"
-                                                data-original-title="Voir l'élève">
+                                                class="btn btn-sm btn-default text-center"
+                                                href="{{ route('surveillant.show', $item->loginEleve) }}"
+                                                data-toggle="tooltip" data-original-title="Voir l'élève">
                                                 <i class="fa fa-eye fa-lg fa-fw"></i>
                                             </a>
                                             <a
-                                                class="btn btn-sm btn-primary float-right"
+                                                class="btn btn-sm btn-primary"
                                                 href="#" data-toggle="tooltip"
                                                 data-original-title="Modifier l'élève">
                                                 <i class="fa fa-edit fa-lg fa-fw"></i>
@@ -88,35 +88,36 @@
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="generateCardId{{ $item->loginEleve }}">Modifier Classes</h5><br>
+                                                            <h5 class="modal-title" id="generateCardId{{ $item->loginEleve }}">Générer carte d'identité scolaire</h5><br>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div id="gradient"></div>
-                                                            <div id="card_id">
-                                                                <img src="photos_profils/avatar_male.png"/>
-                                                                <h2>Prénoms : {{$item->prenom }}</h2>
-                                                                <h2>Nom : {{$item->nom }}</h2>
-                                                                <h2>Date de naissance : {{$item->dateNaissance }}</h2>
-                                                                <h2>Lieu de naissance : {{$item->lieuNaissance }}</h2>
-                                                                <h2>Adresse : {{$item->adresse }}</h2>
-                                                                <h2>Sexe : {{$item->sexe }}</h2>
-                                                                <h2>Login : {{ $item->loginEleve }}
+                                                        <div id="card_id">
 
-                                                                {{-- <span class="left bottom">tel: 731 366 ***</span> --}}
-                                                                <h2 class="right bottom">Matricule: {{ $item->code }}</h2>
-                                                            </div>
+                                                            @if ($item->nomImgPers == null && $item->sexe === 'Garçon')                                
+                                                                <img src="{{ asset('photos_profils/avatar_male.png') }}"/>                                    
+                                                            @elseif ($item->nomImgPers == null && $item->sexe === 'Fille')
+                                                                <img src="{{ asset('photos_profils/avatar_female.png') }}"/>
+                                                            @else
+                                                                <img src="{{ asset('photos_profils/') }} {{ $item->nomImgPers }}"/>
+                                                            @endif
+                                                            <h2>Prénom(s) : {{ $item->prenom }}</h2>
+                                                            <h2>Nom : {{ $item->nom }}</h2>
+                                                            <h2>Date de naissance : {{ $item->dateNaissance }}</h2>
+                                                            <h2>Lieu de naissance : {{ $item->lieuNaissance }}</h2>
+                                                            <h2>Adresse : {{ $item->adresse }}</h2>
+                                                            <h2>Sexe : {{ $item->sexe }}</h2>
+                                                            <h2>Login : {{ $item->loginEleve }}
+
+                                                            {{-- <span class="left bottom">tel: 731 366 ***</span> --}}
+                                                            <h2 class="right bottom">Matricule: {{ $item->code }}</h2>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-                                    @elseif ($profils === 'Comptable')
-
-                                    @else()
-
-                                    @endif
-
                                 </tr>
                             @endforeach
                         </tbody>

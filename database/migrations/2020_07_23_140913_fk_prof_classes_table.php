@@ -13,7 +13,7 @@ class FkProfClassesTable extends Migration
      */
     public function up()
     {
-        Schema::table('profClasses', function (Blueprint $table) {
+        Schema::table('profClassesMatieres', function (Blueprint $table) {
             
             $table->foreign('login_professeur')->references('login')->on('personnes')
                 ->onDelete('cascade')
@@ -22,6 +22,10 @@ class FkProfClassesTable extends Migration
             $table->foreign('classe_id')->references('classe_id')->on('classes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->foreign('matiere_id')->references('matiere_id')->on('matieres')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
 
         });
     }
@@ -33,7 +37,7 @@ class FkProfClassesTable extends Migration
      */
     public function down()
     {
-        Schema::table('profClasses', function (Blueprint $table) {
+        Schema::table('profClassesMatieres', function (Blueprint $table) {
             //
         });
     }

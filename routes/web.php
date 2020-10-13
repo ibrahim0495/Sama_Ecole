@@ -110,9 +110,17 @@ Route::get('surveillant/professeur/liste', 'ProfesseurController@lister_professe
 Route::get('surveillant/professeur/listeActif', 'ProfesseurController@lister_professeurs_actifs')->name('surveillant.professeur.listeActif');
 Route::get('surveillant/professeur/listeInactif', 'ProfesseurController@lister_professeurs_inactifs')->name('surveillant.professeur.listeInactif');
 Route::get('surveillant/professeur/show/{professeur}',  'ProfesseurController@show_professeur')->name('surveillant.professeur.show');
+Route::post('surveillant/professeur/classeMatiere/create','ProfesseurController@createwithClasseMatiere')->name('surveillant.professeur.classeMatiere.create');
+Route::post('surveillant/professeur/classeMatiere/create/step1','ProfesseurController@step1withClasseMatiere')->name('surveillant.professeur.classeMatiere.step1');
+Route::post('surveillant/professeur/classeMatiere/update/step','ProfesseurController@stepUpdatewithClasseMatiere')->name('surveillant.professeur.classeMatiere.step.update');
+Route::post('surveillant/professeur/classeMatiere/update','ProfesseurController@UpdatewithClasseMatiere')->name('surveillant.professeur.classeMatiere.update');
+Route::post('surveillant/professeur/classeMatiere/create/store','ProfesseurController@storewithClasseMatiere')->name('surveillant.professeur.classeMatiere.store');
 Route::get('surveillant/liste_eleve_annee', 'SurveillantController@list_eleve_annee')->name('surveillant.liste_eleve_annee');
 Route::post('surveillant/liste_eleve', 'SurveillantController@list_eleve')->name('surveillant.liste_eleve');
+Route::get('surveillant/show_eleve_annee', 'SurveillantController@show_eleve_annee')->name('surveillant.show_eleve_annee');
+Route::post('surveillant/liste_eleve_classe', 'SurveillantController@liste_eleve_classe')->name('surveillant.liste_eleve_classe');
 Route::resource('surveillant', 'SurveillantController');
+
 
 //Professeur
 Route::get('professeurs/messages','ProfesseurController@messages')->name('professeur.messages');
@@ -133,9 +141,9 @@ Route::post('directeur/liste_eleve', 'DirecteurController@list_eleve')->name('di
 Route::resource('directeur', 'DirecteurController');
 
 //Emploi du temps
-Route::resource('edt', 'EmploiDuTempsController');
 Route::get('surveillant/edt/create-edt',  'EmploiDuTempsController@create_edt')->name('surveillant.edt.create-edt');
 Route::post('surveillant/edt/store-edt',  'EmploiDuTempsController@store_edt')->name('surveillant.edt.store-edt');
+Route::resource('edt', 'EmploiDuTempsController');
 
 
 //Matière

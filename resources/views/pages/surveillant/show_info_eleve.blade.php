@@ -1,16 +1,16 @@
-@extends('pages.directeur.master_directeur', ['title' => ' |Eleve'])
+@extends('pages.surveillant.master_surveillant', ['title' => ' |Eleve'])
 
 {{--  Pour les css dont ce page a besoin ici  --}}
 @section('extra-css')
-    
+    <link rel="stylesheet" href="{{ asset('css/style_upload_img.css') }}">
 @endsection
 
 @section('breadcrumb')
-    <h6 class="h2 text-white d-inline-block mb-0">Directeur</h6>
+    <h6 class="h2 text-white d-inline-block mb-0">Surveillant</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="{{ route('directeur.index') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('surveillant.index') }}"><i class="fas fa-home"></i>Accueil</a></li>
+            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page">Info élève</li>
         </ol>
     </nav>
@@ -71,7 +71,7 @@
                             @endif
                         </h5>
                         @foreach ($infos_enfant as $item)
-                            <a href="{{ route('directeur.eleve.show', $item->loginEleve) }}"
+                            <a href="{{ route('surveillant.show', $item->loginEleve ) }}"
                                 data-original-title="Voir l'élève" class="btn-link">
                                 {{ $item->loginEleve }}
                             </a>
@@ -90,16 +90,39 @@
                 <img src="{{ asset('../../assets/img/theme/img-1-1000x600.jpg') }}" alt="Image placeholder" class="card-img-top">
                 <div class="row justify-content-center">
                     <div class="col-lg-3 order-lg-2">
-                        <div class="card-profile-image">                            
-                            <a href="#">
-                                @if ($eleve->nomImgPers == null && $eleve->sexe === 'Garçon')                                
-                                    <img src="{{ asset('photos_profils/avatar_male.png') }}" class="rounded-circle">                                    
-                                @elseif ($eleve->nomImgPers == null && $eleve->sexe === 'Fille')
-                                    <img src="{{ asset('photos_profils/avatar_female.png') }}" class="rounded-circle">
-                                @else
-                                    <img src="{{ asset('photos_profils/') }} {{ $eleve->nomImgPers }}" class="rounded-circle">
-                                @endif
-                            </a>
+                        <div class="card-profile-image">  
+                            @if ($eleve->nomImgPers == null && $eleve->sexe === 'Garçon')  
+                                <div class="picture-container">
+                                    <div class="picture">
+                                        <img src="{{ asset('photos_profils/avatar_male.png') }}"
+                                        class="picture-src rounded-circle" id="wizardPicturePreview" 
+                                        title="Cliquez ici pour ajouter une image">
+                                        <input type="file" id="wizard-picture" class="">
+                                        <i class="camera-compact"></i>
+                                    </div>
+                                    <h6 class="">Choose Picture</h6>
+                                </div>                              
+                            @elseif ($eleve->nomImgPers == null && $eleve->sexe === 'Fille')
+                                <div class="picture-container">
+                                    <div class="picture">
+                                        <img src="{{ asset('photos_profils/avatar_female.png') }}"
+                                        class="picture-src rounded-circle" id="wizardPicturePreview" 
+                                        title="Cliquez ici pour ajouter une image">
+                                        <input type="file" id="wizard-picture" class="">
+                                    </div>
+                                    <h6 class="">Choose Picture</h6>
+                                </div>
+                            @else
+                                <div class="picture-container">
+                                    <div class="picture">
+                                        <img src="{{ asset('photos_profils/') }} {{ $eleve->nomImgPers }}"
+                                        class="picture-src rounded-circle" id="wizardPicturePreview" 
+                                        title="Cliquez ici pour ajouter une image">
+                                        <input type="file" id="wizard-picture" class="">
+                                    </div>
+                                    <h6 class="">Choose Picture</h6>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -153,5 +176,6 @@
 
 {{--  Pour les fichier js dont ce page a besoin ici  --}}
 @section('extra-js')
+    <script src="{{ asset('js/upload_img.js') }}"></script>
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 @endsection

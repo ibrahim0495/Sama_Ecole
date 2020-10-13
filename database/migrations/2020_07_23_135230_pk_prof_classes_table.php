@@ -13,8 +13,8 @@ class PkProfClassesTable extends Migration
      */
     public function up()
     {
-        Schema::table('profClasses', function (Blueprint $table) {
-            $table->primary(['login_professeur', 'classe_id']);
+        Schema::table('profClassesMatieres', function (Blueprint $table) {
+            $table->primary(['login_professeur', 'classe_id','matiere_id'],'profClassesMatieres');
         });
     }
 

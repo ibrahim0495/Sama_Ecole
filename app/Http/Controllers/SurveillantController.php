@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonneRequest;
 use App\Http\Requests\PersonneUpdateRequest;
+use App\models\AnneeScolaire;
 use App\models\Personne;
 use App\models\Surveillant;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use App\models\Classe;
+use App\models\Eleve;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -49,7 +51,7 @@ class SurveillantController extends Controller
         $nom = $request->nom;
         $personne = new Personne();
 
-        $login =  $personne->generateLogin($prenom,$nom); // le login est generer automatique d'apres son prenom nom;
+        $login =  $personne->generateLogin($nom,$prenom); // le login est generer automatique d'apres son prenom nom;
 
         $etablissement_id = 1; //etablissement doit etre generer automatiquement d'apres le directeur connecter;
 
@@ -82,17 +84,6 @@ class SurveillantController extends Controller
             return redirect()->back()->withInput();
         }
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -211,7 +202,6 @@ class SurveillantController extends Controller
 
         //devra etre afficher selon id_etablissement de l'ajouteur ctd le directeur
         $surveillants = Personne::where('profil','=','Surveillant')->get();
-
         $status = 'Tout';
         return view('pages.directeur.index_surveillant',compact('surveillants', 'status'));
 
@@ -267,14 +257,13 @@ class SurveillantController extends Controller
 
         $request->session()->flash('notification.message', " Le surveillant #$surveillantActif a été bien modifié");
 
-        return redirect(route('directeur.surveillant.liste'));
+        return redirect()->route('directeur.surveillant.liste');
 
     }
 
     public function store_classes(Request $request){
         $classes = $request->classes;
         $login = $request->loginSurveillant;
-
         if($classes){
             foreach($classes as $classe){
                 $update = Classe::where('nom', $classe)->update(['login_surveillant'=> $login]);
@@ -294,13 +283,9 @@ class SurveillantController extends Controller
 
     }
     public function list_eleve_annee(){
-        $anneeScolaire= DB::table('anneeScolaires')
-                        ->where('isDeleted',0)
-                        ->select()
-                        ->get();
-        $nomClasse= DB::table('classes')
-                        ->where('isDeleted',0)
-                        ->get();
+        $anneeScolaire = AnneeScolaire::liste_annee_sco();
+
+        $nomClasse = Classe::where('isDeleted', 0)->get();
 
         return view('pages.surveillant.show_annee_classe', compact('anneeScolaire','nomClasse'));
     }
@@ -336,4 +321,59 @@ class SurveillantController extends Controller
         return view('pages.surveillant.show_notes_eleves',compact('noteDevoir','noteCompo','classe','annee'));
     }
 
+    public function show_eleve_annee(){
+        $anneeScolaire = AnneeScolaire::liste_annee_sco();
+
+        $nomClasse = Classe::where('isDeleted', 0)->get();
+
+        return view('pages.surveillant.show_eleve_annee', compact('anneeScolaire','nomClasse'));
+    }
+
+    public function liste_eleve_classe(Request $request)
+    {
+        $nom_classe = Str::afterLast($request->classe, '::');
+        $classe_id = Str::beforeLast($request->classe, '::');
+
+        $nom_annee_sco = Str::afterLast($request->annee, '::');
+        $anneeScolaire_id= Str::beforeLast($request->annee, '::');
+
+        $this->validate($request, [
+            'annee' => 'required',
+            'classe' => 'required'
+        ]);
+
+        $liste_classe = Personne::liste_des_eleves_classe_annesco($anneeScolaire_id, $classe_id);
+
+        $nom_page = "info_eleve";
+        return view(
+            'pages.surveillant.show_eleve', 
+            compact('nom_page','liste_classe', 'nom_classe', 'nom_annee_sco'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $eleve = Eleve::info_eleve($id);
+
+        $nomClasse = Classe::orderBy('nom')
+                        ->where('isDeleted',0)
+                        ->get();
+        $anneeScolaire = DB::table('anneeScolaires')
+                        ->where('isDeleted', 0)
+                        ->get();
+
+        $parent = Personne::infos_parent($eleve->login_parent, $id);
+
+        $infos_enfant = Eleve::login_enfants_one_parent($parent->login);
+
+        $nombre_enfants = count($infos_enfant);
+
+        return view('pages.surveillant.show_info_eleve ', 
+        compact('eleve','nomClasse','anneeScolaire', 'parent', 'nombre_enfants', 'infos_enfant'));
+    }
 }

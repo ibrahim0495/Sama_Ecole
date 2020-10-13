@@ -172,9 +172,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('eleve.create') }}">
+                            <a class="nav-link" href="{{ route('surveillant.show_eleve_annee') }}">
                                 <i class="ni ni-hat-3 text-green"></i>
-                                <span class="nav-link-text">Nos classes</span>
+                                <span class="nav-link-text">Nos élèves</span>
                             </a>
                         </li>
                     </ul>

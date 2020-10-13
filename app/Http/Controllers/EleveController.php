@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\models\AnneeScolaire;
 use App\models\Classe;
 use App\models\Eleve;
+use App\models\Personne;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use PDF;
@@ -30,15 +31,12 @@ class EleveController extends Controller
      */
     public function create()
     {
-        //Puisque la fonction lister classe c'est à dire les élèves d'une classe
-        //Il faut qu'on le crée une seule fois
         $nom_page = "eleve_create";
-        $profils = "Comptable";
-        $liste_classe = Classe::where('isDeleted', 0)->orderBy('nom', 'desc')->get();
-        $liste_annee_sco = DB::table('anneeScolaires')
-                        ->where('isDeleted', '=', '0')
-                        ->where('enCours', '=', '0')->get();
-        return view('layouts.show_classe', compact('nom_page','profils', 'liste_classe', 'liste_annee_sco'));
+        $liste_annee_sco = AnneeScolaire::liste_annee_sco();
+
+        $liste_classe = Classe::where('isDeleted', 0)->get();
+
+        return view('pages.comptable.show_classe', compact('nom_page', 'liste_classe', 'liste_annee_sco'));
 
     }
 
@@ -50,36 +48,23 @@ class EleveController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'anneeScolaire_id' => 'required',
-            'classe_id' => 'required'
-        ]);
-
         $nom_classe = Str::afterLast($request->classe_id, '::');
         $classe_id = Str::beforeLast($request->classe_id, '::');
 
         $nom_annee_sco = Str::afterLast($request->anneeScolaire_id, '::');
         $anneeScolaire_id = Str::beforeLast($request->anneeScolaire_id, '::');
-        $liste_eleve = DB::table('eleves')
-            ->join('personnes', 'personnes.login', '=', 'eleves.loginEleve')
-            ->join('eleveAnneeClasse', 'eleveAnneeClasse.loginEleve', '=', 'eleves.loginEleve')
-            ->where('eleveAnneeClasse.anneeScolaire_id', '=', $anneeScolaire_id)
-            ->where('eleveAnneeClasse.classe_id', '=', $classe_id)
-            ->orderBy('nom', 'asc')
-            ->get();
-        //La variable $profils va récupérer le profils de l'utilisateur connecter
-        //Pour le momment on le définit manuellement car la connexion n'est pas encore faite
-        $profils = "Surveillant";
-        if($profils === 'directeur'){
-            $nom_page = "info_eleve";
-            return view('pages.directeur.show_info_eleve', compact('nom_page'));
-        }else if ($profils === "Comptable") {
-            $nom_page = "eleve_store";
-            return view('pages.comptable.nos_eleves', compact('nom_page'));
-        }elseif ($profils === 'Surveillant') {
-            $nom_page = "eleve_store";
-            return view('pages.surveillant.show_eleve', compact('profils','nom_page', 'liste_eleve', 'nom_classe', 'nom_annee_sco'));
-        }
+
+        $this->validate($request, [
+            'anneeScolaire_id' => 'required',
+            'classe_id' => 'required'
+        ]);
+
+        $liste_classe = Personne::liste_des_eleves_classe_annesco($anneeScolaire_id, $classe_id);
+
+        $nom_page = "info_eleve";
+        return view(
+            'pages.comptable.show_eleve',
+            compact('nom_page','liste_classe', 'nom_classe', 'nom_annee_sco'));
 
     }
 
@@ -99,7 +84,24 @@ class EleveController extends Controller
      */
     public function show($id)
     {
-        //
+        $eleve = Eleve::info_eleve($id);
+
+        $nomClasse = Classe::orderBy('nom')
+                        ->where('isDeleted',0)
+                        ->get();
+        $anneeScolaire = DB::table('anneeScolaires')
+                        ->where('isDeleted', 0)
+                        ->get();
+
+        $parent = Personne::infos_parent($eleve->login_parent, $id);
+
+        $infos_enfant = Eleve::login_enfants_one_parent($parent->login);
+
+        $nombre_enfants = count($infos_enfant);
+
+        return view('pages.comptable.show_info_eleve ',
+        compact('eleve','nomClasse','anneeScolaire', 'parent', 'nombre_enfants', 'infos_enfant'));
+
     }
 
     /**

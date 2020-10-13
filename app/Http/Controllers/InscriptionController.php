@@ -36,7 +36,7 @@ class InscriptionController extends Controller
     public function create()
     {
         $nom_page = "inscription_create";
-        $liste_classe = Classe::where('isDeleted', 0)->orderBy('nom', 'desc')->get();
+        $liste_classe = Classe::where('isDeleted', 0)->orderBy('nom', 'asc')->get();
         $liste_annee_sco = DB::table('anneeScolaires')
                             ->where('isDeleted', '=', '0')
                             ->where('enCours', '=', '1')->get();

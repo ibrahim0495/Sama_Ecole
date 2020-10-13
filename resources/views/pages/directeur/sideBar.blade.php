@@ -78,7 +78,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-salleClasse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-salleClasse">
                                 <i class="ni ni-shop text-primary"></i>
-                                <span class="nav-link-text">Salle Classe</span>
+                                <span class="nav-link-text">Salle de Classes</span>
                             </a>
                             <div class="collapse" id="navbar-salleClasse">
                                 <ul class="nav nav-sm flex-column">
@@ -102,7 +102,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-matiere" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-matiere">
                                 <i class="ni ni-shop text-primary"></i>
-                                <span class="nav-link-text">Matiere</span>
+                                <span class="nav-link-text">Matieres</span>
                             </a>
                             <div class="collapse" id="navbar-matiere">
                                 <ul class="nav nav-sm flex-column">
@@ -125,7 +125,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-comptable" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-comptable">
                                 <i class="fa fa-user-alt text-info"></i>
-                                <span class="nav-link-text">Comptable</span>
+                                <span class="nav-link-text">Comptables</span>
                             </a>
                             <div class="collapse" id="navbar-comptable">
                                 <ul class="nav nav-sm flex-column">
@@ -149,7 +149,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-surveillant" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-surveillant">
                                 <i class="fa fa-user-alt text-green"></i>
-                                <span class="nav-link-text">Surveillant</span>
+                                <span class="nav-link-text">Surveillants</span>
                             </a>
                             <div class="collapse" id="navbar-surveillant">
                                 <ul class="nav nav-sm flex-column">
@@ -171,8 +171,8 @@
                         {{--  Eleve  --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('directeur.liste.classeAnnee')}}">
-                                <i class="ni ni-shop text-primary"></i>
-                                <span class="nav-link-text">Eleve</span>
+                                <i class="ni ni-hat-3 text-success"></i>
+                                <span class="nav-link-text">Nos élèves</span>
                             </a>
                         </li>
                         {{--  Annee Scolaire  --}}
