@@ -23,6 +23,9 @@
         <!-- Card header -->
         <div class="card-header">
             <h3 class="mb-0">Enregistrer une matière</h3>
+            <div class="text-md-left text-warning mb-4">
+                <small>Les champs (<strong>*</strong>) sont obligatoires</small>
+            </div>
         </div>
         <!-- Card body -->
         <div class="card-body">
@@ -32,17 +35,19 @@
                     {{-- Nom Classe --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label class="form-control-label" for="example2cols2Input">Nom</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="example2cols2Input">
+                                Nom Matière <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <input
-                                    type="text" name="nom" class="form-control" id="example2cols2Input"
-                                    placeholder="Saisir le nom de la matière" value="{{ old('nom') }}">
+                                    type="text" name="nom" class="form-control @error('nom') is-invalid @enderror" 
+                                    id="example2cols2Input" placeholder="Nom matière" value="{{ old('nom') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><i class="ni ni-books"></i></span>
                                 </div>
                             </div>
                             @error('nom')
-                            <div class="text-danger">{{ $message }}</div>
+                                <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -51,13 +56,15 @@
                     {{-- Langue --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label class="form-control-label" for="example2cols2Input">Langue</label>
+                            <label class="form-control-label" for="example2cols2Input">
+                                Langue Enseignée <strong class="text-warning">*</strong>
+                            </label>
                             <select
                                 name="langue" class="form-control"
                                 id="example2cols2Select" data-toggle="select">
+                                <option value="Français">Français (Par défaut)</option>
                                 <option value="Anglais">Anglais</option>
                                 <option value="Arabe">Arabe</option>
-                                <option value="Français">Français</option>
                             </select>
                             @error('langue')
                             <div class="text-danger">{{ $message }}</div>

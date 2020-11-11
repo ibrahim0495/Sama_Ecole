@@ -29,8 +29,7 @@ class PayementController extends Controller
      */
     public function create()
     {
-        $nom_page = "payement_create";
-        return view('pages.comptable.payement', compact('nom_page'));
+        return view('pages.comptable.payement');
     }
 
     /**

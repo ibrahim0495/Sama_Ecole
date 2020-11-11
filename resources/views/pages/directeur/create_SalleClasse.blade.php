@@ -22,6 +22,9 @@
         <!-- Card header -->
         <div class="card-header">
             <h3 class="mb-0">Enregistrer une salle de classe</h3>
+            <div class="text-md-left text-warning mb-4">
+                <small>Les champs (<strong>*</strong>) sont obligatoires</small>
+            </div>
         </div>
         <!-- Card body -->
         <div class="card-body">
@@ -31,13 +34,15 @@
                     {{-- Nom SalleClasse --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label class="form-control-label" for="example2cols2Input">Nom</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="example2cols2Input">
+                                Nom Salle <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <input
-                                    type="text" name="nom" class="form-control" id="example2cols2Input"
-                                    placeholder="Saisir le nom de la salle" value="{{ old('nom') }}">
+                                    type="text" name="nom" class="form-control @error('nom') is-invalid @enderror" 
+                                    id="example2cols2Input" placeholder="Nom salle" value="{{ old('nom') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                 </div>
                             </div>
                             @error('nom')
@@ -49,9 +54,9 @@
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Capacité</label>
-                            <div class="input-group input-group-merge">
+                            <div class="input-group">
                                 <input type="text" name="capacite" value="{{ old('capacite') }}" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle"
-                                    onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                    onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                                 if(event.which < 45 || event.which > 57) return false;">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>

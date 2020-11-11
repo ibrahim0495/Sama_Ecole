@@ -78,6 +78,7 @@ class InscriptionController extends Controller
         $matricule_eleve = Personne::generateMatricule($request->sexe,1, date('Y', strtotime($request->dateNaissance)));
         $dateNaissance = date('Y/m/d' , strtotime($request->dateNaissance));
 
+
         //Vérification si l'élève s'est déjà inscrit
         $info_eleve = DB::table('personnes')
                         ->join('eleves', 'personnes.login', '=', 'eleves.loginEleve')
@@ -132,7 +133,7 @@ class InscriptionController extends Controller
                     'adresse' => $adresse_parent,
                     'motDePasse' => bcrypt('parent'),
                     'profil' => 'Parent',
-                    'langue' => 'FR'
+                    'langue' => 'Français'
                 ]);
                 if ($new_parent) {
                     //2- Enregistrement de l'élève
@@ -145,7 +146,7 @@ class InscriptionController extends Controller
                         'adresse' => $adresse,
                         'motDePasse' => bcrypt('eleve'),
                         'profil' => 'Eleve',
-                        'langue' => 'FR'
+                        'langue' => 'Français'
                     ]);
                         if ($new_eleve) {
                             $new_eleve_eleve = Eleve::create([
@@ -225,7 +226,7 @@ class InscriptionController extends Controller
                         'adresse' => $adresse,
                         'motDePasse' => bcrypt('eleve'),
                         'profil' => 'Eleve',
-                        'langue' => 'FR'
+                        'langue' => 'Français'
                     ]);
                     if ($new_eleve_old) {
                         $new_eleve_eleves = Eleve::create([

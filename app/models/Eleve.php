@@ -9,7 +9,7 @@ class Eleve extends Model
 {
     protected $fillable =
     [
-        'loginEleve', 'code', 'dateNaissance', 'lieuNaissance', 'sexe', ' login_parent'
+        'loginEleve', 'code', 'dateNaissance', 'lieuNaissance', 'sexe', 'login_parent'
     ];
 
     public static function info_eleve($login)

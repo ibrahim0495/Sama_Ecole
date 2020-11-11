@@ -22,7 +22,10 @@
     <div class="card mb-4">
         <!-- Card header -->
         <div class="card-header">
-            <h3 class="mb-0">Enregistrer classe</h3>
+            <h3 class="mb-0">Enregistrer une classe</h3>
+            <div class="text-md-left text-warning mb-4">
+                <small>Les champs (<strong>*</strong>) sont obligatoires</small>
+            </div>
         </div>
         <!-- Card body -->
         <div class="card-body">
@@ -32,13 +35,16 @@
                     {{-- Nom Classe --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label class="form-control-label" for="example2cols2Input">Nom</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="example2cols2Input">
+                                Nom <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <input
-                                    type="text" name="nom" value="{{ old('nom') }}" class="form-control" id="example2cols2Input"
-                                    placeholder="Saisir le nom de la classe" value="{{ old('nom') }}">
+                                    type="text" name="nom" value="{{ old('nom') }}" 
+                                    class="form-control @error('nom') is-invalid @enderror" id="example2cols2Input"
+                                    placeholder="Nom de la classe" />
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                 </div>
                             </div>
                             @error('nom')
@@ -49,7 +55,9 @@
 
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label class="form-control-label">Surveillant associé</label>
+                            <label class="form-control-label">
+                                Surveillant associé <strong class="text-warning">*</strong>
+                            </label>
                             <select
                                 class="form-control"
                                 name="loginSurveillant" data-toggle="select">
@@ -65,14 +73,16 @@
 
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label>Montant inscription</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label">
+                                Montant inscription  <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
                                 </div>
                                 <input
-                                    type="text" class="form-control" name="montant_inscription"
-                                    placeholder="Saisir montant de l'inscription"
+                                    type="text" class="form-control @error('montant_inscription') is-invalid @enderror"
+                                    name="montant_inscription" placeholder="Montant inscription"
                                     value="{{ old('montant_inscription') }}"
                                     onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                             if(event.which < 45 || event.which > 57) return false;">
@@ -88,14 +98,16 @@
 
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label>Montant mensuel</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label">
+                                Montant mensuel  <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
                                 </div>
                                 <input
-                                    type="text" class="form-control" name="montant_mensuel"
-                                    placeholder="Saisir le montant de la mensualité"
+                                    type="text" class="form-control @error('montant_mensuel') is-invalid @enderror" 
+                                    name="montant_mensuel" placeholder="Montant mensualité"
                                     value="{{ old('montant_mensuel') }}"
                                     onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                             if(event.which < 45 || event.which > 57) return false;">

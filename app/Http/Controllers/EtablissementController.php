@@ -44,7 +44,7 @@ class EtablissementController extends Controller
     {
         $this->validate($request, [
             'nom'=> 'required|min:2|max:100',
-            'telephone'=> 'digits:9|required|starts_with:30,33,70,75,76,77,78|numeric|unique:etablissements,telephone',
+            'telephone'=> 'required|digits:9|starts_with:30,33,70,75,76,77,78|numeric|unique:etablissements,telephone',
             'email' => 'required|email',
             'adresse'=> 'required|min:2|max:30',
             'acronyme'=>'nullable|min:2|max:9'

@@ -28,7 +28,8 @@ class ComptableController extends Controller
      */
     public function create()
     {
-        return view('pages.directeur.create_comptable');
+        $profils = "Comptable";
+        return view('pages.directeur.create_comptable', compact('profils'));
     }
 
     /**
@@ -49,21 +50,14 @@ class ComptableController extends Controller
         $etablissement_id = 1; //etablissement doit etre generer automatiquement d'apres le directeur connecter;
 
         $comptable = Personne::where('login', $login)->first();
+        
+        $profils = "Comptable";
 
         if(!$comptable){
-            $personne = Personne::create([
-                'login' => $login,
-                'etablissement_id' => $etablissement_id,
-                'prenom' => $prenom,
-                'nom' => $nom,
-                'telephone' => $request->telephone,
-                'adresse' => $request->adresse,
-                'motDePasse' => bcrypt('Comptable'),
-                'profil' => 'Comptable',
-                'langue' => $request->langue,
-                'email' => $request->email
-            ]);
-
+            $personne->create_personnel(
+                $profils, $login, $etablissement_id, $prenom, $nom, $request->telephone, $request->adresse,
+                $request->langue, $request->email
+            );
 
 
             $request->session()->flash('notification.type','alert-success');
@@ -74,7 +68,7 @@ class ComptableController extends Controller
         else{
             $request->session()->flash('notification.type','alert-danger');
 
-            $request->session()->flash('notification.message', " Il se peut que le login existe déjà, veuillez réessayer d'enregistrer une nouvelle fois !");
+            $request->session()->flash('notification.message', " Il se peut que la personne existe déjà, veuillez réessayer d'enregistrer une nouvelle fois !");
             return redirect()->back()->withInput();
         }
     }

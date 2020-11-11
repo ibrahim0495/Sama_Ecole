@@ -21,19 +21,35 @@
     <div class="card mb-4">
         <!-- Card header -->
         <div class="card-header">
-            <h3 class="mb-0">Enregistrer année</h3>
+            <h3 class="mb-0">Enregistrer une année-scolaire</h3>
+            <div class="text-md-left text-warning mb-4">
+                <small>Les champs (<strong>*</strong>) sont obligatoires</small>
+            </div>
         </div>
         <!-- Card body -->
         <div class="card-body">
             <form action="{{ route('annee-scolaire.store') }}" method="post">
-                {{ csrf_field() }}
+                @csrf
                 <div class="row">
                     <div class="col-md-3"></div>
                     {{-- Nom Annee --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label class="form-control-label" for="example2cols2Input">Nom</label>
-                            <input type="text" name="nom" value="{{ old('nom') }}" class="form-control" id="example2cols2Input" placeholder="Saisir l'année accadémique (exemple: 2019-2020)">
+                            <label class="form-control-label" for="example2cols2Input">
+                                Nom <strong class="text-warning">*</strong>
+                            </label>
+                            
+                            <div class="input-group">
+                                <input 
+                                    type="text" name="nom" value="{{ old('nom') }}" id="example2cols2Input"
+                                    class="form-control @error('nom') is-invalid @enderror"  
+                                    placeholder="Année accadémique (exemple: 2019-2020)">
+
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                </div>
+                            </div>
+
                             @error('nom')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

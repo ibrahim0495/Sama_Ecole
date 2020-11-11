@@ -35,8 +35,8 @@ class SurveillantController extends Controller
      */
     public function create()
     {
-
-        return view('pages.directeur.create_surveillant');
+        $profils = "Surveillant";
+        return view('pages.directeur.create_surveillant', compact('profils'));
     }
 
     /**
@@ -57,19 +57,13 @@ class SurveillantController extends Controller
 
         $surveillant = Personne::where('login', $login)->first();
 
+        $profils = "Surveillant";
+
         if(!$surveillant){
-            $personne = Personne::create([
-                'login' => $login,
-                'etablissement_id' => $etablissement_id,
-                'prenom' => $prenom,
-                'nom' => $nom,
-                'telephone' => $request->telephone,
-                'adresse' => $request->adresse,
-                'motDePasse' => bcrypt('Surveillant'),
-                'profil' => 'Surveillant',
-                'langue' => $request->langue,
-                'email' => $request->email
-            ]);
+            $personne->create_personnel(
+                $profils, $login, $etablissement_id, $prenom, $nom, $request->telephone, $request->adresse,
+                $request->langue, $request->email
+            );
 
 
             $request->session()->flash('notification.type','alert-success');

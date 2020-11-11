@@ -27,10 +27,11 @@
                                 <span class="nav-link-text">Tableau de bord</span>
                             </a>
                         </li>
+
                         {{--  Etablissement  --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-etablissement" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-etablissement">
-                                <i class="ni ni-shop text-primary"></i>
+                                <i class="ni ni-building text-primary"></i>
                                 <span class="nav-link-text">Etablissement</span>
                             </a>
                             <div class="collapse" id="navbar-etablissement">
@@ -50,10 +51,11 @@
                                 </ul>
                             </div>
                         </li>
+
                         {{--  Classe  --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-classe" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-classe">
-                                <i class="ni ni-shop text-primary"></i>
+                                <i class="ni ni-planet text-primary"></i>
                                 <span class="nav-link-text">Classe</span>
                             </a>
                             <div class="collapse" id="navbar-classe">
@@ -101,7 +103,7 @@
                         {{--  Matiere  --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-matiere" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-matiere">
-                                <i class="ni ni-shop text-primary"></i>
+                                <i class="ni ni-books text-primary"></i>
                                 <span class="nav-link-text">Matieres</span>
                             </a>
                             <div class="collapse" id="navbar-matiere">
@@ -121,10 +123,11 @@
                                 </ul>
                             </div>
                         </li>
+
                         {{--  Comptable  --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-comptable" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-comptable">
-                                <i class="fa fa-user-alt text-info"></i>
+                                <i class="fa fa-user-alt text-primary"></i>
                                 <span class="nav-link-text">Comptables</span>
                             </a>
                             <div class="collapse" id="navbar-comptable">
@@ -148,7 +151,7 @@
                         {{-- Surveillant --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-surveillant" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-surveillant">
-                                <i class="fa fa-user-alt text-green"></i>
+                                <i class="fa fa-user-alt text-primary"></i>
                                 <span class="nav-link-text">Surveillants</span>
                             </a>
                             <div class="collapse" id="navbar-surveillant">
@@ -168,17 +171,19 @@
                                 </ul>
                             </div>
                         </li>
+
                         {{--  Eleve  --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('directeur.liste.classeAnnee')}}">
-                                <i class="ni ni-hat-3 text-success"></i>
+                                <i class="ni ni-hat-3 text-primary"></i>
                                 <span class="nav-link-text">Nos élèves</span>
                             </a>
                         </li>
+
                         {{--  Annee Scolaire  --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-annee" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-annee">
-                                <i class="ni ni-shop text-primary"></i>
+                                <i class="ni ni-calendar-grid-58 text-primary"></i>
                                 <span class="nav-link-text">Année Scolaire</span>
                             </a>
                             <div class="collapse" id="navbar-annee">
@@ -199,12 +204,12 @@
                             </div>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="ni ni-calendar-grid-58 text-red"></i>
                                 <span class="nav-link-text">Calendar</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
 
                 </div>

@@ -12,8 +12,8 @@
     <h6 class="h2 text-white d-inline-block mb-0">Comptable</h6>
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('comptable.index') }}"><i class="fas fa-home"></i></a></li>
+            <li class="breadcrumb-item"><a href="{{ route('comptable.index') }}">Accueil</a></li>
             <li class="breadcrumb-item active" aria-current="page">Inscription</li>
         </ol>
     </nav>
@@ -21,9 +21,13 @@
 
 @section('contenu_page')
     <div class="card mb-4">
+
         <!-- Card header -->
         <div class="card-header">
             <h3 class="mb-0">Inscription</h3>
+            <div class="text-md-left text-warning mb-4">
+                <small>Les champs (<strong>*</strong>) sont obligatoires</small>
+            </div>
         </div>
         <br>
         @if (session('error_sql'))
@@ -35,6 +39,7 @@
                 </button>
             </div>
         @endif
+
         <!-- Card body -->
         <div class="card-body">
             <form method="POST" action="{{ route('inscription.store') }}">
@@ -49,7 +54,9 @@
                     {{-- Classe (name="classe_id") --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="FormControlSelect2">Classe</label>
+                            <label class="form-control-label" for="FormControlSelect2">
+                                Classe <strong class="text-warning">*</strong>
+                            </label>
                             <select
                                 class="form-control @error('classe_id') is-invalid @enderror"
                                 name="classe_id" data-toggle="select">
@@ -66,7 +73,9 @@
                     {{-- Année Scolaire (name="anneeScolaire_id") --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="exampleFormControlSelect2">Année-Scolaire</label>
+                            <label class="form-control-label" for="exampleFormControlSelect2">
+                                Année-Scolaire <strong class="text-warning">*</strong>
+                            </label>
                             <select
                                 class="form-control  @error('anneeScolaire_id') is-invalid @enderror"
                                 name="anneeScolaire_id" data-toggle="select">
@@ -87,6 +96,7 @@
                             <h4 class="mb-0">Informations personnelles de l'élève</h4>
                         </div>
                     </div>
+
                     <div class="col-md-8 offset-2">
                         @if (session('error_info_eleve'))
                             <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
@@ -98,16 +108,19 @@
                             </div>
                         @endif
                     </div>
+
                     {{-- Prénoms (prenom) --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputPrénom">Prénom</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="InputPrénom">
+                                Prénom <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <input
                                     type="text" name="prenom" class="form-control @error('prenom') is-invalid @enderror"
-                                    placeholder="Saisir le(s) prénom(s)" value="{{ old('prenom') }}">
+                                    placeholder="Prénom(s)" value="{{ old('prenom') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-user text-primary"></i></span>
                                 </div>
                             </div>
                             @error('prenom')
@@ -119,13 +132,15 @@
                     {{-- Nom --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputNom">Nom</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="InputNom">
+                                Nom <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <input
                                     type="text" class="form-control @error('nom') is-invalid @enderror"
-                                placeholder="Saisir le nom" name="nom" value="{{ old('nom') }}" >
+                                placeholder="Nom" name="nom" value="{{ old('nom') }}" >
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-user text-primary"></i></span>
                                 </div>
                             </div>
                             @error('nom')
@@ -137,11 +152,13 @@
                     {{-- Date de naissance (name="dateNaissance") --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="exampleDatepicker">Date de naissance</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="exampleDatepicker">
+                                Date de naissance <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <input
                                     class="form-control @error('dateNaissance') is-invalid @enderror"
-                                    name="dateNaissance" placeholder="Saisir la date de naissance" type="text"
+                                    name="dateNaissance" placeholder="Date de naissance" type="text"
                                     id="datepicker" {{-- value="{{ old('dateNaissance') ?? date('m/d/Y') }}" --}}
                                     />
                             </div>
@@ -157,14 +174,16 @@
                     {{-- Lieu de naissance --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="example2cols2InputLieuNaiss">Lieu de naissance</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="example2cols2InputLieuNaiss">
+                                Lieu de naissance <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <input
                                     class="form-control @error('lieuNaissance') is-invalid @enderror"
                                     name="lieuNaissance" placeholder="Lieu de naissance"
-                                    type="text" value="{{ old('lieuNaissance') }}">
+                                    type="text" value="{{ old('lieuNaissance') ?? '' }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-map-marker text-red"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-map-marker text-primary"></i></span>
                                 </div>
                             </div>
                             @error('lieuNaissance')
@@ -176,14 +195,16 @@
                     {{-- Adresse --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputAdresse">Adresse</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="InputAdresse">
+                                Adresse <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <input
                                     class="form-control @error('adresse') is-invalid @enderror"
                                     name="adresse" placeholder="Adresse"
-                                    type="text" value="{{ old('adresse') }}">
+                                    type="text" value="{{ old('adresse') ?? '' }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-map-marker text-primary"></i></span>
                                 </div>
                             </div>
                             @error('adresse')
@@ -195,13 +216,15 @@
                     {{-- Sexe --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="exampleFormControlSelectSexe">Sexe</label>
+                            <label class="form-control-label" for="exampleFormControlSelectSexe">
+                                Sexe <strong class="text-warning">*</strong>
+                            </label>
                             <select
                                 class="form-control @error('sexe') is-invalid @enderror" name="sexe"
                                 id="exampleFormControlSelectSexe">
                                 <option value="">Sélectionnez le sexe de l'élève</option>
-                                <option>Garçon</option>
-                                <option>Fille</option>
+                                <option value="Garçon">Garçon</option>
+                                <option value="Fille">Fille</option>
                             </select>
                             @error('sexe')
                                 <div class="text-danger"> {{ $message }}</div>
@@ -212,17 +235,21 @@
                     {{-- Téléphone --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputTéléphone">Téléphone</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="InputTéléphone">
+                                Téléphone
+                            </label>
+                            <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-globe-americas text-primary"></i></span>
                                 </div>
                                 <input
                                     class="form-control @error('telephone') is-invalid @enderror"
-                                    name="telephone" placeholder="Numéro de téléphone" type="text"
-                                    value="{{ old('telephone') }}">
+                                    name="telephone" placeholder="Numéro téléphone" type="text"
+                                    value="{{ old('telephone') ?? '' }}"
+                                    onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                            if(event.which < 45 || event.which > 57) return false;" >
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-phone text-primary"></i></span>
                                 </div>
                             </div>
                             @error('telephone')
@@ -234,17 +261,20 @@
                     {{-- Montant inscription --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputSomme">Somme versée</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="InputSomme">
+                                Somme versée <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-credit-card text-primary"></i></span>
                                 </div>
                                 <input
                                     class="form-control @error('montant') is-invalid @enderror"
-                                    name="montant" placeholder="Montant versée"
-                                    type="text" value="{{ old('montant') }}">
+                                    name="montant" placeholder="Montant versée" type="text" value="{{ old('montant') ?? '' }}"
+                                    onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                            if(event.which < 45 || event.which > 57) return false;" maxlength="9"/>
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><small class="font-weight-bold">Franc CFA</small></span>
+                                    <span class="input-group-text"><small class="font-weight-bold text-primary">Franc CFA</small></span>
                                 </div>
                             </div>
                             @error('montant')
@@ -276,7 +306,9 @@
                     {{-- Parent infos --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label">Type de parent</label>
+                            <label class="form-control-label">
+                                Type de parent <strong class="text-warning">*</strong>
+                            </label>
                             <select
                                 class="form-control @error('type_parent') is-invalid @enderror"
                                 name="type_parent" id="parent" onchange="getTypeParent()">
@@ -296,15 +328,16 @@
                     "\n\
                     <div class='col-md-6'>\n\
                         <div class='form-group'>\n\
-                            <label class='form-control-label' for='examplePrenomParent'>Prénom(s)</label>\n\
-                            <div class='input-group input-group-merge'>\n\
+                            <label class='form-control-label' for='examplePrenomParent'>\n\
+                                Prénom(s) <strong class='text-warning'>*</strong></label>\n\
+                            <div class='input-group'>\n\
                                 <input \n\
                                     type='text' name='prenom_parent' \n\
                                     class='form-control @error('prenom_parent') is-invalid @enderror'\n\
-                                    id='examplePrenomParent' placeholder='Saisir le(s) prénom(s)'\n\
-                                    value='{{ old('prenom_parent') }}'>\n\
+                                    id='examplePrenomParent' placeholder='Prénom(s)'\n\
+                                    value='{{ old('prenom_parent') ?? ''}}'>\n\
                                 <div class='input-group-append'>\n\
-                                    <span class='input-group-text'><i class='fas fa-user'></i></span>\n\
+                                    <span class='input-group-text'><i class='fas fa-user text-primary'></i></span>\n\
                                 </div>\n\
                             </div>\n\
                             @error('prenom_parent')\n\
@@ -315,14 +348,15 @@
                     \n\
                     <div class='col-md-6'>\n\
                         <div class='form-group'>\n\
-                            <label class='form-control-label' for='exampleNomParent'>Nom</label>\n\
-                            <div class='input-group input-group-merge'>\n\
+                            <label class='form-control-label' for='exampleNomParent'>\n\
+                                Nom <strong class='text-warning'>*</strong></label>\n\
+                            <div class='input-group'>\n\
                                 <input \n\
                                     type='text' name='nom_parent' \n\
                                     class='form-control @error('nom_parent') is-invalid @enderror' \n\
-                                    id='exampleNomParent' placeholder='Saisir le nom' value='{{ old('nom_parent') }}'>\n\
+                                    id='exampleNomParent' placeholder='Nom' value='{{ old('nom_parent') ?? '' }}'>\n\
                                 <div class='input-group-append'>\n\
-                                    <span class='input-group-text'><i class='fas fa-user'></i></span>\n\
+                                    <span class='input-group-text'><i class='fas fa-user text-primary'></i></span>\n\
                                 </div>\n\
                             </div>\n\
                             @error('nom_parent') <div class='text-danger'>{{ $message }}</div> @enderror\n\
@@ -331,16 +365,20 @@
                     \n\
                     <div class='col-md-6'>\n\
                         <div class='form-group'>\n\
-                            <label class='form-control-label' for='TelephoneParent'>Téléphone</label>\n\
-                            <div class='input-group input-group-merge'>\n\
+                            <label class='form-control-label' for='TelephoneParent'>\n\
+                                Téléphone <strong class='text-warning'>*</strong></label>\n\
+                            <div class='input-group'>\n\
                                 <div class='input-group-prepend'>\n\
-                                    <span class='input-group-text'><i class='fas fa-globe-americas'></i></span>\n\
+                                    <span class='input-group-text'><i class='fas fa-globe-americas text-primary'></i></span>\n\
                                 </div>\n\
                                 <input \n\
-                                    type='text' name='telephone_parent' class='form-control @error('telephone_parent') is-invalid @enderror' \n\
-                                    id='TelephoneParent' placeholder='Saisir le numéro de téléphone' value='{{ old('telephone_parent') }}'>\n\
+                                    type='text' name='telephone_parent' id='TelephoneParent' \n\
+                                    class='form-control @error('telephone_parent') is-invalid @enderror' \n\
+                                    placeholder='Numéro de téléphone' value='{{ old('telephone_parent') ?? '' }}' \n\
+                                    onKeypress='if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;\n\
+                                        if(event.which < 45 || event.which > 57) return false;' maxlength='9'/>\n\
                                 <div class='input-group-append'>\n\
-                                    <span class='input-group-text'><i class='fas fa-phone'></i></span>\n\
+                                    <span class='input-group-text'><i class='fas fa-phone text-primary'></i></span>\n\
                                 </div>\n\
                             </div>\n\
                             @error('telephone_parent') <div class='text-danger'>{{ $message }}</div> @enderror\n\
@@ -349,15 +387,16 @@
                     \n\
                     <div class='col-md-6'>\n\
                         <div class='form-group'>\n\
-                            <label class='form-control-label' for='AdresseParent'>Adresse</label>\n\
-                            <div class='input-group input-group-merge'>\n\
+                            <label class='form-control-label' for='AdresseParent'>\n\
+                                Adresse <strong class='text-warning'>*</strong></label>\n\
+                            <div class='input-group'>\n\
                                 <input \n\
                                     type='text' name='adresse_parent' \n\
                                     class='form-control @error('adresse_parent') is-invalid @enderror' \n\
-                                    id='AdresseParent' placeholder='Adresse du parent' \n\
-                                    value='{{ old('adresse_parent') }}'>\n\
+                                    id='AdresseParent' placeholder='Adresse' \n\
+                                    value='{{ old('adresse_parent') ?? ''}}'>\n\
                                 <div class='input-group-append'>\n\
-                                    <span class='input-group-text'><i class='fas fa-map-marker'></i></span>\n\
+                                    <span class='input-group-text'><i class='fas fa-map-marker text-primary'></i></span>\n\
                                 </div>\n\
                             </div>\n\
                             @error('adresse_parent') <div class='text-danger'>{{ $message }}</div> @enderror\n\
@@ -368,18 +407,19 @@
                     "\n\
                     <div class='col-md-6'>\n\
                         <div class='form-group'>\n\
-                            <label class='form-control-label' for='exampleTelephoneParent'>Téléphone ou login</label>\n\
+                            <label class='form-control-label' for='exampleTelephoneParent'>\n\
+                                Téléphone ou login <strong class='text-warning'>*</strong></label>\n\
                             <div class='input-group input-group-merge'>\n\
                                 <div class='input-group-prepend'>\n\
-                                    <span class='input-group-text'><i class='fas fa-globe-americas'></i></span>\n\
+                                    <span class='input-group-text'><i class='fas fa-globe-americas text-primary'></i></span>\n\
                                 </div>\n\
                                 <input \n\
                                     type='text' name='info_ancien_parent' \n\
                                     class='form-control @error('info_ancien_parent') is-invalid @enderror' \n\
-                                    placeholder='Saisir le numéro de téléphone ou le nom utilisateur' \n\
-                                    id='exampleTelephoneParent' value='{{ old('info_ancien_parent') }} '>\n\
+                                    placeholder='Numéro de téléphone ou le nom d &#39;utilisateur'\n\
+                                    id='exampleTelephoneParent' value='{{ old('info_ancien_parent') ?? '' }}'/>\n\
                                 <div class='input-group-append'>\n\
-                                    <span class='input-group-text'><i class='fas fa-phone'></i></span>\n\
+                                    <span class='input-group-text'><i class='fas fa-phone text-primary'></i></span>\n\
                                 </div>\n\
                             </div>\n\
                             @error('info_ancien_parent') <div class='text-danger'>{{ $message }}</div> @enderror\n\

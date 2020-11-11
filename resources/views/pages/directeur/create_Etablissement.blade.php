@@ -20,86 +20,105 @@
     <div class="card mb-4">
         <!-- Card header -->
         <div class="card-header">
-            <h3 class="mb-0">Enregistrer un Etablissement</h3>
+            <h3 class="mb-0">Enregistrer son établissement</h3>
+            <div class="text-md-left text-warning mb-4">
+                <small>Les champs (<strong>*</strong>) sont obligatoires</small>
+            </div>
         </div>
         <!-- Card body -->
         <div class="card-body">
             <form method="POST" action="{{ route('etablissement.store') }}" enctype="multipart/form-data">
-                {{ csrf_field() }}
+                @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-header">
-                            <h4 class="mb-0">Informations d'un établissement</h4>
+                            <h4 class="mb-0">Informations de l'établissement</h4>
                         </div>
                     </div>
 
                     {{-- Nom --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputNom">Nom</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label">Nom <strong class="text-warning">*</strong></label>
+                            <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text" id="inputGroupNom">
+                                        <i class="ni ni-hat-3"></i>
+                                    </span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Saisir le nom" name="nom" value="{{ old('nom') }}">
+                                <input 
+                                    type="text" class="form-control @error('nom') is-invalid @enderror"
+                                    placeholder="Nom de l'établissement" name="nom" value="{{ old('nom') }}" 
+                                    aria-describedby="inputGroupNom"/>
                             </div>
+                            @error('nom')
+                                <div class="text-danger text-small">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('nom')
-                                <div class="text-danger">{{ $message }}</div>
-                        @enderror
                     </div>
 
                     {{-- Adresse --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputAdresse">Adresse</label>
-                            <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Adresse" type="text" name="adresse" value="{{ old('adresse') }}">
+                            <label class="form-control-label" for="InputAdresse">
+                                Adresse <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
+                                <input 
+                                    class="form-control @error('adresse') is-invalid @enderror" placeholder="Adresse" type="text" name="adresse" value="{{ old('adresse') }}">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
                                 </div>
                             </div>
-                        </div>
-                        @error('adresse')
+                            @error('adresse')
                                 <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                            @enderror
+                        </div>
                     </div>
 
                     {{-- Email --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputEmail">Email</label>
-                        <div class="input-group input-group-merge">
-                            <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <label class="form-control-label" for="InputEmail">
+                                E-mail <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input 
+                                    class="form-control @error('email') is-invalid @enderror" placeholder="E-mail" type="email" 
+                                    name="email" value="{{ old('email') }}">
                             </div>
-                            <input class="form-control" placeholder="Email address" type="email" name="email" value="{{ old('email') }}">
+                            @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        </div>
-                        @error('email')
-                                <div class="text-danger">{{ $message }}</div>
-                        @enderror
                     </div>
 
                     {{-- Téléphone --}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="InputTéléphone">Téléphone</label>
-                            <div class="input-group input-group-merge">
+                            <label class="form-control-label" for="InputTéléphone">
+                                Téléphone <strong class="text-warning">*</strong>
+                            </label>
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Numéro de téléphone" type="text" name="telephone" value="{{ old('telephone') }}"
-                                onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
-                                            if(event.which < 45 || event.which > 57) return false;" maxlength="9">
+                                <input 
+                                class="form-control @error('telephone') is-invalid @enderror" 
+                                placeholder="Numéro de téléphone" type="text" name="telephone" value="{{ old('telephone') }}"
+                                onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
+                                            if(event.which < 45 || event.which > 57) return false;" maxlength="9"/>
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>
                             </div>
-                        </div>
-                        @error('telephone')
+                            @error('telephone')
                                 <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                            @enderror
+                        </div>
                     </div>
 
                     {{-- logo --}}
@@ -120,10 +139,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="InputTéléphone">Acronyme</label>
-                            <div class="input-group input-group-merge">
+                            <div class="input-group">
                                 <input class="form-control" placeholder="Saisir l'acronyme" type="text" name="acronyme" value="{{ old('acronyme') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                 </div>
                             </div>
                         </div>

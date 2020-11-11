@@ -22,34 +22,42 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
 
+                        {{-- Dashbord --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('comptable.index') }}">
-                                <i class="ni ni-shop text-primary"></i>
+                                <i class="fas fa-home text-primary"></i>
                                 <span class="nav-link-text">Tableau de bord</span>
                             </a>
                         </li>
 
+                        {{-- Inscription --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('inscription.create') }}">
-                                <i class="ni ni-archive-2 text-green"></i>
+                                <i class="ni ni-money-coins text-primary"></i>
                                 <span class="nav-link-text">Inscription</span>
                             </a>
                         </li>
+
+                        {{-- Réinscription --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('reinscription.create') }}">
-                                <i class="ni ni-chart-pie-35 text-info"></i>
+                                <i class="fas fa-credit-card text-primary"></i>
                                 <span class="nav-link-text">Réinscription</span>
                             </a>
                         </li>
+
+                        {{-- Payement --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('payement.create') }}">
-                                <i class="ni ni-money-coins text-red"></i>
+                                <i class="ni ni-calendar-grid-58 text-primary"></i>
                                 <span class="nav-link-text">Payement</span>
                             </a>
                         </li>
+
+                        {{-- Nos Classe --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('eleve.create') }}">
-                                <i class="ni ni-hat-3 text-green"></i>
+                                <i class="ni ni-hat-3 text-primary"></i>
                                 <span class="nav-link-text">Nos classes</span>
                             </a>
                         </li>

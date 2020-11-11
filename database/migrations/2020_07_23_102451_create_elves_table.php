@@ -16,7 +16,7 @@ class CreateElvesTable extends Migration
         Schema::create('eleves', function (Blueprint $table) {
             $table->string('loginEleve');
             $table->string('code');
-            $table->date('dateNaissance');
+            $table->dateTime('dateNaissance');
             $table->string('lieuNaissance');
             $table->string('sexe');
             $table->string('login_parent');

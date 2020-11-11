@@ -20,6 +20,9 @@
         <!-- Card header -->
         <div class="card-header">
             <h3 class="mb-0">Payement</h3>
+            <div class="text-md-left text-warning mb-4">
+                <small>Les champs (<strong>*</strong>) sont obligatoires</small>
+            </div>
         </div>
         <!-- Card body -->
         <div class="card-body">
@@ -30,10 +33,12 @@
                     {{-- Matricule elève --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label class="form-control-label" for="example2cols2Input">Matricule</label>
+                            <label class="form-control-label" for="example2cols2Input">
+                                Matricule <strong class="text-warning">*</strong>
+                            </label>
                             <input
                                 type="text" name="matricule" class="form-control @error('matricule') is-invalid @enderror"
-                                id="example2cols2Input" placeholder="Saisir le matricule de l'élève"
+                                id="example2cols2Input" placeholder="Matricule élève"
                                 value="{{ old('matricule') }}">
                                 @error('matricule')
                                     <div class="text-danger">{{ $message }}</div>

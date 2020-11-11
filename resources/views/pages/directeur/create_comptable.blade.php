@@ -27,6 +27,9 @@
         <!-- Card header -->
         <div class="card-header">
             <h3 class="mb-0">Enregistrer un Comptable</h3>
+            <div class="text-md-left text-warning mb-4">
+                <small>Les champs (<strong>*</strong>) sont obligatoires</small>
+            </div>
         </div>
         <!-- Card body -->
         <div class="card-body">

@@ -33,7 +33,7 @@ class Personne extends Model
         $charactersLength = strlen($characters);
         $prenom1 = substr(Str::lower($prenom),0,3);
         $nom1 = substr(Str::lower($nom),0,2);
-        $login = $prenom1."".$nom1;
+        $login = Str::of($prenom1)->replace(' ', '')."".Str::of($nom1)->replace(' ', '');
         $date = substr(date('Y'), 2, 4);
         for ($i = 0; $i < $length; $i++) {
             $login .= $characters[rand(0, $charactersLength - 1)];
@@ -90,6 +90,22 @@ class Personne extends Model
         return $parent;
     }
 
-
+    public static function create_personnel(
+        $profils, $login, $etablissement_id, $prenom, $nom,$telephone, $adresse, $langue, $email
+    )
+    {
+        Personne::create([
+            'login' => $login,
+            'etablissement_id' => $etablissement_id,
+            'prenom' => $prenom,
+            'nom' => $nom,
+            'telephone' => $telephone,
+            'adresse' => $adresse,
+            'motDePasse' => bcrypt($profils),
+            'profil' => $profils,
+            'langue' => $langue,
+            'email' => $email
+        ]);
+    }
 
 }
