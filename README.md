@@ -1,3 +1,12 @@
+<p>
+    Scaffolding with React
+    <li> composer require laravel/ui:^2.4 </li>
+    <li> php artisan ui react</li>
+    <li> npm install && npm run dev</li>
+    <li></li>
+    <li></li>
+</p>
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
