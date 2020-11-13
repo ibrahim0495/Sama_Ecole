@@ -6,6 +6,7 @@
             <h4 class="mb-0">Informations personnelles du {{ $profils }}</h4>
         </div>
     </div>
+
     {{-- Prénoms --}}
     <div class="col-md-6">
         <div class="form-group">
@@ -14,11 +15,13 @@
             </label>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <span class="input-group-text">
+                        <i class="fas fa-user text-primary"></i>
+                    </span>
                 </div>
                 <input
                     type="text" class="form-control @error('prenom') is-invalid @enderror" 
-                    placeholder="Prénom(s)" value="{{ old('prenom') ?? ''}}" name="prenom"/>
+                    placeholder="Prénom(s)" value="{{ old('prenom') ?? '' }}" name="prenom"/>
             </div>
                 {!! $errors->first('prenom', '<div class="text-danger">:message</div>')!!}
         </div>
@@ -33,9 +36,11 @@
                 <div class="input-group">
                     <input 
                         type="text" class="form-control @error('nom') is-invalid @enderror" 
-                        placeholder="Nom" value="{{ old('nom') ?? ''}}" name="nom">
+                        placeholder="Nom" value="{{ old('nom') ?? '' }}" name="nom">
                     <div class="input-group-append">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <span class="input-group-text">
+                            <i class="fas fa-user text-primary"></i>
+                        </span>
                     </div>
             </div>
             {!! $errors->first('nom', '<div class="text-danger">:message</div>')!!}
@@ -51,7 +56,9 @@
             </label>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
+                    <span class="input-group-text">
+                        <i class="fas fa-globe-americas text-primary"></i>
+                    </span>
                 </div>
                 <input 
                     class="form-control @error('telephone') is-invalid @enderror" name="telephone"
@@ -59,7 +66,9 @@
                     onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                         if(event.which < 45 || event.which > 57) return false;" maxlength="9"/>
                 <div class="input-group-append">
-                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    <span class="input-group-text">
+                        <i class="fas fa-phone text-primary"></i>
+                    </span>
                 </div>
             </div>
             {!! $errors->first('telephone', '<div class="text-danger">:message</div>')!!}
@@ -77,7 +86,9 @@
                     class="form-control @error('email') is-invalid @enderror" type="email"
                     placeholder="Adresse E-mail" value="{{ old('email') ?? ''}}" name="email"/>
                 <div class="input-group-append">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <span class="input-group-text">
+                        <i class="fas fa-envelope text-primary"></i>
+                    </span>
                 </div>
             </div>
             {!! $errors->first('email', '<div class="text-danger">:message</div>')!!}
@@ -93,9 +104,11 @@
             <div class="input-group">
                 <input 
                     class="form-control @error('adresse') is-invalid @enderror" name="adresse"
-                    placeholder="Adresse" type="text" value="{{ old('adresse') ?? ''}}" />
+                    placeholder="Adresse" type="text" value="{{ old('adresse') ?? '' }}" />
                 <div class="input-group-append">
-                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                    <span class="input-group-text">
+                        <i class="fas fa-map-marker text-primary"></i>
+                    </span>
                 </div>
             </div>
             {!! $errors->first('adresse', '<div class="text-danger">:message</div>')!!}

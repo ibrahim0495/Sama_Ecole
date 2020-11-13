@@ -32,6 +32,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-3"></div>
+
                     {{-- Nom Annee --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
@@ -46,7 +47,9 @@
                                     placeholder="Année accadémique (exemple: 2019-2020)">
 
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="ni ni-calendar-grid-58 text-primary"></i>
+                                    </span>
                                 </div>
                             </div>
 
@@ -55,8 +58,10 @@
                             @enderror
                         </div>
 
+                        {{-- Button submit --}}
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Enregistrer</button>
                     </div>
+
                 </div>
             </form>
         </div>

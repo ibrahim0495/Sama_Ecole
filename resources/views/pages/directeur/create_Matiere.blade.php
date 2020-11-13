@@ -32,7 +32,8 @@
             <form action="{{ route('matiere.store') }}" method="post">
                 @csrf
                 <div class="row">
-                    {{-- Nom Classe --}}
+
+                    {{-- Nom Matière --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">
@@ -43,7 +44,9 @@
                                     type="text" name="nom" class="form-control @error('nom') is-invalid @enderror" 
                                     id="example2cols2Input" placeholder="Nom matière" value="{{ old('nom') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="ni ni-books"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="ni ni-books  text-primary"></i>
+                                    </span>
                                 </div>
                             </div>
                             @error('nom')

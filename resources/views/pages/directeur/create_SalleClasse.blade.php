@@ -31,6 +31,7 @@
             <form action="{{ route('salle_classe.store') }}" method="post">
                 {{ csrf_field() }}
                 <div class="row">
+
                     {{-- Nom SalleClasse --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
@@ -42,7 +43,9 @@
                                     type="text" name="nom" class="form-control @error('nom') is-invalid @enderror" 
                                     id="example2cols2Input" placeholder="Nom salle" value="{{ old('nom') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="ni ni-hat-3 text-primary"></i>
+                                    </span>
                                 </div>
                             </div>
                             @error('nom')
@@ -51,15 +54,21 @@
                         </div>
                     </div>
 
+                    {{-- Capacite --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label" for="example2cols2Input">Capacité</label>
                             <div class="input-group">
-                                <input type="text" name="capacite" value="{{ old('capacite') }}" class="form-control" id="example2cols2Input" placeholder="Saisir la capacité de la salle"
+                                <input 
+                                    type="text" name="capacite" value="{{ old('capacite') }}" 
+                                    class="form-control" id="example2cols2Input" 
+                                    placeholder="Capacité salle"
                                     onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                                 if(event.which < 45 || event.which > 57) return false;">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user text-primary"></i>
+                                    </span>
                                 </div>
                             </div>
                             @error('capacite')

@@ -32,6 +32,7 @@
             <form action="{{ route('classe.store') }}" method="post">
                 @csrf
                 <div class="row">
+
                     {{-- Nom Classe --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
@@ -41,10 +42,12 @@
                             <div class="input-group">
                                 <input
                                     type="text" name="nom" value="{{ old('nom') }}" 
-                                    class="form-control @error('nom') is-invalid @enderror" id="example2cols2Input"
-                                    placeholder="Nom de la classe" />
+                                    class="form-control @error('nom') is-invalid @enderror" 
+                                    placeholder="Nom de la classe" id="example2cols2Input"/>
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="ni ni-hat-3 text-primary"></i>
+                                    </span>
                                 </div>
                             </div>
                             @error('nom')
@@ -53,6 +56,7 @@
                         </div>
                     </div>
 
+                    {{-- Surveillant associe --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label">
@@ -71,6 +75,7 @@
                         </div>
                     </div>
 
+                    {{-- Montant inscription --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label">
@@ -78,16 +83,20 @@
                             </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="fas fa-credit-card text-primary"></i>
+                                    </span>
                                 </div>
                                 <input
-                                    type="text" class="form-control @error('montant_inscription') is-invalid @enderror"
+                                    class="form-control @error('montant_inscription') is-invalid @enderror"
                                     name="montant_inscription" placeholder="Montant inscription"
-                                    value="{{ old('montant_inscription') }}"
+                                    value="{{ old('montant_inscription') }}" type="text"
                                     onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                             if(event.which < 45 || event.which > 57) return false;">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><small class="font-weight-bold">Franc CFA</small></span>
+                                    <span class="input-group-text">
+                                        <small class="font-weight-bold text-primary">Franc CFA</small>
+                                    </span>
                                 </div>
                             </div>
                             @error('montant_inscription')
@@ -96,6 +105,7 @@
                         </div>
                     </div>
 
+                    {{-- Montant Mensuel --}}
                     <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="form-control-label">
@@ -103,16 +113,20 @@
                             </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="fas fa-credit-card text-primary"></i>
+                                    </span>
                                 </div>
                                 <input
-                                    type="text" class="form-control @error('montant_mensuel') is-invalid @enderror" 
+                                    class="form-control @error('montant_mensuel') is-invalid @enderror" 
                                     name="montant_mensuel" placeholder="Montant mensualité"
-                                    value="{{ old('montant_mensuel') }}"
+                                    value="{{ old('montant_mensuel') }}" type="text" 
                                     onKeypress="  if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                             if(event.which < 45 || event.which > 57) return false;">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><small class="font-weight-bold">Franc CFA</small></span>
+                                    <span class="input-group-text">
+                                        <small class="font-weight-bold text-primary">Franc CFA</small>
+                                    </span>
                                 </div>
                             </div>
                             @error('montant_mensuel')

@@ -43,7 +43,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroupNom">
-                                        <i class="ni ni-hat-3"></i>
+                                        <i class="ni ni-hat-3 text-primary"></i>
                                     </span>
                                 </div>
                                 <input 
@@ -67,7 +67,7 @@
                                 <input 
                                     class="form-control @error('adresse') is-invalid @enderror" placeholder="Adresse" type="text" name="adresse" value="{{ old('adresse') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-map-marker text-primary"></i></span>
                                 </div>
                             </div>
                             @error('adresse')
@@ -84,7 +84,9 @@
                             </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="fas fa-envelope text-primary"></i>
+                                    </span>
                                 </div>
                                 <input 
                                     class="form-control @error('email') is-invalid @enderror" placeholder="E-mail" type="email" 
@@ -104,7 +106,9 @@
                             </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="fas fa-globe-americas text-primary"></i>
+                                    </span>
                                 </div>
                                 <input 
                                 class="form-control @error('telephone') is-invalid @enderror" 
@@ -112,7 +116,9 @@
                                 onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;
                                             if(event.which < 45 || event.which > 57) return false;" maxlength="9"/>
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="fas fa-phone text-primary"></i>
+                                    </span>
                                 </div>
                             </div>
                             @error('telephone')
@@ -126,8 +132,12 @@
                         <div class="form-group">
                             <label class="form-control-label" for="InputLogo">Logo</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="logo" value="{{ old('logo') }}">
-                                <label class="custom-file-label" for="customFile">Choisir une photo</label>
+                                <input 
+                                    type="file" class="custom-file-input" id="customFile" 
+                                    name="logo" value="{{ old('logo') }}">
+                                <label class="custom-file-label" for="customFile">
+                                    Choisir une image
+                                </label>
                             </div>
                         </div>
                         @error('logo')
@@ -140,9 +150,14 @@
                         <div class="form-group">
                             <label class="form-control-label" for="InputTéléphone">Acronyme</label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="Saisir l'acronyme" type="text" name="acronyme" value="{{ old('acronyme') }}">
+                                <input 
+                                    class="form-control @error('acronyme') is-invalid @enderror" 
+                                    placeholder="Saisir l'acronyme" type="text" name="acronyme"
+                                     value="{{ old('acronyme') }}">
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    <span class="input-group-text">
+                                        <i class="ni ni-hat-3 text-primary"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>

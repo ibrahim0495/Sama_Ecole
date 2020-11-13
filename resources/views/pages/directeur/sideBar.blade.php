@@ -23,7 +23,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('directeur.index') }}">
-                                <i class="ni ni-shop text-primary"></i>
+                                <i class="fas fa-home text-primary"></i>
                                 <span class="nav-link-text">Tableau de bord</span>
                             </a>
                         </li>
