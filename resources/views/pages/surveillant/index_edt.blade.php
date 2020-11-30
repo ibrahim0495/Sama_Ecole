@@ -25,7 +25,7 @@
             <div class="col-xl-12 order-xl-1">
                 <div class="card-body">
                     <div class="table-responsive py-4">
-                        <table class="table table-bordered" id="datatable-basic">
+                        <!--<table class="table table-bordered" id="datatable-basic">
                             
                             <thead class="thead-light">
                                 <tr>
@@ -51,7 +51,7 @@
                                     <div class="modal fade" id="new-edt" tabindex="-1" role="dialog" aria-labelledby="new-event-label" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-secondary" role="document">
                                           <div class="modal-content">
-                                            <!-- Modal body -->
+                                             {{-- Modal body  --}}
                                             <div class="modal-body">
                                               <form class="new-event--form">
                                                 <div class="form-group">
@@ -73,7 +73,7 @@
                                                 <input type="hidden" class="new-event--end" />
                                               </form>
                                             </div>
-                                            <!-- Modal footer -->
+                                            {{-- Modal footer  --}}
                                             <div class="modal-footer">
                                               <button type="submit" class="btn btn-primary new-event--add">Add event</button>
                                               <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
@@ -83,7 +83,9 @@
                                     </div>
                                 @endforeach
                             </tbody>
-                        </table>
+                        </table>-->
+
+                        <div id="dp"></div>
                     </div>
                 </div>
             </div>
@@ -92,5 +94,134 @@
 @endsection
 
 @section('extra-js')
+
+    <script src="{{ asset('js/daypilot-all.min.js') }}"></script>
+
+
+    <script type="text/javascript">
+        var dp = new DayPilot.Calendar("dp");
+      
+        //Date format
+        dp.locale= "fr-fr";
+        dp.viewType= "Week";
+        dp.headerDateFormat= "dddd";
+      
+        //Heure de debut et Heure de fin
+        dp.dayBeginsHour= 8,
+        dp.dayEndsHour= 20,
+      
+        // view
+        /* dp.startDate = new DayPilot.Date("2020-09-01");  // or just dp.startDate = "2020-09-01";
+        dp.viewType = "Week";
+       */
+        // no events at startup, we will load them later using loadEvents()
+        dp.events.list = [];
+      
+        dp.eventDeleteHandling = "Update";
+      
+        dp.onBeforeEventRender = function (args) {
+        };
+      
+        dp.onBeforeCellRender = function (args) {
+          if (args.cell.start.getHours() === 13) {
+            args.cell.backColor = "#eee";
+          }
+        };
+      
+        dp.onEventMoved = function (args) {
+          DayPilot.Http.ajax({
+            url: "backend_move.php",
+            data: args,
+            success: function(ajax) {
+              var response = ajax.data;
+              dp.message("Moved: " + response.message);
+            }
+          });
+        };
+      
+        dp.onEventResized = function (args) {
+          DayPilot.Http.ajax({
+            url: "backend_move.php",
+            data: args,
+            success: function(ajax) {
+              var response = ajax.data;
+              dp.message("Resized: " + response.message);
+            }
+          });
+        };
+      
+        dp.onEventDeleted = function (args) {
+          DayPilot.Http.ajax({
+            url: "backend_delete.php",
+            data: { id: args.e.id() },
+            success: function(ajax) {
+              var response = ajax.data;
+              dp.message("Deleted: " + response.message);
+            }
+          });
+        };
+      
+      
+        // event creating
+        dp.onTimeRangeSelected = function (args) {
+          DayPilot.Modal.prompt("New event name:", "Event").then(function(modal) {
+      
+            dp.clearSelection();
+            if (modal.canceled) {
+              return;
+            }
+      
+            var name = modal.result;
+      
+            var params = {
+              start: args.start,
+              end: args.end,
+              text: name
+            };
+      
+            DayPilot.Http.ajax({
+              url: "backend_create.php",
+              data: params,
+              success: function(ajax) {
+      
+                params.id = ajax.data.id;
+                dp.events.add(params);
+      
+                var response = ajax.data;
+                dp.message("Created: " + response.message);
+              }
+            });
+          });
+      
+        };
+      
+        dp.init();
+      
+        loadEvents();
+      
+        function loadEvents() {
+          dp.events.load("backend_events.php");
+        }
+      
+        var elements = {
+          day: document.querySelector("#day"),
+          week: document.querySelector("#week"),
+          
+        };
+
+        elements.week.addEventListener("click", function() {
+          dp.update({viewType: "Week"});
+          dp.events.load("backend_events.php");
+        });
+      
+        /* elements.day.addEventListener("click", function() {
+          dp.update({viewType: "Day"});
+          dp.events.load("backend_events.php");
+        }); */
+      
+        
+    </script>
+
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+
 @endsection
